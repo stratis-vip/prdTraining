@@ -15,7 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/stratis-vip/training.git"
+    "url": "git+https://github.com/stratis-vip/prdTraining.git"
   },
   "keywords": [
     "training"
@@ -23,9 +23,9 @@
   "author": "Stratis Christodoulou",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/stratis-vip/training/issues"
+    "url": "https://github.com/stratis-vip/prdTraining/issues"
   },
-  "homepage": "https://github.com/stratis-vip/training#readme",
+  "homepage": "https://github.com/stratis-vip/prdTraining#readme",
   "devDependencies": {
     "@types/express": "^4.0.37",
     "@types/node": "^8.0.26",
@@ -36,7 +36,8 @@
     "@types/body-parser": "^1.16.5",
     "@types/jasmine-node": "^1.14.32",
     "@types/express-session": "^1.15.3",
-    "@types/sqlite3": "^3.1.1"
+    "@types/sqlite3": "^3.1.1",
+    "@types/dotenv": "^4.0.1"
   },
   "dependencies": {
     "body-parser": "^1.17.2",
@@ -47,6 +48,7 @@
     "hbs": "^4.0.1",
     "morgan": "^1.8.2",
     "serve-favicon": "^2.4.3",
-    "sqlite3": "^3.1.9"
+    "sqlite3": "^3.1.9",
+    "dotenv": "^4.0.0"
   }
 }

@@ -32,22 +32,11 @@ let checkIfTableExists = (tableName: string): Promise<answer> => {
 }
 
 
-let db = new sql.Database('training', sql.OPEN_READWRITE | sql.OPEN_CREATE, (err) => {
-    return new Promise((resolve, reject) => {
-        if (err) {
-            let error = { reason: err.message, action: actions.STOP_PROGRAM_ERROR };
-
-            reject(error);
-        } else {
-            console.log('in db create');
-            resolve({ reason: "Βάση Δεδομένων ΟΚ", action: actions.NO_ACTION });
-        }
-    })
-});
+let db = new sql.Database('training', sql.OPEN_READWRITE | sql.OPEN_CREATE);
 
 checkIfTableExists('athletes')
     .then((value) => {
-        console.log(`table athletes exists ${JSON.stringify(value)}`)
+        steps.push(value);
     })
     .catch((value) => {
         console.log(`table athletes does not exists ${JSON.stringify(value)}`);
@@ -65,8 +54,8 @@ checkIfTableExists('athletes')
         }
     });
 
-    console.log(errors);
-    console.log(steps);
+    
+   
 
 /*
 db.get('SELECT * FROM ATHLETES',(err:Error | null, row:any,)=>

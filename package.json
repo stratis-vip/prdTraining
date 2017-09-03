@@ -1,0 +1,52 @@
+{
+  "name": "training-assistant",
+  "version": "0.0.1",
+  "description": "a web application to help you keeping your sports trainings in order",
+  "main": "app.js",
+  "bin": {
+    "training-assistant": "www.js"
+  },
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "start": "node ./bin/www.js",
+    "test": "jasmine-node spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stratis-vip/training.git"
+  },
+  "keywords": [
+    "training"
+  ],
+  "author": "Stratis Christodoulou",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/stratis-vip/training/issues"
+  },
+  "homepage": "https://github.com/stratis-vip/training#readme",
+  "devDependencies": {
+    "@types/express": "^4.0.37",
+    "@types/node": "^8.0.26",
+    "jasmine-node": "^1.14.5",
+    "@types/serve-favicon": "^2.2.29",
+    "@types/morgan": "^1.7.32",
+    "@types/cookie-parser": "^1.4.1",
+    "@types/body-parser": "^1.16.5",
+    "@types/jasmine-node": "^1.14.32",
+    "@types/express-session": "^1.15.3",
+    "@types/sqlite3": "^3.1.1"
+  },
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "cookie-parser": "^1.4.3",
+    "debug": "^3.0.1",
+    "express": "^4.15.4",
+    "express-session": "^1.15.5",
+    "hbs": "^4.0.1",
+    "morgan": "^1.8.2",
+    "serve-favicon": "^2.4.3",
+    "sqlite3": "^3.1.9"
+  }
+}

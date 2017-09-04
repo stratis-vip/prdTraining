@@ -2,6 +2,7 @@ import * as dot from 'dotenv';
 import * as sql from 'sqlite3';
 import { actions, answer } from './interfaces';
 
+sql.verbose();
 let errors: Array<answer> = [];
 let steps: Array<answer> = [];
 
@@ -49,6 +50,12 @@ let createTableAthletes = ():Promise<answer> =>{
 
 
 let db = new sql.Database('training', sql.OPEN_READWRITE | sql.OPEN_CREATE);
+db.on('profile',(sql:string, time:string) => console.log(`TRACE||||||| ${sql} at ${time}`));
+//db.configure('profile',logger);
+
+function logger(){
+
+}
 
 checkIfTableExists('athletes')
     .then((value) => {
@@ -69,5 +76,5 @@ checkIfTableExists('athletes')
                 break;
             case actions.NO_ACTION:
         }
-        console.log(`ERROS\n${JSON.stringify(errors,null,2)}`);
+        console.log(`ERRORS\n${JSON.stringify(errors,null,2)}`);
     });

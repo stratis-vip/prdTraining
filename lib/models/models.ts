@@ -39,7 +39,7 @@ let createTableAthletes = ():Promise<answer> =>{
             'height'	REAL NOT NULL DEFAULT 1.73,
             'sex'	INTEGER NOT NULL DEFAULT 0,
             'bday'	TEXT NOT NULL,
-            'vo2max'	TEXT NOT NULL`,(err:Error | null, row:any) {
+            'vo2max'	TEXT NOT NULL`,(err:Error | null, row:any) =>{
                 //check for error and reject
                 //resolve if everything all right
             }

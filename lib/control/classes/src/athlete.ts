@@ -1,9 +1,10 @@
-import {MINWEIGHT,MAXWEIGHT, MINHEIGHT, MAXHEIGHT, MAXVO2MAX} from './consts';
-import { sex, vo2maxClass } from './classes';
-import { updateAthlete, calculateBmi } from './functions';
+import {MINWEIGHT,MAXWEIGHT, MINHEIGHT, MAXHEIGHT, MAXVO2MAX} from '../../consts';
+import  vo2maxClass  from './vo2max';
+import { sex } from '../../enums'
+import { updateAthlete, calculateBmi } from '../../functions';
 //var evn = require('./events');
 
-class athlete {
+export default class athlete {
     //WEIGHT
     private _weight: number = 75;
     get weight() {
@@ -90,5 +91,3 @@ class athlete {
         }
     };
 };
-
-export  {athlete};

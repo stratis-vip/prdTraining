@@ -1,15 +1,14 @@
-import * as athlete from './athlete';
-import {vo2maxClass} from './classes';
+/*import athlete from './classes/athlete';
+import {vo2maxClass} from './classes/vo2max';
+import HeartRate from './classes/heartRate';
+import Altitude from './classes/altitude';
 import * as constants from './consts';
+*
 
 let vm = new vo2maxClass();
-var ath = new athlete.athlete();
-ath.name = 'Παναγιώτης Λυπηρίδης';
-vm.bicycling=23.1;
-ath.vo2max=vm;
-ath.vo2max.bicycling=32;
+let ath = new athlete();
+let hr = new HeartRate(120,130,123);*/
+import {Altitude} from './classes/index'
+let alt = new Altitude(12,345,122,567);
 
-console.log(`To όνομα είναι: ${ath.name}`);
-console.log(constants.MINHEIGHT);
-ath.weight = constants.MINWEIGHT+1;
-console.log(ath.weight);
+console.log(alt.toString());

@@ -1,9 +1,10 @@
 let app = require('../bin/www');
-import * as athlete from '../lib/control/athlete';
-let constants = require('../lib/control/consts');
+import {athlete, HeartRate} from '../lib/control/classes/index';
+import * as constants from '../lib/control/consts';
+import {sex} from '../lib/control/enums'
 
 
-let tAthlete = new athlete.athlete();
+let tAthlete = new athlete();
 /*console.log(constants.MINWEIGHT);
 console.log(app);
 console.log(tAthlete);
@@ -20,7 +21,7 @@ describe("Check athlete object\n", function () {
     app.closeServer();
 })
 
-describe("Check athlete object\n", function () {
+describe("Check athlete object\n", ()=> {
     describe("", function () {
         it("Check invalid weight (less or equal of 27.3 Kgr)\n", function (done) {
             tAthlete.weight = constants.MINWEIGHT;
@@ -48,7 +49,7 @@ describe("Check athlete object\n", function () {
 
         it("Check Invalid height (more than 2.72)\n", function (done) {
             tAthlete.height = constants.MAXHEIGHT;
-            expect(tAthlete.height).not.toBe(constants.MAXHEIGH);
+            expect(tAthlete.height).not.toBe(constants.MAXHEIGHT);
             done();
         });
 
@@ -72,8 +73,8 @@ describe("Check athlete object\n", function () {
         });
 
         it("Check if sex set to Male correctly\n",function(done){
-            tAthlete.sex=constants.SEX_MALE;
-            expect(tAthlete.sex).toBe(constants.SEX_MALE);
+            tAthlete.sex=sex.SEX_MALE;
+            expect(tAthlete.sex).toBe(sex.SEX_MALE);
             done();
         });
 
@@ -108,4 +109,77 @@ describe("Check athlete object\n", function () {
         });
     });
     app.closeServer();
+});
+
+let hr = new HeartRate(100,100,100);
+describe("Check HeartRate object\n",()=>{
+    describe("Check correct initial values",()=>{
+        it("average HR must be 100", (done) => {
+            expect(hr.aHR).toBe(100);
+            done();
+        });
+        it("maximum HR must be 100", (done) => {
+            expect(hr.mHR).toBe(100);
+            done();
+        });
+        it("lower HR must be 100", (done) => {
+            expect(hr.lHR).toBe(100);
+            done();
+        });
+    });
+
+    describe("Check if i can change to correct values\n",()=>{
+        it("average HR changes from 100 to 120", (done) => {
+            hr.aHR = 120;
+            expect(hr.aHR).toBe(120);
+            done();
+        });
+        it("maximum HR changes from 100 to 120", (done) => {
+            hr.mHR = 120;
+            expect(hr.mHR).toBe(120);
+            done();
+        });
+        it("lower HR changes from 100 to 120", (done) => {
+            hr.lHR = 120;
+            expect(hr.lHR).toBe(120);
+            done();
+        });
+    });
+    
+    describe("Check if i can change to incorrect values\n",()=>{
+        it("setting average HR too high", (done) => {
+            hr.aHR = 220;
+            expect(hr.aHR).not.toBe(220);
+            done();
+        });
+        it("setting max HR too high", (done) => {
+            hr.mHR = 220;
+            expect(hr.mHR).not.toBe(220);
+            done();
+        });
+        it("setting min HR too high", (done) => {
+            hr.lHR = 220;
+            expect(hr.lHR).not.toBe(220);
+            done();
+        });
+
+        it("setting average HR too low", (done) => {
+            hr.aHR = 20;
+            expect(hr.aHR).not.toBe(20);
+            done();
+        });
+        it("setting max HR too low", (done) => {
+            hr.mHR = 20;
+            expect(hr.mHR).not.toBe(20);
+            done();
+        });
+        it("setting min HR too low", (done) => {
+            hr.lHR = 20;
+            expect(hr.lHR).not.toBe(20);
+            done();
+        });
+
+
+    });    
+
 });

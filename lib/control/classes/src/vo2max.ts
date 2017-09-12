@@ -1,12 +1,6 @@
-import * as constants  from './consts';
+import * as constants  from '../consts';
 
-const enum sex {
-    SEX_UNDEFINED = 0,
-    SEX_MALE,
-    SEX_FEMALE
-}
-
-class vo2maxClass {
+export default class vo2maxClass {
     private _swimming: number = 20.0;
     private _bicycling: number = 21.0;
     private _running: number = 22.0;
@@ -31,4 +25,3 @@ class vo2maxClass {
         }
     }
 }
-export {sex, vo2maxClass};

@@ -1,4 +1,4 @@
-import { updateAltitude } from '../functions';
+import { updateAltitude } from '../../functions';
 
 export default class Altitude{
     private _min : number;

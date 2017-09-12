@@ -1,0 +1,4 @@
+{ 
+    "name" : "classes",
+    "main" : "./index.js" 
+}

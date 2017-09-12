@@ -1,12 +1,24 @@
 import {MINWEIGHT,MAXWEIGHT, MINHEIGHT, MAXHEIGHT, MAXVO2MAX} from '../../consts';
-import  vo2maxClass  from './vo2max';
+import  Vo2maxClass  from './vo2max';
 import { sex } from '../../enums'
 import { updateAthlete, calculateBmi } from '../../functions';
 //var evn = require('./events');
 
-export default class athlete {
-    //WEIGHT
+export default class Athlete {
+   
     private _weight: number = 75;
+    private _height: number = 1.73;
+    private _sex: sex = sex.SEX_UNDEFINED;
+    private _name: string = 'Ανώνυμος';
+    private _bday: Date;
+    private _vo2max: Vo2maxClass;
+
+    constructor() {
+        this._vo2max= new Vo2maxClass();
+        this._bday = new Date('1971-10-21');
+    }
+    
+    //WEIGHT   
     get weight() {
         return this._weight;
     };
@@ -19,8 +31,7 @@ export default class athlete {
         }
     };
 
-    //HEIGHT
-    private _height: number = 1.73;
+    //HEIGHT  
     get height() {
         return this._height;
     };
@@ -38,7 +49,6 @@ export default class athlete {
     };
 
     //SEX 
-    private _sex: sex = sex.SEX_UNDEFINED;
     get sex() { return this._sex; };
     set sex(x: sex) {
         if (this._sex !== x) {
@@ -48,7 +58,6 @@ export default class athlete {
     };
 
     //NAME 
-    private _name: string = 'Ανώνυμος';
     get name() { return this._name; };
     set name(x: string) {
         if (this._name !== x && x.trim().length > 4 && x.trim() !== "") {
@@ -58,7 +67,6 @@ export default class athlete {
     };
 
     //age
-    private _bday: Date = new Date('1971-10-21');
     get bday() {
         return this._bday;
     };
@@ -80,11 +88,10 @@ export default class athlete {
     };
 
     //VO2MAX
-    private _vo2max: vo2maxClass;
     get vo2max() {
         return this._vo2max;
     };
-    set vo2max(x: vo2maxClass) {
+    set vo2max(x: Vo2maxClass) {
         if (this._vo2max !== x) {
             this._vo2max = x;
             updateAthlete(this,'vo2max', x);

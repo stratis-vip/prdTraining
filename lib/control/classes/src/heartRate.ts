@@ -1,5 +1,5 @@
-import {MINHEARTRATE, MAXHEARTRATE} from '../consts';
-import { updateHeartRate } from '../functions';
+import {MINHEARTRATE, MAXHEARTRATE} from '../../consts';
+import { updateHeartRate } from '../../functions';
 
 export default class HeartRate{
     private _aHR : number;

@@ -13,9 +13,17 @@ function updateAthlete(obj:object, property:string, value:any){
 	console.log(JSON.stringify(obj)+`\nProperty ${property} changed: ${value}`);
 }
 
+function updateHeartRate(obj:object, property:string, value:number){
+	console.log(JSON.stringify(obj)+`\nProperty ${property} changed: ${value}`);
+}
+
+function updateAltitude(obj:object, property:string, value:number){
+	console.log(JSON.stringify(obj)+`\nProperty ${property} changed: ${value}`);
+}
+
 //calculate Bmi with weghit w (in Kgr) and height h (in meters)
 function calculateBmi(w:number,h:number){
 	return w/(h * h);
 };
 
-export { updateAthlete, calculateBmi, inform };
+export { updateAthlete, updateHeartRate, updateAltitude, calculateBmi, inform };

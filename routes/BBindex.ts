@@ -3,7 +3,7 @@ import {check} from './check'
 const router = express.Router();
 
 /* GET home page. */
-router.get('/', check,(req, res, next) => {
+router.get('/', check,(req:Request, res:Response, next:any) => {
   res.render('index', { title: 'Βοηθός Προπονητή', logged:req.session.user });
   console.log(`Session id ${req.sessionID}\nreq.session.user: ${req.session.user}\n`+JSON.stringify(req.session));
 });

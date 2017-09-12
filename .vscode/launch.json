@@ -18,7 +18,7 @@
             "type": "node",
             "request": "launch",
             "name": "Test Program",
-            "program": "${workspaceRoot}/spec/app_spec.js",
+            "program": "${workspaceRoot}/lib/control/test.js",
             "outFiles": [
                 "${workspaceRoot}/out/**/*.js"
             ]

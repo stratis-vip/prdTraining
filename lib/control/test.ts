@@ -1,15 +1,26 @@
-import * as athlete from './athlete';
-import {vo2maxClass} from './classes';
+import {Athlete, Vo2maxClass, HeartRate, Altitude } from './classes';
 import * as constants from './consts';
 
-let vm = new vo2maxClass();
-var ath = new athlete.athlete();
-ath.name = 'Παναγιώτης Λυπηρίδης';
-vm.bicycling=23.1;
-ath.vo2max=vm;
-ath.vo2max.bicycling=32;
 
-console.log(`To όνομα είναι: ${ath.name}`);
-console.log(constants.MINHEIGHT);
-ath.weight = constants.MINWEIGHT+1;
-console.log(ath.weight);
+let vm = new Vo2maxClass();
+let ath = new Athlete();
+let hr = new HeartRate(120,130,123);
+
+import DB from '../models/database'
+
+let db = new DB('training');
+
+db.getAthites((err,rows)=>{
+    if (err){
+        return console.log(err)
+    }
+    console.log(rows);
+})
+db.Emiter.on('error',(value)=>{
+    console.log(`onError = ${JSON.stringify(value,null,2)}`);
+});
+db.Emiter.on('finish',(value)=>{
+    console.log(`onFinish = ${JSON.stringify(value,null,2)}`);
+});
+
+

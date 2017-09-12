@@ -34,13 +34,13 @@ let checkIfTableExists = (tableName: string): Promise<answer> => {
 let createTableAthletes = ():Promise<answer> =>{
     return new Promise(()=>{
         db.get(`CREATE TABLE 'athletes' (
-            'id'	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-            'name'	TEXT NOT NULL DEFAULT 'Ανώνυμος  Αθλητής',
-            'weight'	REAL NOT NULL DEFAULT 75.0,
-            'height'	REAL NOT NULL DEFAULT 1.73,
-            'sex'	INTEGER NOT NULL DEFAULT 0,
-            'bday'	TEXT NOT NULL,
-            'vo2max'	TEXT NOT NULL`,(err:Error | null, row:any) =>{
+                'id'	    INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+                'name'	    TEXT NOT NULL DEFAULT 'Ανώνυμος  Αθλητής',
+                'weight'	REAL NOT NULL DEFAULT 75.0,
+                'height'	REAL NOT NULL DEFAULT 1.73,
+                'sex'	    INTEGER NOT NULL DEFAULT 0,
+                'bday'  	TEXT NOT NULL,
+                'vo2max'	TEXT NOT NULL`,(err:Error | null, row:any) =>{
                 //check for error and reject
                 //resolve if everything all right
             }
@@ -48,14 +48,7 @@ let createTableAthletes = ():Promise<answer> =>{
     })
 }
 
-
 let db = new sql.Database('training', sql.OPEN_READWRITE | sql.OPEN_CREATE);
-db.on('profile',(sql:string, time:string) => console.log(`TRACE||||||| ${sql} at ${time}`));
-//db.configure('profile',logger);
-
-function logger(){
-
-}
 
 checkIfTableExists('athletes')
     .then((value) => {

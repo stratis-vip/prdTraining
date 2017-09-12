@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 let app = require('../bin/www');
-const index_1 = require("../lib/control/classes/index");
+const classes_1 = require("../lib/control/classes");
 const constants = require("../lib/control/consts");
-let tAthlete = new index_1.Athlete();
+let tAthlete = new classes_1.Athlete();
 describe("Check athlete object\n", () => {
     describe("Check Weight\n", () => {
         it("Check invalid weight (less or equal of 27.3 Kgr)\n", (done) => {
@@ -84,7 +84,7 @@ describe("Check athlete object\n", () => {
     });
     app.closeServer();
 });
-let hr = new index_1.HeartRate(100, 100, 100);
+let hr = new classes_1.HeartRate(100, 100, 100);
 describe("Check HeartRate object\n", () => {
     describe("Check correct initial values", () => {
         it("average HR must be 100", (done) => {

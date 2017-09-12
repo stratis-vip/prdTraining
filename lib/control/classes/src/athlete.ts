@@ -5,7 +5,7 @@ import { updateAthlete, calculateBmi } from '../../functions';
 //var evn = require('./events');
 
 export default class Athlete {
-   
+    private _id: number;
     private _weight: number = 75;
     private _height: number = 1.73;
     private _sex: sex = sex.SEX_UNDEFINED;
@@ -16,6 +16,14 @@ export default class Athlete {
     constructor() {
         this._vo2max= new Vo2maxClass();
         this._bday = new Date('1971-10-21');
+    }
+    //Id
+    get id() {
+        return this._id;
+    }
+
+    set id(x) {
+        (this._id !== x) ? this._id=x : this._id;
     }
     
     //WEIGHT   

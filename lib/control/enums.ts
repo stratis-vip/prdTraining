@@ -4,10 +4,10 @@ const enum sex {
     SEX_FEMALE
 }
 
-const enum activitiesTypes {
+enum activitiesTypes {
     Generic = 0,
     Running = 1,
-    Cycling = 2,
+    Biking = 2,
     Transition = 3,
     FitnessEquipment = 4,
     Swimming = 5,

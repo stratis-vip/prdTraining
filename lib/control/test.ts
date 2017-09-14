@@ -6,7 +6,34 @@ import * as path from 'path'
 import * as gp from 'tcxparse'
 import {activitiesTypes, activitiesSubTypes} from './enums'
 
-interface iExtension{
+interface iPointHR{
+    $:{
+        'xsi:type': string  
+    }
+    value: number
+}
+
+interface iPoint{
+    LatitudeDegrees: Array<string>
+    LongitudeDegrees: Array<string>
+}
+
+interface iTrackPoint{
+    Time: Array<string>
+    Position: Array<{iPoint}>
+    AltitudeMeters: Array<string>
+    DistanceMeters: Array<string>
+    HeartRateBpm: Array<iPointHR>
+    Cadence: Array<number>
+    Speed: Array<iTPXExtension>
+}
+interface iTPXExtension{
+    $:{
+        xmlns:string 
+    }
+    Speed:number
+}
+interface iLXExtension{
     LX:Array<iLXExtension>
 }
 
@@ -34,7 +61,7 @@ interface iActivity{
         MaximumHeartRateBpm: {}
         Cadence: Array<string>
         Track: Array<{}>
-        Extensions: Array<iExtension>
+        Extensions: Array<iLXExtension>
     }>
 }
 
@@ -75,7 +102,9 @@ gp.parseFile(path.join(__dirname,'test.tcx'),(err,result)=>{
             
             
            
-            if (i===0) { act.start=lap.StartTime}
+            if (i===0) { 
+                console.log(JSON.stringify(activityObject.Lap[i].Track,null,2))
+                act.start=lap.StartTime}
             act.laps.push(lap)
             act.distance += lap.DistanceMeters;
             act.calories += lap.Calories;
@@ -89,10 +118,10 @@ gp.parseFile(path.join(__dirname,'test.tcx'),(err,result)=>{
         }
         avgHR = Math.floor(avgHR / act.laps.length);
         avgCadence = Math.floor(avgCadence / act.laps.length);
-         console.log(act.laps[0].MaximumSpeed.decimalPaceFromSpeedMpS().decPaceToTimePace())
-        // console.log(act.distance.distanceFromMtoKM())
-         console.log(JSON.stringify(act, null, 2))
-         console.log(`avg HR ${avgHR} avg cadence ${avgCadence} maxHR ${maxHR} totalTime ${act.totalTime.secsToTime()}`)
+        //  console.log(act.laps[0].MaximumSpeed.decimalPaceFromSpeedMpS().decPaceToTimePace())
+        // // console.log(act.distance.distanceFromMtoKM())
+        //  console.log(JSON.stringify(act, null, 2))
+        //  console.log(`avg HR ${avgHR} avg cadence ${avgCadence} maxHR ${maxHR} totalTime ${act.totalTime.secsToTime()}`)
     } else 
     {console.log(err.message)}
 })

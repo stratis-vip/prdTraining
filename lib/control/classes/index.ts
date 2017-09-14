@@ -7,8 +7,9 @@ import Record from './src/records'
 import TimeInZones from './src/timeInZones'
 import Exoplismos from './src/exoplismos'
 import Lap from './src/lap'
-
+import Track from './src/track';
 import {MINWEIGHT,MAXWEIGHT, MINHEIGHT, MAXHEIGHT, MAXVO2MAX, MINHEARTRATE, MAXHEARTRATE} from '../consts';
+
 
 export {
         Activity, Altitude, Athlete,
@@ -17,6 +18,6 @@ export {
         Lap,
         MAXHEARTRATE, MAXHEIGHT, MAXVO2MAX, MAXWEIGHT, MINHEARTRATE, MINHEIGHT, MINWEIGHT,
         Record,
-        TimeInZones,
+        TimeInZones, Track,
         Vo2maxClass
     }

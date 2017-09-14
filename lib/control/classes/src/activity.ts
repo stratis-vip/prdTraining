@@ -10,8 +10,10 @@ import { EventEmitter } from 'events';
 //TODO να προσθέσω και χρόνο σταματημένο
 export default class Activity extends EventEmitter{
     private _activityId:number;
-    private _Emiter:EventEmitter;
     private _athleteId: number;
+    private _cadence: number=-1;
+    private _Emiter:EventEmitter;
+    
     private _name: string;
     private _totalTime: number;
     private _distance: number;
@@ -23,6 +25,7 @@ export default class Activity extends EventEmitter{
     private _start: Date;
     private _exoplismos: Array<Exoplismos>
     private _laps: Array<Lap>
+    private _calories: number;
     constructor () {
         super()   
         this._Emiter = new EventEmitter()   
@@ -53,6 +56,13 @@ export default class Activity extends EventEmitter{
         (this._athleteId !== x) ? this._athleteId =x : this._athleteId;
     }
 
+    get cadence (){
+        return this._cadence;
+    }
+    set cadence(x){
+        (this._cadence !== x) ? this._cadence =x : this._cadence;
+    }
+
     get name() {
         return this._name;
     }
@@ -67,7 +77,7 @@ export default class Activity extends EventEmitter{
         return this._totalTime;
     }
     set totalTime(x){
-        if (this._totalTime !== x && x > 0){
+        if (this._totalTime !== x){
             this._totalTime =x
             this._Emiter.emit('change','totalTime',x);
         }
@@ -76,11 +86,16 @@ export default class Activity extends EventEmitter{
     get distance() {
         return this._distance;
     }
+
     set distance(x){
-        if (this._distance !== x && x > 0){
+        if (this._distance !== x ){
             this._distance =x
             this._Emiter.emit('change','distance',x);
         }
+    }
+
+    toKm = () =>{
+        return this._distance / 1000
     }
     
     get type() {
@@ -161,7 +176,15 @@ export default class Activity extends EventEmitter{
         }
     }  
 
-
+    get calories() {
+        return this._calories;
+    }
+    set calories(x){
+        if (this._calories !== x){
+            this._calories =x
+            this._Emiter.emit('change','calories',x);
+        }
+    }  
 
 
 

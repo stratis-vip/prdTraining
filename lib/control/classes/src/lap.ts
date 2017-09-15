@@ -1,5 +1,8 @@
-import Track from "./track";
-
+﻿import Track from "./track";
+/**
+ * @class Lap
+ * Κρατά
+ */
 export default class Lap {
     private _AverageHeartRateBpm: number
     private _AvgSpeed:number = -1

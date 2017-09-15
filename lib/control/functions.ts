@@ -1,9 +1,5 @@
 /**
- * @interface [Number]
- * προσθέτω τις παρακάτω συναρτήσεις στο αντικείμενο Number
- * 
-    * Here is my jsdoc comment
-    * @alias global
+ * @namespace functions
  */
 declare global {
     interface Number {
@@ -26,16 +22,19 @@ const secondsInHour = 3600;
 function calculateBmi(weightInKG: number, heightInMeters: number) {
     return weightInKG / (heightInMeters * heightInMeters);
 };
- /** 
- *  Μετατρέπει τα μέτρα σε ΚΜ
- * Solves equations of the form a * x = b
- * @example <caption>Example usage of method1.</caption>
- * // returns 2
- * globalNS.method1(5, 10);
- * @returns {Number} Returns the value of x for the equation.
- */
+
 function dummy(){}
 
+/**
+ * Επεκτείνει το Number ώστε να μετατρέπει αυτόματα τα μέτρα σε χιλιόμετρα
+ *@example
+ * //returns 5
+ * let alfa = 5000
+ * console.log(alfa.distanceFromMtoKM())
+ * 
+ * @returns number
+ *@alias distanceFromMtoKM
+ */
 Number.prototype.distanceFromMtoKM = function (this: number) {
 
     if (this - Math.floor(this) === 0) {
@@ -58,9 +57,7 @@ Number.prototype.decimalPaceFromSpeedMpS = function (this: number) {
     return 50 / (this * 3);
 };
 
-/**
- * gia na douyme
- */
+
 Number.prototype.TimePaceFromSpeedMpS = function (this: number) {
     let dec = this.decimalPaceFromSpeedMpS();
 

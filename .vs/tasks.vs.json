@@ -1,0 +1,16 @@
+{
+  "version": "0.2.1",
+  "tasks": [
+    {
+      "appliesTo": "/",
+      "taskName": "task-prdTraining",
+      "type": "launch"
+    },
+    {
+      "taskName": "task-test1",
+      "appliesTo": "lib/control/test1.ts",
+					"type": "launch",
+					"customLaunchCommand": ""
+    }
+  ]
+}

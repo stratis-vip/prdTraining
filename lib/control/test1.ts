@@ -1,4 +1,4 @@
-import { Athlete, Vo2maxClass, HeartRate, Altitude, Activity, Lap } from './classes';
+import { Athlete, Vo2maxClass, HeartRate, Altitude, Activity, Lap, Track, TrackPoint } from './classes';
 import * as constants from './consts';
 import DB from '../models/database'
 import * as fs from 'fs'
@@ -14,15 +14,15 @@ interface iPointHR{
 }
 
 interface iPoint{
-    LatitudeDegrees: Array<string>
-    LongitudeDegrees: Array<string>
+	LatitudeDegrees: Array<number>
+	LongitudeDegrees: Array<number>
+	AltitudeMeters: Array<number>
 }
 
 interface iTrackPoint{
     Time: Array<string>
-    Position: Array<{iPoint}>
-    AltitudeMeters: Array<string>
-    DistanceMeters: Array<string>
+	Position: Array<{ iPoint }>
+	DistanceMeters: Array<number>
     HeartRateBpm: Array<iPointHR>
     Cadence: Array<number>
     Speed: Array<iTPXExtension>
@@ -52,25 +52,25 @@ interface iActivity{
     Lap:Array<{
         $:{
             StartTime:string
-        }
-        TotalTimeSeconds:Array<string>
-        DistanceMeters: Array<string>
-        MaximumSpeed: Array<string>
-        Calories: Array<string>
+		}
+		TotalTimeSeconds: Array<number>
+        DistanceMeters: Array<number>
+        MaximumSpeed: Array<number>
+        Calories: Array<number>
         AverageHeartRateBpm: {}
         MaximumHeartRateBpm: {}
-        Cadence: Array<string>
+        Cadence: Array<number>
         Track: Array<{}>
         Extensions: Array<iLXExtension>
     }>
 }
 
 let vm = new Vo2maxClass();
-/*let ath = new Athlete();
+let ath = new Athlete();
 let hr = new HeartRate(120,130,123);
 let act = new Activity();
 let db = new DB('training');
-/*
+
 let data = fs.readFileSync(path.join(__dirname,'test.tcx'),'utf8');
 gp.parseFile(path.join(__dirname,'test.tcx'),(err,result)=>{
     if (!err){
@@ -86,21 +86,20 @@ gp.parseFile(path.join(__dirname,'test.tcx'),(err,result)=>{
         let maxHR=0;
         for (let i =0; i < activityObject.Lap.length;i++){
             let lap = new Lap();
-
             lap.AverageHeartRateBpm = Number(activityObject.Lap[i].AverageHeartRateBpm[0].Value[0])
             ;(activityObject.Lap[i].Extensions[0].LX[0].AvgSpeed !== undefined) ? lap.AvgSpeed =Number(activityObject.Lap[i].Extensions[0].LX[0].AvgSpeed)
                 : lap.AvgSpeed = -1;
-            lap.Cadence = Number(activityObject.Lap[i].Cadence[0])
-            lap.Calories = Number(activityObject.Lap[i].Calories[0]);
-            lap.DistanceMeters = Number(activityObject.Lap[i].DistanceMeters[0]) 
-            lap.MaximumHeartRateBpm = Number(activityObject.Lap[i].MaximumHeartRateBpm[0].Value[0])
-            lap.MaximumSpeed = Number(activityObject.Lap[i].MaximumSpeed[0]);
+            lap.Cadence = activityObject.Lap[i].Cadence[0]
+            lap.Calories = activityObject.Lap[i].Calories[0]
+            lap.DistanceMeters = activityObject.Lap[i].DistanceMeters[0] 
+            lap.MaximumHeartRateBpm = activityObject.Lap[i].MaximumHeartRateBpm[0].Value[0]
+            lap.MaximumSpeed = activityObject.Lap[i].MaximumSpeed[0]
             lap.StartTime=new Date(activityObject.Lap[i].$.StartTime)
-            lap.TotalTimeSeconds = Number(activityObject.Lap[i].TotalTimeSeconds)           
-            
+            lap.TotalTimeSeconds = activityObject.Lap[i].TotalTimeSeconds[0]          
+            let track = new Track()
             // console.log(`${lap.DistanceMeters} ${lap.MaximumSpeed.speedFromMpStoKpH()} pace ${lap.MaximumSpeed.decimalPaceFromSpeedMpS()}`)
-            
-            
+
+			console.log(lap.TotalTimeSeconds)
            
             if (i===0) { 
                // console.log(JSON.stringify(activityObject.Lap[i].Track,null,2))
@@ -120,7 +119,7 @@ gp.parseFile(path.join(__dirname,'test.tcx'),(err,result)=>{
         avgCadence = Math.floor(avgCadence / act.laps.length);
         //  console.log(act.laps[0].MaximumSpeed.decimalPaceFromSpeedMpS().decPaceToTimePace())
         // // console.log(act.distance.distanceFromMtoKM())
-        //  console.log(JSON.stringify(act, null, 2))
+          console.log(JSON.stringify(act, null, 2))
         //  console.log(`avg HR ${avgHR} avg cadence ${avgCadence} maxHR ${maxHR} totalTime ${act.totalTime.secsToTime()}`)
     } else 
     {console.log(err.message)}
@@ -144,7 +143,7 @@ let findStr = (sub:string, tcx:string):number => {
         
     }else {return -1}
     
-}*/
+}
 let bb= 6.2427
 console.log(bb.decPaceToTimePace())
 //parseTcx(data);

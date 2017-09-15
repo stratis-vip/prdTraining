@@ -41,8 +41,8 @@ describe("Check Functions library\n", () => {
             expect(0..secsToTime()).toBe('00:00:00.00');
             done();
         });
-        describe("Check TimePaceFromSpeedMpS\n", () => {
-            it("Speed of 2.77 (25/9) meter per second must be 6 min per km\n", (done) => {
+        describe("Έλεγχος του TimePaceFromSpeedMpS\n", () => {
+            it("Ταχύτητα 2.77 (25/9) m / s πρέπει να είναι ρυθμός 06:00.00\n", (done) => {
                 expect((25 / 9).TimePaceFromSpeedMpS()).toBe('06:00.00');
                 done();
             });

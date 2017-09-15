@@ -7,6 +7,8 @@ import * as gp from 'tcxparse'
 import {activitiesTypes, activitiesSubTypes} from './enums'
 
 let d = new dummy();
-
+/**
+ * alfa
+ */
 let alfa:number =0
 console.log(alfa.secsToTime(false))

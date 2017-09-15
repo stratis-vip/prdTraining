@@ -1,7 +1,5 @@
-/**
- * @namespace functions
- */
 declare global {
+
     interface Number {
         distanceFromMtoKM(): number;
         speedFromMpStoKpH(): number;
@@ -27,13 +25,7 @@ function dummy(){}
 
 /**
  * Επεκτείνει το Number ώστε να μετατρέπει αυτόματα τα μέτρα σε χιλιόμετρα
- *@example
- * //returns 5
- * let alfa = 5000
- * console.log(alfa.distanceFromMtoKM())
- * 
- * @returns number
- *@alias distanceFromMtoKM
+ * @alias distanceFromMtoKM
  */
 Number.prototype.distanceFromMtoKM = function (this: number) {
 
@@ -45,34 +37,50 @@ Number.prototype.distanceFromMtoKM = function (this: number) {
     }
 };
 
-//μετατρέπει την ταχύτητα από m/s σε Κm/h
+
 //τεστ οκ
+/**
+ * Επεκτείνει το Number ώστε να μετατρέπει την ταχύτητα από m/s σε Κm/h
+ * @alias  speedFromMpStoKpH
+ */
 Number.prototype.speedFromMpStoKpH = function (this: number) {
     return this * 3.6;
 };
 
-//μετατρέπει την ταχύτητα από m/s σε δεκαδικό ρυθμό min/km
 //test ok
+/**
+ * Επεκτείνει το Number ώστε να μετατρέπει την ταχύτητα από m/s σε δεκαδικό ρυθμό min/km
+ * @alias  decimalPaceFromSpeedMpS
+ */
 Number.prototype.decimalPaceFromSpeedMpS = function (this: number) {
     return 50 / (this * 3);
 };
 
-
+//test ok
+/**
+ * Επεκτείνει το Number ώστε να μετατρέπει την ταχύτητα από m/s σε μορφής ΛΛ:ΔΔ.ΕΕ
+ * @alias TimePaceFromSpeedMpS
+ */
 Number.prototype.TimePaceFromSpeedMpS = function (this: number) {
     let dec = this.decimalPaceFromSpeedMpS();
 
     return dec.decPaceToTimePace();
 };
-//μετατρέπει την ταχύτητα από m/s σε μορφής ΛΛ:ΔΔ.ΕΕ
-//test ok
-//μετατρέπει τον ρυθμο από την δεκαδική του μορφή στη μορφή ΛΛ:ΔΔ.ΕΕ
-//τεστ οκ
+
+
+/** Επεκτείνει το Number ώστε να μετατρέπει τον ρυθμο από την δεκαδική του μορφή στη μορφή ΛΛ:ΔΔ.ΕΕ
+* @alias decPaceToTimePace
+*/
 Number.prototype.decPaceToTimePace = function (this: number) {
     return (this * 60).secsToTime(false);
 }
 
-//μετατρέπει τα δευτερόλεπτα σε χρόνο της μορφής ΩΩ:ΛΛ:ΔΔ.ΕΕ
+//
 //τεστ οκ
+/**
+ * Επεκτείνει το Number ώστε να μετατρέπει τα δευτερόλεπτα σε χρόνο της μορφής ΩΩ:ΛΛ:ΔΔ.ΕΕ
+ * @alias secsToTime
+ */
 Number.prototype.secsToTime = function (this: number, showHours?: boolean) {
     (showHours === undefined) ? showHours = true : showHours = false;
     let alfa = this;
@@ -102,10 +110,5 @@ Number.prototype.secsToTime = function (this: number, showHours?: boolean) {
 
     return result;
 }
-
-
-
-
-
 
 export { calculateBmi };

@@ -9,7 +9,7 @@ import Exoplismos from './src/exoplismos'
 import Lap from './src/lap'
 import Track from './src/track';
 import {sex, activitiesTypes, activitiesSubTypes} from '../enums'
-import TrackPoint from "./src/trackpoint";
+import  TrackPointClass  from "./src/trackpoint";
 
 import {MINWEIGHT,MAXWEIGHT, MINHEIGHT, MAXHEIGHT, MAXVO2MAX, MINHEARTRATE, MAXHEARTRATE} from '../consts';
 
@@ -25,6 +25,6 @@ export {
         MAXHEARTRATE, MAXHEIGHT, MAXVO2MAX, MAXWEIGHT, MINHEARTRATE, MINHEIGHT, MINWEIGHT,
         Record,
         sex,
-        TimeInZones, Track, TrackPoint,
+        TimeInZones, Track, TrackPointClass,
         Vo2maxClass
     }

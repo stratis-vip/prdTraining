@@ -1,4 +1,4 @@
-import { Athlete, Vo2maxClass, HeartRate, Altitude, Activity, Lap, Track, TrackPoint } from './classes';
+import { Athlete, Vo2maxClass, HeartRate, Altitude, Activity, Lap, Track, TrackPointClass } from './classes';
 import * as constants from './consts';
 import DB from '../models/database'
 import * as fs from 'fs'
@@ -18,14 +18,17 @@ interface iPoint{
 	LongitudeDegrees: Array<number>
 	AltitudeMeters: Array<number>
 }
-
+interface parentTrack{
+    TrackPoint:Array<iTrackPoint>
+}
 interface iTrackPoint{
     Time: Array<string>
-	Position: Array<{ iPoint }>
+	Position: Array<iPoint>
 	DistanceMeters: Array<number>
     HeartRateBpm: Array<iPointHR>
     Cadence: Array<number>
     Speed: Array<iTPXExtension>
+    
 }
 interface iTPXExtension{
     $:{
@@ -60,7 +63,7 @@ interface iActivity{
         AverageHeartRateBpm: {}
         MaximumHeartRateBpm: {}
         Cadence: Array<number>
-        Track: Array<{}>
+        Track: Array<parentTrack>
         Extensions: Array<iLXExtension>
     }>
 }
@@ -96,10 +99,20 @@ gp.parseFile(path.join(__dirname,'test.tcx'),(err,result)=>{
             lap.MaximumSpeed = activityObject.Lap[i].MaximumSpeed[0]
             lap.StartTime=new Date(activityObject.Lap[i].$.StartTime)
             lap.TotalTimeSeconds = activityObject.Lap[i].TotalTimeSeconds[0]          
-            let track = new Track()
+            let o = activityObject.Lap[i].Track[0].Trackpoint[0];
+            console.log((o))
+          //  for (let j = 0; activityObject.Lap[i].Track; j++){
+        //        let track = new Track()
+              //  track.Position.Time =new Date(activityObject.Lap[i].Track[j].Time[0])
+                // track.Position.LongitudeDegrees = activityObject.Lap[i].Track[j].Position[0].LongitudeDegrees[0]
+                // track.Position.LatitudeDegrees = activityObject.Lap[i].Track[j].Position[0].LatitudeDegrees[0]
+                // track.Position.AltitudeMeters = activityObject.Lap[i].Track[j].Position[0].AltitudeMeters[0]
+                // console.log(track)
+           // }
+            
             // console.log(`${lap.DistanceMeters} ${lap.MaximumSpeed.speedFromMpStoKpH()} pace ${lap.MaximumSpeed.decimalPaceFromSpeedMpS()}`)
 
-			console.log(lap.TotalTimeSeconds)
+			//console.log(lap.TotalTimeSeconds)
            
             if (i===0) { 
                // console.log(JSON.stringify(activityObject.Lap[i].Track,null,2))
@@ -119,7 +132,7 @@ gp.parseFile(path.join(__dirname,'test.tcx'),(err,result)=>{
         avgCadence = Math.floor(avgCadence / act.laps.length);
         //  console.log(act.laps[0].MaximumSpeed.decimalPaceFromSpeedMpS().decPaceToTimePace())
         // // console.log(act.distance.distanceFromMtoKM())
-          console.log(JSON.stringify(act, null, 2))
+       //   console.log(JSON.stringify(act, null, 2))
         //  console.log(`avg HR ${avgHR} avg cadence ${avgCadence} maxHR ${maxHR} totalTime ${act.totalTime.secsToTime()}`)
     } else 
     {console.log(err.message)}
@@ -145,7 +158,5 @@ let findStr = (sub:string, tcx:string):number => {
     
 }
 let bb= 6.2427
-console.log(bb.decPaceToTimePace())
+//console.log(bb.decPaceToTimePace())
 //parseTcx(data);
-let alfa:number =11725.12
-console.log(alfa.secsToTime())

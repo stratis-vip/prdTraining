@@ -8,16 +8,21 @@ import TimeInZones from './src/timeInZones'
 import Exoplismos from './src/exoplismos'
 import Lap from './src/lap'
 import Track from './src/track';
+import {sex, activitiesTypes, activitiesSubTypes} from '../enums'
+
 import {MINWEIGHT,MAXWEIGHT, MINHEIGHT, MAXHEIGHT, MAXVO2MAX, MINHEARTRATE, MAXHEARTRATE} from '../consts';
 
+class dummy{}
 
 export {
-        Activity, Altitude, Athlete,
+        Activity, activitiesTypes, activitiesSubTypes, Altitude, Athlete,
+        dummy,
         Exoplismos,
         HeartRate,
         Lap,
         MAXHEARTRATE, MAXHEIGHT, MAXVO2MAX, MAXWEIGHT, MINHEARTRATE, MINHEIGHT, MINWEIGHT,
         Record,
+        sex,
         TimeInZones, Track,
         Vo2maxClass
     }

@@ -32,73 +32,84 @@ const secondsInHour = 3600;
 /** Υπολογίζει το Bmi από το βάρος και το ύψος
  * @param {number} weightInKG το βάρος σε Κgr
  * @param {number} heightInMeters το υψος σε μέτρα
- *
+ * @returns number το ΒΜΙ σαν δεδκαδικό αριθμό
  */
 //τεστ ΟΚ
-function calculateBmi(weightInKG, heightInMeters) {
+const calculateBmi = (weightInKG, heightInMeters) => {
     return weightInKG / (heightInMeters * heightInMeters);
-}
+};
 exports.calculateBmi = calculateBmi;
-;
-function dummy() { }
 /**
- * Επεκτείνει το Number ώστε να μετατρέπει αυτόματα τα μέτρα σε χιλιόμετρα
- * @alias distanceFromMtoKM
+ * Mετατρέπει την ταχύτητα από m/s σε δεκαδικό ρυθμό min/km
+ * @param {number} value η ταχύτητα σε m/s
+ * @returns string το ρυθμό σε λεπτά το χιλιόμετρο με τη μορφή Λ,Δ
+ * @example decimalPaceFromSpeedMpS(2.77) = 6 (06:00.00)
  */
-Number.prototype.distanceFromMtoKM = function () {
-    if (this - Math.floor(this) === 0) {
-        return this / 1000;
+const decimalPaceFromSpeedMpS = (value) => {
+    return 50 / (value * 3);
+};
+exports.decimalPaceFromSpeedMpS = decimalPaceFromSpeedMpS;
+/**
+ * Mετατρέπει τον ρυθμο από την δεκαδική του μορφή στη μορφή ΛΛ:ΔΔ.ΕΕ
+ * @param  {number} value
+ * @returns string: ο ρυθμός σε μορφή ΛΛ:ΔΔ.ΕΕ
+ */
+const decimalPaceToTimePace = (value) => {
+    return secsToTime(value * 60, false);
+};
+exports.decimalPaceToTimePace = decimalPaceToTimePace;
+/**
+ * Μετατρέπει τα μέτρα σε χιλιόμετρα χωρίς να χάσει το δεικαδικό
+ * @param {number} value η απόσταση σε μέτρα
+ * @returns {number} την απόσταση σε ΚΜ
+ */
+const distanceFromMtoKM = (value) => {
+    if (value - Math.floor(value) === 0) {
+        return value / 1000;
     }
     else {
-        let medium = Math.pow(10, this.toString().split('.')[1].length);
-        return this * medium / (medium * 1000);
+        let medium = Math.pow(10, value.toString().split('.')[1].length);
+        return value * medium / (medium * 1000);
     }
 };
+exports.distanceFromMtoKM = distanceFromMtoKM;
+/**
+ * Mετατρέπει την ταχύτητα από m/s σε Κm/h
+ * @param {number} value η ταχύτητα σε m/s
+ * @returns number η ταχύτητα σε ΧαΩ
+ */
+const speedFromMpStoKpH = (value) => {
+    return value * 3.6;
+};
+exports.speedFromMpStoKpH = speedFromMpStoKpH;
+/**
+ * Mετατρέπει την ταχύτητα από m/s σε ρυθμό της μορφής ΛΛ:ΔΔ.ΕΕ
+ * @param  {number} value η ταχύτητα σε m/s
+ * @returns string ο ρυθμός σε μορφή ΛΛ:ΔΔ.ΕΕ
+ */
+const TimePaceFromSpeedMpS = (value) => {
+    return decimalPaceToTimePace(decimalPaceFromSpeedMpS(value));
+};
+exports.TimePaceFromSpeedMpS = TimePaceFromSpeedMpS;
+/**
+ * H secsToTime μετατρέπει τα δευτερόλεπτα value σε χρόνο της μορφής
+ * [ΩΩ:]ΛΛ:ΔΔ.ΕΕ.
+ *
+ * &lt;p>Οι ώρες δεν εμφανίζονται αν τεθεί η τιμή showHours σε false (εξ ορισμού
+ * εμφανίζονται οι ώρες)&lt;/p>
+ * @param {number} value ο χρόνος σε secs
+ * @param {boolean} showHours αν θα εμφανίζεται το πεδίο ΩΩ:
+ * @returns string o χρόνος σε μορφή ΩΩ:ΛΛ:ΔΔ.ΕΕ
+ *
+ */
 //τεστ οκ
-/**
- * Επεκτείνει το Number ώστε να μετατρέπει την ταχύτητα από m/s σε Κm/h
- * @alias  speedFromMpStoKpH
- */
-Number.prototype.speedFromMpStoKpH = function () {
-    return this * 3.6;
-};
-//test ok
-/**
- * Επεκτείνει το Number ώστε να μετατρέπει την ταχύτητα από m/s σε δεκαδικό ρυθμό min/km
- * @alias  decimalPaceFromSpeedMpS
- */
-Number.prototype.decimalPaceFromSpeedMpS = function () {
-    return 50 / (this * 3);
-};
-//test ok
-/**
- * Επεκτείνει το Number ώστε να μετατρέπει την ταχύτητα από m/s σε μορφής ΛΛ:ΔΔ.ΕΕ
- * @alias TimePaceFromSpeedMpS
- */
-Number.prototype.TimePaceFromSpeedMpS = function () {
-    let dec = this.decimalPaceFromSpeedMpS();
-    return dec.decPaceToTimePace();
-};
-/** Επεκτείνει το Number ώστε να μετατρέπει τον ρυθμο από την δεκαδική του μορφή στη μορφή ΛΛ:ΔΔ.ΕΕ
-* @alias decPaceToTimePace
-*/
-Number.prototype.decPaceToTimePace = function () {
-    return (this * 60).secsToTime(false);
-};
-//
-//τεστ οκ
-/**
- * Επεκτείνει το Number ώστε να μετατρέπει τα δευτερόλεπτα σε χρόνο της μορφής ΩΩ:ΛΛ:ΔΔ.ΕΕ
- * @alias secsToTime
- */
-Number.prototype.secsToTime = function (showHours) {
+const secsToTime = (value, showHours) => {
     (showHours === undefined) ? showHours = true : showHours = false;
-    let alfa = this;
     let result = "";
     //βρίσκω τις ώρες
-    let hrs = Math.floor(alfa / 3600);
+    let hrs = Math.floor(value / 3600);
     if (hrs > 0) {
-        alfa -= hrs * 3600;
+        value -= hrs * 3600;
         ;
         (hrs > 9) ? result += hrs.toString() + ':' : result = `0${hrs.toString()}:`;
     }
@@ -106,23 +117,24 @@ Number.prototype.secsToTime = function (showHours) {
         (showHours) ? result += `00:` : result = result;
     }
     //μιν -> λεπτά
-    let min = Math.floor(alfa / 60);
-    alfa -= min * 60;
+    let min = Math.floor(value / 60);
+    value -= min * 60;
     ;
     (min > 9) ? result += min.toString() + ':' : result += `0${min.toString()}:`;
     //sec -> δευτερόλεπτα
-    let secs = Math.floor(alfa);
+    let secs = Math.floor(value);
     (secs > 9) ? result += secs.toString() : result += `0${secs.toString()}`;
-    alfa -= secs;
-    if (alfa === 0) {
+    value -= secs;
+    if (value === 0) {
         return `${result}.00`;
     }
     ;
     //mil -> εκατοστά
-    let mil = Math.floor(alfa * 100);
+    let mil = Math.floor(value * 100);
     (mil > 9) ? result += `.${mil.toString()}` : result += `.0${mil.toString()}`;
     return result;
 };
+exports.secsToTime = secsToTime;
 </code></pre>
         </article>
     </section>
@@ -133,13 +145,13 @@ Number.prototype.secsToTime = function (showHours) {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Lap.html">Lap</a></li></ul><h3>Global</h3><ul><li><a href="global.html#calculateBmi">calculateBmi</a></li><li><a href="global.html#decimalPaceFromSpeedMpS">decimalPaceFromSpeedMpS</a></li><li><a href="global.html#decPaceToTimePace">decPaceToTimePace</a></li><li><a href="global.html#distanceFromMtoKM">distanceFromMtoKM</a></li><li><a href="global.html#secsToTime">secsToTime</a></li><li><a href="global.html#speedFromMpStoKpH">speedFromMpStoKpH</a></li><li><a href="global.html#TimePaceFromSpeedMpS">TimePaceFromSpeedMpS</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Lap.html">Lap</a></li></ul><h3>Global</h3><ul><li><a href="global.html#calculateBmi">calculateBmi</a></li><li><a href="global.html#decimalPaceFromSpeedMpS">decimalPaceFromSpeedMpS</a></li><li><a href="global.html#decimalPaceToTimePace">decimalPaceToTimePace</a></li><li><a href="global.html#distanceFromMtoKM">distanceFromMtoKM</a></li><li><a href="global.html#secsToTime">secsToTime</a></li><li><a href="global.html#speedFromMpStoKpH">speedFromMpStoKpH</a></li><li><a href="global.html#TimePaceFromSpeedMpS">TimePaceFromSpeedMpS</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Fri Sep 15 2017 20:52:41 GMT+0300 (EEST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sat Sep 16 2017 13:17:28 GMT+0300 (EEST)
 </footer>
 
 <script> prettyPrint(); </script>

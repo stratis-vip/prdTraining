@@ -251,6 +251,16 @@
 
 
 
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    number το ΒΜΙ σαν δεδκαδικό αριθμό
+</div>
+
+
+
+    
 
 
 
@@ -262,7 +272,7 @@
     
 
     
-    <h4 class="name" id="decimalPaceFromSpeedMpS"><span class="type-signature"></span>decimalPaceFromSpeedMpS<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="decimalPaceFromSpeedMpS"><span class="type-signature"></span>decimalPaceFromSpeedMpS<span class="signature">(value)</span><span class="type-signature"></span></h4>
     
 
     
@@ -270,7 +280,7 @@
 
 
 <div class="description">
-    Επεκτείνει το Number ώστε να μετατρέπει την ταχύτητα από m/s σε δεκαδικό ρυθμό min/km
+    Mετατρέπει την ταχύτητα από m/s σε δεκαδικό ρυθμό min/km
 </div>
 
 
@@ -281,176 +291,53 @@
 
 
 
-
-
-
-
-<dl class="details">
-
+    <h5>Parameters:</h5>
     
 
-    
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
 
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="functions.js.html">functions.js</a>, <a href="functions.js.html#line42">line 42</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        <th>Type</th>
 
         
-            
-
-    
-
-    
-    <h4 class="name" id="decPaceToTimePace"><span class="type-signature"></span>decPaceToTimePace<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Επεκτείνει το Number ώστε να μετατρέπει τον ρυθμο από την δεκαδική του μορφή στη μορφή ΛΛ:ΔΔ.ΕΕ
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="functions.js.html">functions.js</a>, <a href="functions.js.html#line57">line 57</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>value</code></td>
             
 
-    
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">η ταχύτητα σε m/s</td>
+        </tr>
 
     
-    <h4 class="name" id="distanceFromMtoKM"><span class="type-signature"></span>distanceFromMtoKM<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Επεκτείνει το Number ώστε να μετατρέπει αυτόματα τα μέτρα σε χιλιόμετρα
-</div>
-
-
-
-
-
-
-
+    </tbody>
+</table>
 
 
 
@@ -509,8 +396,23 @@
 
 
 
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    string το ρυθμό σε λεπτά το χιλιόμετρο με τη μορφή Λ,Δ
+</div>
 
 
+
+    
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>decimalPaceFromSpeedMpS(2.77) = 6 (06:00.00)</code></pre>
 
 
 
@@ -520,7 +422,7 @@
     
 
     
-    <h4 class="name" id="secsToTime"><span class="type-signature"></span>secsToTime<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="decimalPaceToTimePace"><span class="type-signature"></span>decimalPaceToTimePace<span class="signature">(value)</span><span class="type-signature"></span></h4>
     
 
     
@@ -528,7 +430,7 @@
 
 
 <div class="description">
-    Επεκτείνει το Number ώστε να μετατρέπει τα δευτερόλεπτα σε χρόνο της μορφής ΩΩ:ΛΛ:ΔΔ.ΕΕ
+    Mετατρέπει τον ρυθμο από την δεκαδική του μορφή στη μορφή ΛΛ:ΔΔ.ΕΕ
 </div>
 
 
@@ -537,6 +439,55 @@
 
 
 
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>value</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
 
 
 
@@ -572,7 +523,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="functions.js.html">functions.js</a>, <a href="functions.js.html#line66">line 66</a>
+        <a href="functions.js.html">functions.js</a>, <a href="functions.js.html#line29">line 29</a>
     </li></ul></dd>
     
 
@@ -595,6 +546,16 @@
 
 
 
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    string: ο ρυθμός σε μορφή ΛΛ:ΔΔ.ΕΕ
+</div>
+
+
+
+    
 
 
 
@@ -606,7 +567,7 @@
     
 
     
-    <h4 class="name" id="speedFromMpStoKpH"><span class="type-signature"></span>speedFromMpStoKpH<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="distanceFromMtoKM"><span class="type-signature"></span>distanceFromMtoKM<span class="signature">(value)</span><span class="type-signature"> &rarr; {number}</span></h4>
     
 
     
@@ -614,7 +575,7 @@
 
 
 <div class="description">
-    Επεκτείνει το Number ώστε να μετατρέπει την ταχύτητα από m/s σε Κm/h
+    Μετατρέπει τα μέτρα σε χιλιόμετρα χωρίς να χάσει το δεικαδικό
 </div>
 
 
@@ -623,6 +584,55 @@
 
 
 
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>value</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">η απόσταση σε μέτρα</td>
+        </tr>
+
+    
+    </tbody>
+</table>
 
 
 
@@ -658,7 +668,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="functions.js.html">functions.js</a>, <a href="functions.js.html#line34">line 34</a>
+        <a href="functions.js.html">functions.js</a>, <a href="functions.js.html#line38">line 38</a>
     </li></ul></dd>
     
 
@@ -681,6 +691,28 @@
 
 
 
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    την απόσταση σε ΚΜ
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">number</span>
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -692,7 +724,7 @@
     
 
     
-    <h4 class="name" id="TimePaceFromSpeedMpS"><span class="type-signature"></span>TimePaceFromSpeedMpS<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="secsToTime"><span class="type-signature"></span>secsToTime<span class="signature">(value, showHours)</span><span class="type-signature"></span></h4>
     
 
     
@@ -700,7 +732,11 @@
 
 
 <div class="description">
-    Επεκτείνει το Number ώστε να μετατρέπει την ταχύτητα από m/s σε μορφής ΛΛ:ΔΔ.ΕΕ
+    H secsToTime μετατρέπει τα δευτερόλεπτα value σε χρόνο της μορφής
+[ΩΩ:]ΛΛ:ΔΔ.ΕΕ.
+
+<p>Οι ώρες δεν εμφανίζονται αν τεθεί η τιμή showHours σε false (εξ ορισμού
+εμφανίζονται οι ώρες)</p>
 </div>
 
 
@@ -709,6 +745,78 @@
 
 
 
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>value</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">ο χρόνος σε secs</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>showHours</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">αν θα εμφανίζεται το πεδίο ΩΩ:</td>
+        </tr>
+
+    
+    </tbody>
+</table>
 
 
 
@@ -744,7 +852,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="functions.js.html">functions.js</a>, <a href="functions.js.html#line50">line 50</a>
+        <a href="functions.js.html">functions.js</a>, <a href="functions.js.html#line78">line 78</a>
     </li></ul></dd>
     
 
@@ -767,6 +875,306 @@
 
 
 
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    string o χρόνος σε μορφή ΩΩ:ΛΛ:ΔΔ.ΕΕ
+</div>
+
+
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="speedFromMpStoKpH"><span class="type-signature"></span>speedFromMpStoKpH<span class="signature">(value)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Mετατρέπει την ταχύτητα από m/s σε Κm/h
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>value</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">η ταχύτητα σε m/s</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="functions.js.html">functions.js</a>, <a href="functions.js.html#line53">line 53</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    number η ταχύτητα σε ΧαΩ
+</div>
+
+
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="TimePaceFromSpeedMpS"><span class="type-signature"></span>TimePaceFromSpeedMpS<span class="signature">(value)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Mετατρέπει την ταχύτητα από m/s σε ρυθμό της μορφής ΛΛ:ΔΔ.ΕΕ
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>value</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">η ταχύτητα σε m/s</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="functions.js.html">functions.js</a>, <a href="functions.js.html#line62">line 62</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    string ο ρυθμός σε μορφή ΛΛ:ΔΔ.ΕΕ
+</div>
+
+
+
+    
 
 
 
@@ -788,13 +1196,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Lap.html">Lap</a></li></ul><h3>Global</h3><ul><li><a href="global.html#calculateBmi">calculateBmi</a></li><li><a href="global.html#decimalPaceFromSpeedMpS">decimalPaceFromSpeedMpS</a></li><li><a href="global.html#decPaceToTimePace">decPaceToTimePace</a></li><li><a href="global.html#distanceFromMtoKM">distanceFromMtoKM</a></li><li><a href="global.html#secsToTime">secsToTime</a></li><li><a href="global.html#speedFromMpStoKpH">speedFromMpStoKpH</a></li><li><a href="global.html#TimePaceFromSpeedMpS">TimePaceFromSpeedMpS</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Lap.html">Lap</a></li></ul><h3>Global</h3><ul><li><a href="global.html#calculateBmi">calculateBmi</a></li><li><a href="global.html#decimalPaceFromSpeedMpS">decimalPaceFromSpeedMpS</a></li><li><a href="global.html#decimalPaceToTimePace">decimalPaceToTimePace</a></li><li><a href="global.html#distanceFromMtoKM">distanceFromMtoKM</a></li><li><a href="global.html#secsToTime">secsToTime</a></li><li><a href="global.html#speedFromMpStoKpH">speedFromMpStoKpH</a></li><li><a href="global.html#TimePaceFromSpeedMpS">TimePaceFromSpeedMpS</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Fri Sep 15 2017 20:52:41 GMT+0300 (EEST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sat Sep 16 2017 13:17:28 GMT+0300 (EEST)
 </footer>
 
 <script> prettyPrint(); </script>

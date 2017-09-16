@@ -1,11 +1,31 @@
-import { Athlete, Vo2maxClass, HeartRate, Altitude, Activity, Lap, Track, TrackPointClass } from './classes';
-import * as constants from './consts';
-import DB from '../models/database'
-import * as fs from 'fs'
-import * as path from 'path'
-import * as gp from 'tcxparse'
-import {activitiesTypes, activitiesSubTypes} from './enums'
-
+import {
+  Athlete,
+  Vo2maxClass,
+  HeartRate,
+  Altitude,
+  Activity,
+  Lap,
+  Track,
+  TrackPointClass,
+  dummy
+} from "./classes";
+import * as constants from "./consts";
+import DB from "../models/database";
+import * as fs from "fs";
+import * as path from "path";
+import * as gp from "tcxparse";
+import { activitiesTypes, activitiesSubTypes } from "./enums";
+import {
+  getActivities,
+  getAuthor,
+  getLaps,
+  getResult,
+  iActivity,
+  iResult,
+  iLap
+} from "./classes/src/interfaces";
+import { secsToTime, speedFromMpStoKpH, distanceFromMtoKM } from "./functions";
+/*
 interface iPointHR{
     $:{
         'xsi:type': string  
@@ -19,7 +39,7 @@ interface iPoint{
 	AltitudeMeters: Array<number>
 }
 interface parentTrack{
-    TrackPoint:Array<iTrackPoint>
+    TrackPoint:Array<{}>
 }
 interface iTrackPoint{
     Time: Array<string>
@@ -66,24 +86,99 @@ interface iActivity{
         Track: Array<parentTrack>
         Extensions: Array<iLXExtension>
     }>
-}
+}*/
 
 let vm = new Vo2maxClass();
 let ath = new Athlete();
-let hr = new HeartRate(120,130,123);
+let hr = new HeartRate(120, 130, 123);
 let act = new Activity();
-let db = new DB('training');
+let db = new DB("training");
+let d = new dummy();
+let data = fs.readFileSync(path.join(__dirname, "test.tcx"), "utf8");
+gp.parseFile(path.join(__dirname, "test.tcx"), (err, tcxData) => {
+  if (!err) {
+    // console.log(typeof(tcxData))
+    let resultObject: iResult = getResult(tcxData);
+    let activitiesObject = getActivities(resultObject); //.result//.TrainingCenterDatabase.Activities[0].Activity[0];
+    let author = getAuthor(resultObject);
+    //console.log(JSON.stringify(activitiesObject[0].Activity[0].Id[0],null,2))
+    act.name = activitiesObject[0].Activity[0].Id[0];
+    act.type = activitiesTypes[activitiesObject[0].Activity[0].$.Sport];
 
-let data = fs.readFileSync(path.join(__dirname,'test.tcx'),'utf8');
-gp.parseFile(path.join(__dirname,'test.tcx'),(err,result)=>{
-    if (!err){
-        let activityObject:iActivity=result.result.TrainingCenterDatabase.Activities[0].Activity[0];
+    let laps = getLaps(activitiesObject[0]);
+   
+    act.totalTime = 0;
+    act.distance = 0;
+    act.calories = 0;
+    let count = 1;
+    let maxHR = 0;
+    let avgHR = 0;
+    let maxSpeed = 0;
+    let avgCadence=0;
+    console.log(
+`SUMMARY\nLaps: ${laps.length}
+Name: ${act.name}
+Type: ${activitiesTypes[act.type]}    
+LAPS`);
+    laps.forEach((tcxLap: iLap) => {
+      let lap = new Lap();
+      lap.StartTime = new Date(tcxLap.$.StartTime);
+      if (count === 1) {act.start=lap.StartTime}
+      lap.TotalTimeSeconds = Number(tcxLap.TotalTimeSeconds[0]);
+      lap.DistanceMeters = Number(tcxLap.DistanceMeters[0]);
+      act.distance += Number(lap.DistanceMeters);
+      act.totalTime += Number(lap.TotalTimeSeconds);
+      lap.Calories = Number(tcxLap.Calories[0])
+      lap.AvgSpeed =Number( tcxLap.Extensions[0].LX[0].AvgSpeed[0])
+      lap.Cadence = Number(tcxLap.Cadence[0])
+      //if (avgCadence < lap.Cadence){avgCadence=lap.Cadence}
+      avgCadence +=Number(lap.Cadence)
+      act.calories += Number(lap.Calories);
+      
+      lap.AverageHeartRateBpm = Number(tcxLap.AverageHeartRateBpm[0].Value[0]);
+      avgHR += Number(lap.AverageHeartRateBpm)
+      lap.MaximumHeartRateBpm = Number(tcxLap.MaximumHeartRateBpm[0].Value[0]);
+      if (maxHR < lap.MaximumHeartRateBpm){maxHR= lap.MaximumHeartRateBpm}
+      lap.MaximumSpeed =Number(tcxLap.MaximumSpeed[0])
+    
+      if (lap.MaximumSpeed > maxSpeed) {maxSpeed = lap.MaximumSpeed}
+      console.log(lap.MaximumSpeed+'  max='+ maxSpeed)
+      console.log(
+`  ${count++} from ${laps.length}
+    Starting at ${lap.StartTime}
+    Distance in KM:${(lap.DistanceMeters / 1000).toFixed(2)}
+    TotalTime:${secsToTime(lap.TotalTimeSeconds)}
+    AverageHeartRateBpm:${lap.AverageHeartRateBpm}
+    MaximumHeartRateBpm:${lap.MaximumHeartRateBpm}
+    AvgSpeed:${speedFromMpStoKpH(lap.AvgSpeed).toFixed(2)}
+    MaxSpeed:${(speedFromMpStoKpH(lap.MaximumSpeed)).toFixed(2)}
+    `)
 
-        act.type=activitiesTypes[(activityObject.$.Sport as string)];
+
+    });
+
+    avgHR /= laps.length
+    avgCadence /= laps.length
+    console.log(
+`Start Time: ${act.start}
+TOTALS\n\tTime in seconds: ${secsToTime(act.totalTime)}
+\tDistance in KM:  ${distanceFromMtoKM(act.distance).toFixed(2)}
+\tCalories:  ${act.calories}
+\tAverage HR: ${Math.floor(avgHR)}
+\tMaximum HR: ${Math.floor(maxHR)}
+\tAvg Cadence : ${Math.floor(avgCadence)}
+\tMaximum Speed: ${speedFromMpStoKpH(maxSpeed).toFixed(2)}
+`);
+
+
+
+
+    //console.log(JSON.stringify(author[0].Name[0],null,2))
+    /*        
         act.name = activityObject.Id[0];
         act.distance=0;
         act.calories=0;
-        act.totalTime=0;
+        
         let avgHR = 0;
         let avgCadence = 0;
         let maxHR=0;
@@ -99,8 +194,8 @@ gp.parseFile(path.join(__dirname,'test.tcx'),(err,result)=>{
             lap.MaximumSpeed = activityObject.Lap[i].MaximumSpeed[0]
             lap.StartTime=new Date(activityObject.Lap[i].$.StartTime)
             lap.TotalTimeSeconds = activityObject.Lap[i].TotalTimeSeconds[0]          
-            let o = activityObject.Lap[i].Track[0].Trackpoint[0];
-            console.log((o))
+            let o = activityObject.Lap[i].Track[0];
+        //    console.log((o))
           //  for (let j = 0; activityObject.Lap[i].Track; j++){
         //        let track = new Track()
               //  track.Position.Time =new Date(activityObject.Lap[i].Track[j].Time[0])
@@ -134,29 +229,28 @@ gp.parseFile(path.join(__dirname,'test.tcx'),(err,result)=>{
         // // console.log(act.distance.distanceFromMtoKM())
        //   console.log(JSON.stringify(act, null, 2))
         //  console.log(`avg HR ${avgHR} avg cadence ${avgCadence} maxHR ${maxHR} totalTime ${act.totalTime.secsToTime()}`)
-    } else 
-    {console.log(err.message)}
-})
-let parseTcx = (tcx:string) => {
-    
-    let arr = tcx.split('\n');
-    let slice:number;
-    slice = findStr('Activity',tcx);
-    tcx= tcx.slice(slice)
- //   console.log(tcx.slice(0,100))
+    */
+  } else {
+    console.log(err.message);
+  }
+});
+let parseTcx = (tcx: string) => {
+  let arr = tcx.split("\n");
+  let slice: number;
+  slice = findStr("Activity", tcx);
+  tcx = tcx.slice(slice);
+  //   console.log(tcx.slice(0,100))
 
+  //   console.log(arr[arr.find(('<Activity')]);
+};
 
- //   console.log(arr[arr.find(('<Activity')]);
-
-}
-
-let findStr = (sub:string, tcx:string):number => {
-    if (tcx.includes(sub)){
-        return tcx.search(`<${sub}`);
-        
-    }else {return -1}
-    
-}
-let bb= 6.2427
+let findStr = (sub: string, tcx: string): number => {
+  if (tcx.includes(sub)) {
+    return tcx.search(`<${sub}`);
+  } else {
+    return -1;
+  }
+};
+let bb = 6.2427;
 //console.log(bb.decPaceToTimePace())
 //parseTcx(data);

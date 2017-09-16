@@ -1,51 +1,28 @@
-import {
-  Athlete,
-  Vo2maxClass,
-  HeartRate,
-  Altitude,
-  Activity,
-  Lap,
-  Track,
-  TrackPointClass,
-  dummy
-} from "./classes";
-import * as constants from "./consts";
-import DB from "../models/database";
-import * as fs from "fs";
-import * as path from "path";
-import * as gp from "tcxparse";
-import { activitiesTypes, activitiesSubTypes } from "./enums";
-import {
-  getActivities,
-  getAuthor,
-  getLaps,
-  getResult,
-  iActivity,
-  iLap,
-  iPoint,
-  iResult
-} from "./classes/src/interfaces";
-import { secsToTime, speedFromMpStoKpH, distanceFromMtoKM } from "./functions";
 
-let vm = new Vo2maxClass();
-let ath = new Athlete();
-let hr = new HeartRate(120, 130, 123);
+import * as fs from 'fs';
+import * as path from 'path';
+import { getActivities, getAuthor, getLaps, getResult, iLap, iPoint, iResult } from './classes/src/interfaces';
+import Lap from './classes/src/lap';
+import Track from './classes/src/track';
+import TrackPointClass from './classes/src/trackpoint';
+import * as console from 'console';
+import { Activity, activitiesTypes } from "./classes/index";
+import * as gp from 'tcxparse';
+
 let act = new Activity();
-let db = new DB("training");
 
 let data = fs.readFileSync(path.join(__dirname, "test.tcx"), "utf8");
+
 gp.parseFile(path.join(__dirname, "test.tcx"), (err, tcxData) => {
   if (!err) {
-    let resultObject: iResult = getResult(tcxData);
-    let activitiesObject = getActivities(resultObject); 
+  //  console.log(JSON.stringify(tcxData,null,2))
     
+    let resultObject: iResult = getResult(tcxData);
     let author = getAuthor(resultObject);
-
+    let activitiesObject = getActivities(resultObject);     
     act.name = activitiesObject[0].Activity[0].Id[0];
     act.type = activitiesTypes[activitiesObject[0].Activity[0].$.Sport];
-
     let laps = getLaps(activitiesObject[0]);
-    
     act.totalTime = 0;
     act.distance = 0;
     act.calories = 0;

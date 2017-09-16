@@ -1,4 +1,4 @@
-﻿import Track from "./track";
+﻿import Track from './track';
 /**
  * @class Lap
  * Κρατά
@@ -14,11 +14,22 @@ export default class Lap {
     private _MaximumSpeed: number    
     private _StartTime:Date
     private _TotalTimeSeconds:number
-    private _Track: Array<Track>
+    private _Tracks: Array<Track>;
 
     constructor(){
-
+        this._Tracks = new Array<Track>()
     }
+
+	public get Track(): Array<Track> {
+		return this._Tracks;
+	}
+
+	public set Track(value: Array<Track>) {
+		if (this._Tracks !== value){
+            this._Tracks = value;
+        }
+    }
+    
     get AverageHeartRateBpm(){
         return this._AverageHeartRateBpm
     }

@@ -9,4 +9,3 @@ import {activitiesTypes, activitiesSubTypes} from './enums'
 let d = new dummy();
 
 let alfa:number =0
-console.log(alfa.secsToTime(false))

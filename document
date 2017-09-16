@@ -1,0 +1,3 @@
+#!/bin/bash
+
+typedoc --module commonjs --target ES6 --out out/ lib/control/ --ignoreCompilerErrors --exclude bin/* routes/* views/* --mode file --excludePrivate

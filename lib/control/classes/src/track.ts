@@ -1,7 +1,6 @@
 import TrackPoint from './trackpoint'
 
 export default class Track {
-	private _Time: Date
 	private _Position: TrackPoint
 	private _DistanceMeters: number
 	private _HeartRateBpm: number
@@ -11,13 +10,11 @@ export default class Track {
 		this._Position = new TrackPoint()
 	}
 
+	/**
+	 * Συντόμευση στο χρόνο που αποθηκεύεται στο αντικείμενο Position
+	 */
 	get Time() {
-		return this._Time
-	}
-	set Time(x) {
-		if (this._Time !== x) {
-			this._Time = x;
-		}
+		return this._Position.Time
 	}
 
 	get Position() {

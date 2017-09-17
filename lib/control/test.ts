@@ -1,11 +1,12 @@
-import { Athlete, Vo2maxClass, HeartRate, Altitude, Activity, Lap , dummy} from './classes';
-import * as constants from './consts';
-import DB from '../models/database'
-import * as fs from 'fs'
-import * as path from 'path'
-import * as gp from 'tcxparse'
-import {activitiesTypes, activitiesSubTypes} from './enums'
+import * as path from 'path';
+import { getActivityFromFile } from "./parsers/tcxparser";
 
-let d = new dummy();
 
-let alfa:number =0
+getActivityFromFile(path.join(__dirname,'test1.tcx'), (error,act) => {
+    if (!error){
+        console.log(JSON.stringify(act,null,2)) }
+        else{
+            console.log(`ERROR FOUND: ${error}`)
+        }
+        
+})

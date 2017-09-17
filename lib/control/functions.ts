@@ -1,3 +1,5 @@
+import { Activity } from "./classes/index";
+
 const secondsInHour = 3600;
 
 /** Υπολογίζει το Bmi από το βάρος και το ύψος
@@ -28,8 +30,6 @@ const decimalPaceToTimePace = (value: number) => {
     return secsToTime(value * 60, false);
 }
 
-
-
 /**
  * Μετατρέπει τα μέτρα σε χιλιόμετρα χωρίς να χάσει το δεικαδικό
  * @param {number} value η απόσταση σε μέτρα
@@ -55,8 +55,6 @@ const speedFromMpStoKpH = (value: number) => { //τεστ οκ
 
 };
 
-
-
 /**
  * Mετατρέπει την ταχύτητα από m/s σε ρυθμό της μορφής ΛΛ:ΔΔ.ΕΕ
  * @param  {number} value η ταχύτητα σε m/s
@@ -65,9 +63,6 @@ const speedFromMpStoKpH = (value: number) => { //τεστ οκ
 const TimePaceFromSpeedMpS = (value: number):string => {//test ok
     return decimalPaceToTimePace(decimalPaceFromSpeedMpS(value)); 
 };
-
-
-
 
 /**
  * H secsToTime μετατρέπει τα δευτερόλεπτα value σε χρόνο της μορφής
@@ -109,6 +104,9 @@ const secsToTime = (value:number, showHours?: boolean) => {
 
     return result;
 }
+
+
+
 
 export { calculateBmi,     
          decimalPaceFromSpeedMpS, decimalPaceToTimePace, distanceFromMtoKM,

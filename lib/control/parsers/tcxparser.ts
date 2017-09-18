@@ -50,7 +50,7 @@ export const getActivityFromFile = (filename: string, CallBack): void => {
           laps.forEach((tcxLap: iLap) => {
             let lap = fillLap(tcxLap);
             if (count === 1) {
-              act.start = lap.StartTime;
+              act.start = new Date(lap.StartTime);
             }
             avgCadence += Number(lap.Cadence);
             act.calories += Number(lap.Calories);
@@ -69,6 +69,7 @@ export const getActivityFromFile = (filename: string, CallBack): void => {
               lap.Track.push(fillPoint(point));
             }); //<-forEach point
             act.laps.push(lap);
+            count++
           });
 
           avgHR /= laps.length;

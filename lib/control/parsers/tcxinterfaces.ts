@@ -176,7 +176,7 @@ export const fillLap = (tcxLap: iLap): Lap => {
           lap.Cadence = Number(element["ns3:LX"]["0"]["ns3:AvgRunCadence"]["0"])
         }
         else {
-          lap.Cadence = Number(element["ns3:LX"]["0"]["ns3:MaxBikeCadence"]["0"])
+     //     lap.Cadence = Number(element["ns3:LX"]["0"]["ns3:MaxBikeCadence"]["0"])
         }
         //        ["ns3:LX"]["0"]["ns3:MaxRunCadence"]   
       }
@@ -200,7 +200,7 @@ export const fillPoint = (point: iPoint): Track => {
   trackPosition.LatitudeDegrees = Number(point.Position[0].LatitudeDegrees[0]);
   trackPosition.AltitudeMeters = Number(point.AltitudeMeters[0]);
   trackPoint.DistanceMeters = Number(point.DistanceMeters[0]);
-  trackPoint.HeartRateBpm = Number(point.HeartRateBpm[0].Value[0]);
+ // trackPoint.HeartRateBpm = Number(point.HeartRateBpm[0].Value[0]);
 
   ; (point.Extensions as Array<{}>).forEach(element => {
     for (let el in element) {

@@ -1,6 +1,7 @@
 import * as path from 'path';
 import { getActivityFromFile } from "./parsers/tcxparser";
 import { Activity } from './classes/index';
+import { secsToTime } from './functions';
 
 interface PointsPer100m{
     timec:number;
@@ -32,11 +33,31 @@ const getPointsPer100m = (activity:Activity) =>{
     })
 }
 
+interface iFasterTimes{
+    faster100:number;
+}
+const foundFaster = (ac:Array<PointsPer100m>) =>{
+    let f100:number=0;
+    let records:Array<number> = new Array<number>()
+    let multiplier:number =1000
+    records[0]=0
+    records[multiplier]=0
+    for (let i=0;i<ac.length-multiplier;i++){
+     let ntime = ac[i+multiplier].timec-ac[i].timec
+            ;(records[multiplier] === 0) ? records[multiplier] = ntime  : ( (ntime < records[multiplier]) ? records[multiplier] = ntime: ntime =ntime)        
+    }
+    console.log(secsToTime(records[multiplier]))
+}
 
-getActivityFromFile(path.join(__dirname, 'running5k-auto.tcx'), (error, act) => {
+getActivityFromFile(path.join(__dirname, 'bike100.tcx'), (error, act) => {
     if (!error) {
         let ac: Activity = act as Activity
-        getPointsPer100m(ac).then((al)=>{console.log(al)}).catch((error)=>console.log(error))
+        getPointsPer100m(ac).then((al)=>{
+        foundFaster(al)    
+            
+            
+        })
+        .catch((error)=>console.log(error))
         // let al = [];
         // let multiplier = 1;
         // ac.laps.forEach(lap => {

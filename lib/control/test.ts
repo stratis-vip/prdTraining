@@ -33,7 +33,7 @@ const getPointsPer100m = (activity:Activity) =>{
 }
 
 
-getActivityFromFile(path.join(__dirname, 'activity.tcx'), (error, act) => {
+getActivityFromFile(path.join(__dirname, 'running5k-auto.tcx'), (error, act) => {
     if (!error) {
         let ac: Activity = act as Activity
         getPointsPer100m(ac).then((al)=>{console.log(al)}).catch((error)=>console.log(error))

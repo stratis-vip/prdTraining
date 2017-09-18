@@ -59,15 +59,15 @@ export interface iLap {
   MaximumHeartRateBpm: Array<iHeartRate>;
   Cadence: Array<number>;
   Track: Array<iTrackPoints>;
-  Extensions: Array<iExtensionsLX>;
+  Extensions: Array<{}>;
+  //Extensions: Array<iExtensionsLX>;
 }
 
 export interface iTrackPoints {
   Trackpoint: Array<iPoint>;
 }
 
-export interface iPoint
-{
+export interface iPoint {
   Time: Array<number>;
   Position: Array<{
     LatitudeDegrees: Array<number>;
@@ -119,7 +119,7 @@ export interface iActivity {
  * @returns iResult το αντικείμενο σε μορφή που μπορώ να το διαχειριστώ καλύτερα
  */
 export const getResult = (data: iResult | any): iResult => {
- 
+
   return data;
 };
 
@@ -129,6 +129,7 @@ export const getResult = (data: iResult | any): iResult => {
  * @returns Array<iActivity> πίνακας με τις δραστηριότητες iActivity
  */
 export const getActivities = (data: iResult): Array<iActivity> => {
+
   return data.result.TrainingCenterDatabase.Activities;
 };
 
@@ -147,6 +148,7 @@ export const getAuthor = (data: iResult): Array<iAuthor> => {
  * @returns Array<iLap> πίνακας με τα ανιτκείμενα iLap
  */
 export const getLaps = (data: iActivity): Array<iLap> => {
+
   return data.Activity[0].Lap;
 };
 
@@ -159,21 +161,38 @@ export const getTrack = (tcxLap: iLap): Array<iPoint> => {
   return tcxLap.Track[0].Trackpoint;
 };
 
-export const fillLap = (tcxLap: iLap):Lap =>{
+export const fillLap = (tcxLap: iLap): Lap => {
   let lap = new Lap();
   lap.StartTime = new Date(tcxLap.$.StartTime);
   lap.TotalTimeSeconds = Number(tcxLap.TotalTimeSeconds[0]);
   lap.DistanceMeters = Number(tcxLap.DistanceMeters[0]);
   lap.Calories = Number(tcxLap.Calories[0]);
-  lap.AvgSpeed = Number(tcxLap.Extensions[0].LX[0].AvgSpeed[0]);
-  lap.Cadence = Number(tcxLap.Cadence[0]);
+  //console.log(JSON.stringify(tcxLap.Extensions,null,2))
+  ; (tcxLap.Extensions as Array<{}>).forEach(element => {
+    for (let el in element) {
+      if (el === "ns3:LX") {
+        lap.AvgSpeed = Number(element["ns3:LX"]["0"]["ns3:AvgSpeed"]["0"]);
+        if (element["ns3:LX"]["0"]["ns3:AvgRunCadence"]  !== undefined) {
+          lap.Cadence = Number(element["ns3:LX"]["0"]["ns3:AvgRunCadence"]["0"])
+        }
+        else {
+          lap.Cadence = Number(element["ns3:LX"]["0"]["ns3:MaxBikeCadence"]["0"])
+        }
+        //        ["ns3:LX"]["0"]["ns3:MaxRunCadence"]   
+      }
+
+    }
+
+  })
+  //lap.AvgSpeed = Number(tcxLap.Extensions[0].LX[0].AvgSpeed[0]);
+  //lap.Cadence = Number(tcxLap.Cadence[0]);
   lap.AverageHeartRateBpm = Number(tcxLap.AverageHeartRateBpm[0].Value[0]);
   lap.MaximumHeartRateBpm = Number(tcxLap.MaximumHeartRateBpm[0].Value[0]);
   lap.MaximumSpeed = Number(tcxLap.MaximumSpeed[0]);
   return lap;
 }
 
-export const fillPoint = (point: iPoint):Track => {
+export const fillPoint = (point: iPoint): Track => {
   let trackPoint = new Track();
   let trackPosition = new TrackPointClass();
   trackPosition.Time = new Date(point.Time[0]);
@@ -182,8 +201,19 @@ export const fillPoint = (point: iPoint):Track => {
   trackPosition.AltitudeMeters = Number(point.AltitudeMeters[0]);
   trackPoint.DistanceMeters = Number(point.DistanceMeters[0]);
   trackPoint.HeartRateBpm = Number(point.HeartRateBpm[0].Value[0]);
-  trackPoint.Cadence = Number(point.Cadence[0]);
-  trackPoint.Speed = Number(point.Extensions[0].TPX[0].Speed[0]);
+
+  ; (point.Extensions as Array<{}>).forEach(element => {
+    for (let el in element) {
+      //["0"]["ns3:TPX"]["0"] ["0"]
+      if (el === "ns3:TPX") {
+        trackPoint.Speed = Number(element["ns3:TPX"]["0"]["ns3:Speed"]["0"]);
+      } else {
+        trackPoint.RunCadence = Number(point.Cadence[0]);
+        trackPoint.BikeCadence = trackPoint.RunCadence
+        trackPoint.Speed = Number(point.Extensions[0].TPX[0].Speed[0]);
+      }
+    }
+  })
   trackPoint.Position = trackPosition;
   return trackPoint;
 }

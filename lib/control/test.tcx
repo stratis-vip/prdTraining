@@ -1,0 +1,428 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<TrainingCenterDatabase xmlns:tpx="http://www.garmin.com/xmlschemas/ActivityExtension/v2" xmlns:ns4="http://www.garmin.com/xmlschemas/ProfileExtension/v1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns5="http://www.garmin.com/xmlschemas/ActivityGoals/v1" xmlns:ns2="http://www.garmin.com/xmlschemas/UserProfile/v2" xmlns="http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2">
+  <Activities>
+    <Activity Sport="Biking">
+      <Id>2017-09-13T05:41:20.000Z</Id>
+      <Lap StartTime="2017-09-13T05:41:20.000Z">
+        <TotalTimeSeconds>573.973</TotalTimeSeconds>
+        <DistanceMeters>5000.0</DistanceMeters>
+        <MaximumSpeed>11.159999847412111</MaximumSpeed>
+        <Calories>115</Calories>
+        <AverageHeartRateBpm>
+          <Value>129</Value>
+        </AverageHeartRateBpm>
+        <MaximumHeartRateBpm>
+          <Value>139</Value>
+        </MaximumHeartRateBpm>
+        <Intensity>Active</Intensity>
+        <Cadence>59</Cadence>
+        <TriggerMethod>Manual</TriggerMethod>
+        <Track>
+          <Trackpoint>
+            <Time>2017-09-13T05:41:32.000Z</Time>
+            <Position>
+              <LatitudeDegrees>40.52799758501351</LatitudeDegrees>
+              <LongitudeDegrees>22.210105173289776</LongitudeDegrees>
+            </Position>
+            <AltitudeMeters>94.0</AltitudeMeters>
+            <DistanceMeters>69.54000091552734</DistanceMeters>
+            <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t">
+              <Value>105</Value>
+            </HeartRateBpm>
+            <Cadence>61</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>7.548999786376953</Speed>
+              </TPX>
+            </Extensions>
+          </Trackpoint>
+          <Trackpoint>
+            <Time>2017-09-13T05:41:34.000Z</Time>
+            <Position>
+              <LatitudeDegrees>40.52796891890466</LatitudeDegrees>
+              <LongitudeDegrees>22.210288234055042</LongitudeDegrees>
+            </Position>
+            <AltitudeMeters>93.19999694824219</AltitudeMeters>
+            <DistanceMeters>85.37999725341797</DistanceMeters>
+            <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t">
+              <Value>107</Value>
+            </HeartRateBpm>
+            <Cadence>52</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>7.967999935150147</Speed>
+              </TPX>
+            </Extensions>
+          </Trackpoint>
+        </Track>
+        <Extensions>
+          <LX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+            <AvgSpeed>8.711000442504883</AvgSpeed>
+          </LX>
+        </Extensions>
+      </Lap>
+      <Lap StartTime="2017-09-13T05:51:24.000Z">
+        <TotalTimeSeconds>871.255</TotalTimeSeconds>
+        <DistanceMeters>5000.0</DistanceMeters>
+        <MaximumSpeed>13.51099967956543</MaximumSpeed>
+        <Calories>215</Calories>
+        <AverageHeartRateBpm>
+          <Value>144</Value>
+        </AverageHeartRateBpm>
+        <MaximumHeartRateBpm>
+          <Value>153</Value>
+        </MaximumHeartRateBpm>
+        <Intensity>Active</Intensity>
+        <Cadence>57</Cadence>
+        <TriggerMethod>Manual</TriggerMethod>
+        <Track>
+          <Trackpoint>
+            <Time>2017-09-13T05:51:24.000Z</Time>
+            <Position>
+              <LatitudeDegrees>40.49849915318191</LatitudeDegrees>
+              <LongitudeDegrees>22.239950699731708</LongitudeDegrees>
+            </Position>
+            <AltitudeMeters>72.5999984741211</AltitudeMeters>
+            <DistanceMeters>5018.16015625</DistanceMeters>
+            <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t">
+              <Value>133</Value>
+            </HeartRateBpm>
+            <Cadence>58</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>9.293000221252441</Speed>
+              </TPX>
+            </Extensions>
+          </Trackpoint>
+          <Trackpoint>
+            <Time>2017-09-13T05:51:26.000Z</Time>
+            <Position>
+              <LatitudeDegrees>40.49845514819026</LatitudeDegrees>
+              <LongitudeDegrees>22.240042481571436</LongitudeDegrees>
+            </Position>
+            <AltitudeMeters>72.4000015258789</AltitudeMeters>
+            <DistanceMeters>5027.35009765625</DistanceMeters>
+            <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t">
+              <Value>133</Value>
+            </HeartRateBpm>
+            <Cadence>58</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>9.208999633789064</Speed>
+              </TPX>
+            </Extensions>
+          </Trackpoint>
+        </Track>
+        <Extensions>
+          <LX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+            <AvgSpeed>5.738999843597412</AvgSpeed>
+          </LX>
+        </Extensions>
+      </Lap>
+      <Lap StartTime="2017-09-13T06:05:55.000Z">
+        <TotalTimeSeconds>856.255</TotalTimeSeconds>
+        <DistanceMeters>5000.0</DistanceMeters>
+        <MaximumSpeed>11.925000190734863</MaximumSpeed>
+        <Calories>206</Calories>
+        <AverageHeartRateBpm>
+          <Value>142</Value>
+        </AverageHeartRateBpm>
+        <MaximumHeartRateBpm>
+          <Value>148</Value>
+        </MaximumHeartRateBpm>
+        <Intensity>Active</Intensity>
+        <Cadence>50</Cadence>
+        <TriggerMethod>Manual</TriggerMethod>
+        <Track>
+          <Trackpoint>
+            <Time>2017-09-13T06:05:55.000Z</Time>
+            <Position>
+              <LatitudeDegrees>40.47095521353185</LatitudeDegrees>
+              <LongitudeDegrees>22.24171911366284</LongitudeDegrees>
+            </Position>
+            <AltitudeMeters>109.5999984741211</AltitudeMeters>
+            <DistanceMeters>10006.150390625</DistanceMeters>
+            <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t">
+              <Value>144</Value>
+            </HeartRateBpm>
+            <Cadence>54</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>3.686000108718872</Speed>
+              </TPX>
+            </Extensions>
+          </Trackpoint>
+          <Trackpoint>
+            <Time>2017-09-13T06:05:57.000Z</Time>
+            <Position>
+              <LatitudeDegrees>40.47086779028177</LatitudeDegrees>
+              <LongitudeDegrees>22.241650046780705</LongitudeDegrees>
+            </Position>
+            <AltitudeMeters>110.19999694824219</AltitudeMeters>
+            <DistanceMeters>10017.490234375</DistanceMeters>
+            <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t">
+              <Value>144</Value>
+            </HeartRateBpm>
+            <Cadence>54</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>3.7139999866485596</Speed>
+              </TPX>
+            </Extensions>
+          </Trackpoint>
+        </Track>
+        <Extensions>
+          <LX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+            <AvgSpeed>5.839000225067139</AvgSpeed>
+          </LX>
+        </Extensions>
+      </Lap>
+      <Lap StartTime="2017-09-13T06:20:11.000Z">
+        <TotalTimeSeconds>570.056</TotalTimeSeconds>
+        <DistanceMeters>5000.0</DistanceMeters>
+        <MaximumSpeed>11.467000007629395</MaximumSpeed>
+        <Calories>126</Calories>
+        <AverageHeartRateBpm>
+          <Value>139</Value>
+        </AverageHeartRateBpm>
+        <MaximumHeartRateBpm>
+          <Value>153</Value>
+        </MaximumHeartRateBpm>
+        <Intensity>Active</Intensity>
+        <Cadence>56</Cadence>
+        <TriggerMethod>Manual</TriggerMethod>
+        <Track>
+          <Trackpoint>
+            <Time>2017-09-13T06:20:11.000Z</Time>
+            <Position>
+              <LatitudeDegrees>40.44235867448151</LatitudeDegrees>
+              <LongitudeDegrees>22.221614364534616</LongitudeDegrees>
+            </Position>
+            <AltitudeMeters>146.60000610351562</AltitudeMeters>
+            <DistanceMeters>15008.009765625</DistanceMeters>
+            <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t">
+              <Value>142</Value>
+            </HeartRateBpm>
+            <Cadence>36</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>5.505000114440918</Speed>
+              </TPX>
+            </Extensions>
+          </Trackpoint>
+          <Trackpoint>
+            <Time>2017-09-13T06:20:13.000Z</Time>
+            <Position>
+              <LatitudeDegrees>40.44245154596865</LatitudeDegrees>
+              <LongitudeDegrees>22.22156574949622</LongitudeDegrees>
+            </Position>
+            <AltitudeMeters>147.39999389648438</AltitudeMeters>
+            <DistanceMeters>15019.1201171875</DistanceMeters>
+            <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t">
+              <Value>141</Value>
+            </HeartRateBpm>
+            <Cadence>35</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>5.4019999504089355</Speed>
+              </TPX>
+            </Extensions>
+          </Trackpoint>
+        </Track>
+        <Extensions>
+          <LX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+            <AvgSpeed>8.770999908447266</AvgSpeed>
+          </LX>
+        </Extensions>
+      </Lap>
+      <Lap StartTime="2017-09-13T06:29:41.000Z">
+        <TotalTimeSeconds>600.469</TotalTimeSeconds>
+        <DistanceMeters>5000.0</DistanceMeters>
+        <MaximumSpeed>15.862000465393066</MaximumSpeed>
+        <Calories>131</Calories>
+        <AverageHeartRateBpm>
+          <Value>139</Value>
+        </AverageHeartRateBpm>
+        <MaximumHeartRateBpm>
+          <Value>145</Value>
+        </MaximumHeartRateBpm>
+        <Intensity>Active</Intensity>
+        <Cadence>65</Cadence>
+        <TriggerMethod>Manual</TriggerMethod>
+        <Track>
+          <Trackpoint>
+            <Time>2017-09-13T06:29:41.000Z</Time>
+            <Position>
+              <LatitudeDegrees>40.47042103484273</LatitudeDegrees>
+              <LongitudeDegrees>22.241568323224783</LongitudeDegrees>
+            </Position>
+            <AltitudeMeters>112.5999984741211</AltitudeMeters>
+            <DistanceMeters>20016.369140625</DistanceMeters>
+            <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t">
+              <Value>133</Value>
+            </HeartRateBpm>
+            <Cadence>74</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>11.336999893188478</Speed>
+              </TPX>
+            </Extensions>
+          </Trackpoint>
+          <Trackpoint>
+            <Time>2017-09-13T06:29:43.000Z</Time>
+            <Position>
+              <LatitudeDegrees>40.47066084109247</LatitudeDegrees>
+              <LongitudeDegrees>22.241665720939636</LongitudeDegrees>
+            </Position>
+            <AltitudeMeters>111.5999984741211</AltitudeMeters>
+            <DistanceMeters>20044.2109375</DistanceMeters>
+            <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t">
+              <Value>133</Value>
+            </HeartRateBpm>
+            <Cadence>75</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>11.336999893188478</Speed>
+              </TPX>
+            </Extensions>
+          </Trackpoint>
+        </Track>
+        <Extensions>
+          <LX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+            <AvgSpeed>8.32699966430664</AvgSpeed>
+          </LX>
+        </Extensions>
+      </Lap>
+      <Lap StartTime="2017-09-13T06:39:42.000Z">
+        <TotalTimeSeconds>704.633</TotalTimeSeconds>
+        <DistanceMeters>5000.0</DistanceMeters>
+        <MaximumSpeed>9.909000396728516</MaximumSpeed>
+        <Calories>147</Calories>
+        <AverageHeartRateBpm>
+          <Value>138</Value>
+        </AverageHeartRateBpm>
+        <MaximumHeartRateBpm>
+          <Value>144</Value>
+        </MaximumHeartRateBpm>
+        <Intensity>Active</Intensity>
+        <Cadence>54</Cadence>
+        <TriggerMethod>Manual</TriggerMethod>
+        <Track>
+          <Trackpoint>
+            <Time>2017-09-13T06:39:43.000Z</Time>
+            <Position>
+              <LatitudeDegrees>40.49824467860162</LatitudeDegrees>
+              <LongitudeDegrees>22.240504659712315</LongitudeDegrees>
+            </Position>
+            <AltitudeMeters>74.19999694824219</AltitudeMeters>
+            <DistanceMeters>25020.900390625</DistanceMeters>
+            <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t">
+              <Value>142</Value>
+            </HeartRateBpm>
+            <Cadence>61</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>7.03499984741211</Speed>
+              </TPX>
+            </Extensions>
+          </Trackpoint>
+          <Trackpoint>
+            <Time>2017-09-13T06:39:45.000Z</Time>
+            <Position>
+              <LatitudeDegrees>40.49836780875921</LatitudeDegrees>
+              <LongitudeDegrees>22.24030651152134</LongitudeDegrees>
+            </Position>
+            <AltitudeMeters>74.19999694824219</AltitudeMeters>
+            <DistanceMeters>25042.55078125</DistanceMeters>
+            <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t">
+              <Value>142</Value>
+            </HeartRateBpm>
+            <Cadence>62</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>7.138000011444093</Speed>
+              </TPX>
+            </Extensions>
+          </Trackpoint>
+        </Track>
+        <Extensions>
+          <LX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+            <AvgSpeed>7.0960001945495605</AvgSpeed>
+          </LX>
+        </Extensions>
+      </Lap>
+      <Lap StartTime="2017-09-13T06:51:26.000Z">
+        <TotalTimeSeconds>5.646</TotalTimeSeconds>
+        <DistanceMeters>31.94</DistanceMeters>
+        <MaximumSpeed>5.188000202178955</MaximumSpeed>
+        <Calories>0</Calories>
+        <AverageHeartRateBpm>
+          <Value>143</Value>
+        </AverageHeartRateBpm>
+        <MaximumHeartRateBpm>
+          <Value>143</Value>
+        </MaximumHeartRateBpm>
+        <Intensity>Active</Intensity>
+        <Cadence>56</Cadence>
+        <TriggerMethod>Manual</TriggerMethod>
+        <Track>
+          <Trackpoint>
+            <Time>2017-09-13T06:51:27.000Z</Time>
+            <Position>
+              <LatitudeDegrees>40.528030693531036</LatitudeDegrees>
+              <LongitudeDegrees>22.210141802206635</LongitudeDegrees>
+            </Position>
+            <AltitudeMeters>92.4000015258789</AltitudeMeters>
+            <DistanceMeters>30011.609375</DistanceMeters>
+            <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t">
+              <Value>143</Value>
+            </HeartRateBpm>
+            <Cadence>56</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>5.019999980926515</Speed>
+              </TPX>
+            </Extensions>
+          </Trackpoint>
+          <Trackpoint>
+            <Time>2017-09-13T06:51:28.000Z</Time>
+            <Position>
+              <LatitudeDegrees>40.52803781814873</LatitudeDegrees>
+              <LongitudeDegrees>22.210083296522498</LongitudeDegrees>
+            </Position>
+            <AltitudeMeters>92.5999984741211</AltitudeMeters>
+            <DistanceMeters>30016.619140625</DistanceMeters>
+            <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t">
+              <Value>143</Value>
+            </HeartRateBpm>
+            <Cadence>57</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>5.047999858856202</Speed>
+              </TPX>
+            </Extensions>
+          </Trackpoint>
+        </Track>
+        <Extensions>
+          <LX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+            <AvgSpeed>5.6570000648498535</AvgSpeed>
+          </LX>
+        </Extensions>
+      </Lap>
+      <Notes>Makrochori Ποδηλασία δρόμου</Notes>
+    </Activity>
+  </Activities>
+  <Author xsi:type="Application_t">
+    <Name>tapiriik</Name>
+    <Build>
+      <Version>
+        <VersionMajor>0</VersionMajor>
+        <VersionMinor>0</VersionMinor>
+        <BuildMajor>0</BuildMajor>
+        <BuildMinor>0</BuildMinor>
+      </Version>
+    </Build>
+    <LangID>en</LangID>
+    <PartNumber>000-00000-00</PartNumber>
+  </Author>
+</TrainingCenterDatabase>

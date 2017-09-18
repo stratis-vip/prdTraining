@@ -37,7 +37,9 @@
     "@types/jasmine-node": "^1.14.32",
     "@types/express-session": "^1.15.3",
     "@types/sqlite3": "^3.1.1",
-    "@types/dotenv": "^4.0.1"
+    "@types/dotenv": "^4.0.1",
+    "typescript": "latest",
+    "tslint": "^5.7.0"
   },
   "dependencies": {
     "body-parser": "^1.17.2",

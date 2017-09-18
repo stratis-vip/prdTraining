@@ -30,6 +30,7 @@ export const getActivityFromFile = (filename: string, CallBack): void => {
   //   } else {
       gp.parseFile(filename, (err, tcxData) => {
         if (!err) {
+          //console.log(JSON.stringify(tcxData))
           let resultObject: iResult = getResult(tcxData);
           let author = getAuthor(resultObject);
           let activitiesObject = getActivities(resultObject);

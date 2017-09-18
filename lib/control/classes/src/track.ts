@@ -4,7 +4,8 @@ export default class Track {
 	private _Position: TrackPoint
 	private _DistanceMeters: number
 	private _HeartRateBpm: number
-	private _Cadence: number
+	private _RunCadence: number
+	private _BikeCadence: number
 	private _Speed: number
 	constructor() {
 		this._Position = new TrackPoint()
@@ -44,12 +45,21 @@ export default class Track {
 		}
 	}
 
-	get Cadence() {
-		return this._Cadence
+	get RunCadence() {
+		return this._RunCadence
 	}
-	set Cadence(x) {
-		if (this._Cadence !== x) {
-			this._Cadence = x;
+	set RunCadence(x) {
+		if (this._RunCadence !== x) {
+			this._RunCadence = x;
+		}
+	}
+
+	get BikeCadence() {
+		return this._BikeCadence
+	}
+	set BikeCadence(x) {
+		if (this._BikeCadence !== x) {
+			this._BikeCadence = x;
 		}
 	}
 

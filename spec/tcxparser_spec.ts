@@ -87,7 +87,7 @@ describe("Έλεγχος του Αναγνώστη TCX\n", () => {
       });
       
       it("Στον 1ο σημείο του 7ου γύρου ο ρυθμός πεταλιάς πρέπει να είναι 56\n", done => {
-        expect(act.laps[6].Track[0].Cadence).toBe(56);
+        expect(act.laps[6].Track[0].RunCadence).toBe(56);
         done();
       });
 

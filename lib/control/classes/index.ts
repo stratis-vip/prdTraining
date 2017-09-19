@@ -12,6 +12,7 @@ import {sex, activitiesTypes, activitiesSubTypes} from '../enums'
 import  TrackPointClass  from "./src/trackpoint";
 
 import {MINWEIGHT,MAXWEIGHT, MINHEIGHT, MAXHEIGHT, MAXVO2MAX, MINHEARTRATE, MAXHEARTRATE} from '../consts';
+import geoPoint from './src/geoPoint';
 
 
 class dummy{}
@@ -20,6 +21,7 @@ export {
         Activity, activitiesTypes, activitiesSubTypes, Altitude, Athlete,
         dummy,
         Exoplismos,
+        geoPoint,
         HeartRate,
         Lap,
         MAXHEARTRATE, MAXHEIGHT, MAXVO2MAX, MAXWEIGHT, MINHEARTRATE, MINHEIGHT, MINWEIGHT,

@@ -112,6 +112,7 @@ const secsToTime = (value: number, showHours?: boolean) => {
  * @param {number} Degrees οι μοίρες
  * @returns number τις degrees μοίρες σε ακτίνια
  */
+//test ok
 const degToRads = (Degrees: number): number => {
     return Degrees * ((Math.PI) / 180);
 }
@@ -122,6 +123,7 @@ const degToRads = (Degrees: number): number => {
 * @param {number} η γωνία angle σε ακτίνια
 * @returns number τα ακτίνια angle σε μοίρες
 */
+//test ok
 const radToDegrees = (angle: number): number => {
 
     return angle * (180 / Math.PI);
@@ -134,6 +136,7 @@ const radToDegrees = (angle: number): number => {
  * @param {geoPoint} ToPoint οι συντεταγμένες του τελικού σημείου σε ΜΟΙΡΕΣ
  * @returns number η απόσταση ανάμεσα στα σημεία σε ΜΕΤΡΑ
 */
+//test οκ
 const apostasi = (FromPoint: geoPoint, ToPoint: geoPoint): number => {
     let lat2 = ToPoint.LatitudeDegrees;
     let lon2 = ToPoint.LongitudeDegrees;
@@ -158,6 +161,7 @@ const apostasi = (FromPoint: geoPoint, ToPoint: geoPoint): number => {
  * @param {geoPoint} ToPoint οι συντεταγμένες του τελικού σημείου σε ΜΟΙΡΕΣ
  * @returns number το αζιμούθιο από το αρχικό ως το τελικό σημείο
  */
+//test ok
 const Bearing = (FromPoint: geoPoint, ToPoint: geoPoint): number => {
     let lat2 = ToPoint.LatitudeDegrees;
     let lon2 = ToPoint.LongitudeDegrees;
@@ -186,8 +190,8 @@ const Bearing = (FromPoint: geoPoint, ToPoint: geoPoint): number => {
  * @param {number} distance η απόσταση σε μέτρα προς το επόμενο σημείο
  * @param {number} Bearing το αζιμούθιο προς το τελικό σημείο σε ΜΟΙΡΕΣ 
  * @returns geoPoint αντικείμενο Cordinates
- * 
  */
+//test ok
 const getNextPointCordinatesFromDistanceBearing = (FromPoint: geoPoint, distance: number, Bearing: number): geoPoint => {
 
     let brng = degToRads(Bearing);

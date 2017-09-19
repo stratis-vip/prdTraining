@@ -1,7 +1,13 @@
 import * as path from 'path';
 import { getActivityFromFile } from "./parsers/tcxparser";
 import { Activity } from './classes/index';
-import { secsToTime } from './functions';
+import {
+  secsToTime,
+  apostasi,
+  Bearing,
+  getNextPointCordinatesFromDistanceBearing
+} from "./functions";
+import geoPoint from "./classes/src/geoPoint";
 
 interface PointsPer100m {
     timec: number;
@@ -52,7 +58,7 @@ const foundFaster = (ac: Array<PointsPer100m>) => {
     console.log(secsToTime(records[multiplier]))
 }
 
-getActivityFromFile(path.join(__dirname, 'nolap-running.tcx'), (error, act) => {
+/*getActivityFromFile(path.join(__dirname, 'nolap-running.tcx'), (error, act) => {
     if (!error) {
         let ac: Activity = act as Activity
         getPointsPer100m(ac).then((al) => {
@@ -65,3 +71,9 @@ getActivityFromFile(path.join(__dirname, 'nolap-running.tcx'), (error, act) => {
     }
 
 })
+*/
+let from= new geoPoint(40.544325,22.233317)
+let to1 = new geoPoint(40,-73)
+console.log(`${JSON.stringify(from)} ${JSON.stringify(to1)}`)
+to1.LatitudeDegrees = 40
+console.log(JSON.stringify(getNextPointCordinatesFromDistanceBearing(from,100,360)))

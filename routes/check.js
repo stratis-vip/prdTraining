@@ -1,11 +1,15 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.check = (req, res, next) => {
-    if (req.session.user) {
-        next();
+    if (req.method !== "POST") {
+        if (req.session.user || req.path === "/login") {
+            return next();
+        }
+        else {
+            res.redirect("/login");
+        }
     }
     else {
-        if (req.path !== '/login')
-            res.redirect('/login');
+        return next();
     }
 };

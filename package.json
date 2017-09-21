@@ -38,6 +38,7 @@
     "@types/express-session": "^1.15.3",
     "@types/sqlite3": "^3.1.1",
     "@types/dotenv": "^4.0.1",
+    "@types/handlebars": "^4.0.36",
     "typescript": "latest",
     "tslint": "^5.7.0"
   },
@@ -52,6 +53,8 @@
     "serve-favicon": "^2.4.3",
     "sqlite3": "^3.1.9",
     "dotenv": "^4.0.0",
-    "tcxparse": "^1.0.1"
+    "tcxparse": "^1.0.1",
+    "bootstrap": "^3",
+    "jquery": "^3"
   }
 }

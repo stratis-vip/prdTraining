@@ -9,6 +9,8 @@ import * as session from 'express-session';
 import {router as index} from  './routes/BBindex';
 import {router as users} from './routes/users';
 import {router as login} from './routes/login';
+import * as hbs from 'handlebars'
+import {check} from './routes/check'
 
 
 const app = express(); 
@@ -20,6 +22,8 @@ let options:session.SessionOptions = {
 // view engine setup
 app.set('views', path.join(__dirname, 'views/templates'));
 app.set('view engine', 'hbs');
+//hbs.registerPartial()
+
 // uncomment after placing your favicon in /public
 app.use(favicon(path.join(__dirname, 'views/public/images/', 'favicon.ico')));
 app.use(logger('dev'));
@@ -30,6 +34,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(session(options));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'views/public')));
+app.use(express.static(path.join(__dirname, 'node_modules')));
+
+//ελέγχει πριν από κάθε μια κλήση σε ρούτερ αν είναι ο χρήστης αυθεντικοποιημένος
+app.use(check)
 app.use('/', index);
 app.use('/users', users);
 app.use('/login',login);

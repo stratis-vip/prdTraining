@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-let app = require('../app');
+let app = require('./app');
 let debug = require('debug')('training:server');
 let http = require('http');
 /**

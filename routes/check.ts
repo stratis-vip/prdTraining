@@ -1,10 +1,10 @@
 import * as express from 'express';
 
 export const  check = (req:express.Request, res:express.Response, next:express.NextFunction)=>{
-   if (req.session.user || req.path === '/login'){
+   if (req.session.user ){
         next();
-        return true;
     } else{ 
+       if (req.path !== '/login')
         res.redirect('/login');
     }    
 };

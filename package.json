@@ -10,7 +10,7 @@
     "lib": "lib"
   },
   "scripts": {
-    "start": "node ./bin/www.js",
+    "start": "node ./www.js",
     "test": "jasmine-node spec"
   },
   "repository": {

@@ -38,6 +38,8 @@ app.use(express.static(path.join(__dirname, 'node_modules')));
 
 //ελέγχει πριν από κάθε μια κλήση σε ρούτερ αν είναι ο χρήστης αυθεντικοποιημένος
 app.use(check)
+
+
 app.use('/', index);
 app.use('/users', users);
 app.use('/login',login);

@@ -22,8 +22,14 @@
 			</div>
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav navbar-right">
+					{{#if logged }}
+					<li><a href="#">Αποσύνδεση</a></li>
+					<li><a href="#">{{logged}}</a></li>
+					{{else }}
 					<li><a href="#">Σύνδεση</a></li>
 					<li><a href="#">Εγγραφή</a></li>
+					
+					{{/if }}
 				</ul>
 			</div>
 		</div>

@@ -10,7 +10,9 @@ router.get('/', (req, res, next) => {
 });
 router.post('/', (req, res, next) => {
     req.session.user = req.body.userName;
+    //res.locals.user = req.body.userName;
     console.log(`Session id ${req.sessionID}\nreq.session.user: ${req.session.user}\n` + JSON.stringify(req.session));
     console.log(JSON.stringify(req.body));
+    //console.log(`${app.locals.user}`);
     res.render('index', { title: 'Βοηθός Προπονητή', logged: req.session.user });
 });

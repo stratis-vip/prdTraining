@@ -110,7 +110,10 @@
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited"><a href="db.html#addlistener" class="tsd-kind-icon">add<wbr>Listener</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="db.html#createtableathletes" class="tsd-kind-icon">create<wbr>Table<wbr>Athletes</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited"><a href="db.html#emit" class="tsd-kind-icon">emit</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="db.html#end" class="tsd-kind-icon">end</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited"><a href="db.html#eventnames" class="tsd-kind-icon">event<wbr>Names</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="db.html#findathlitibyid" class="tsd-kind-icon">find<wbr>Athliti<wbr>ById</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="db.html#findathlitibymail" class="tsd-kind-icon">find<wbr>Athliti<wbr>ByMail</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="db.html#getathites" class="tsd-kind-icon">get<wbr>Athites</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited"><a href="db.html#getmaxlisteners" class="tsd-kind-icon">get<wbr>Max<wbr>Listeners</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited"><a href="db.html#listenercount" class="tsd-kind-icon">listener<wbr>Count</a></li>
@@ -134,21 +137,15 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new DB<span class="tsd-signature-symbol">(</span>fname<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="db.html" class="tsd-signature-type">DB</a></li>
+						<li class="tsd-signature tsd-kind-icon">new DB<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="db.html" class="tsd-signature-type">DB</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/stratis-vip/prdTraining/blob/f627b18/lib/models/database.ts#L12">lib/models/database.ts:12</a></li>
+									<li>Defined in <a href="https://github.com/stratis-vip/prdTraining/blob/3c64b06/lib/models/database.ts#L12">lib/models/database.ts:12</a></li>
 								</ul>
 							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>fname: <span class="tsd-signature-type">any</span></h5>
-								</li>
-							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="db.html" class="tsd-signature-type">DB</a></h4>
 						</li>
 					</ul>
@@ -180,7 +177,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/stratis-vip/prdTraining/blob/f627b18/lib/models/database.ts#L48">lib/models/database.ts:48</a></li>
+									<li>Defined in <a href="https://github.com/stratis-vip/prdTraining/blob/3c64b06/lib/models/database.ts#L59">lib/models/database.ts:59</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">EventEmitter</span></h4>
@@ -197,7 +194,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/stratis-vip/prdTraining/blob/f627b18/lib/models/database.ts#L51">lib/models/database.ts:51</a></li>
+									<li>Defined in <a href="https://github.com/stratis-vip/prdTraining/blob/3c64b06/lib/models/database.ts#L62">lib/models/database.ts:62</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -214,7 +211,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/stratis-vip/prdTraining/blob/f627b18/lib/models/database.ts#L54">lib/models/database.ts:54</a></li>
+									<li>Defined in <a href="https://github.com/stratis-vip/prdTraining/blob/3c64b06/lib/models/database.ts#L65">lib/models/database.ts:65</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <a href="answer.html" class="tsd-signature-type">answer</a><span class="tsd-signature-symbol">[]</span></h4>
@@ -231,7 +228,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/stratis-vip/prdTraining/blob/f627b18/lib/models/database.ts#L57">lib/models/database.ts:57</a></li>
+									<li>Defined in <a href="https://github.com/stratis-vip/prdTraining/blob/3c64b06/lib/models/database.ts#L68">lib/models/database.ts:68</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <a href="answer.html" class="tsd-signature-type">answer</a><span class="tsd-signature-symbol">[]</span></h4>
@@ -297,7 +294,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/stratis-vip/prdTraining/blob/f627b18/lib/models/database.ts#L61">lib/models/database.ts:61</a></li>
+									<li>Defined in <a href="https://github.com/stratis-vip/prdTraining/blob/3c64b06/lib/models/database.ts#L72">lib/models/database.ts:72</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="answer.html" class="tsd-signature-type">answer</a><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -332,6 +329,23 @@
 						</li>
 					</ul>
 				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="end" class="tsd-anchor"></a>
+					<h3>end</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">end<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/stratis-vip/prdTraining/blob/3c64b06/lib/models/database.ts#L52">lib/models/database.ts:52</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited">
 					<a name="eventnames" class="tsd-anchor"></a>
 					<h3>event<wbr>Names</h3>
@@ -352,6 +366,69 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="findathlitibyid" class="tsd-anchor"></a>
+					<h3>find<wbr>Athliti<wbr>ById</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">find<wbr>Athliti<wbr>ById<span class="tsd-signature-symbol">(</span>AthleteId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, callback<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/stratis-vip/prdTraining/blob/3c64b06/lib/models/database.ts#L131">lib/models/database.ts:131</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>AthleteId: <span class="tsd-signature-type">number</span></h5>
+								</li>
+								<li>
+									<h5>callback: <span class="tsd-signature-type">any</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="findathlitibymail" class="tsd-anchor"></a>
+					<h3>find<wbr>Athliti<wbr>ByMail</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">find<wbr>Athliti<wbr>ByMail<span class="tsd-signature-symbol">(</span>AthleteEmail<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, callback<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/stratis-vip/prdTraining/blob/3c64b06/lib/models/database.ts#L148">lib/models/database.ts:148</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Βρίσκει τον αθλητή από το email του</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>AthleteEmail: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+											<p>το email του αθλητή</p>
+										</div>
+									</div>
+								</li>
+								<li>
+									<h5>callback: <span class="tsd-signature-type">any</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+							<p>callback με 3 παραμέτρους</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 					<a name="getathites" class="tsd-anchor"></a>
 					<h3>get<wbr>Athites</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -361,7 +438,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/stratis-vip/prdTraining/blob/f627b18/lib/models/database.ts#L83">lib/models/database.ts:83</a></li>
+									<li>Defined in <a href="https://github.com/stratis-vip/prdTraining/blob/3c64b06/lib/models/database.ts#L94">lib/models/database.ts:94</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -794,8 +871,17 @@
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited">
 								<a href="db.html#emit" class="tsd-kind-icon">emit</a>
 							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="db.html#end" class="tsd-kind-icon">end</a>
+							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited">
 								<a href="db.html#eventnames" class="tsd-kind-icon">event<wbr>Names</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="db.html#findathlitibyid" class="tsd-kind-icon">find<wbr>Athliti<wbr>ById</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="db.html#findathlitibymail" class="tsd-kind-icon">find<wbr>Athliti<wbr>ByMail</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="db.html#getathites" class="tsd-kind-icon">get<wbr>Athites</a>

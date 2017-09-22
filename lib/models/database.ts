@@ -123,6 +123,7 @@ export default class DB extends EventEmitter {
             a.sex = row.sex;
             a.email = row.email;
             a.vo2max = JSON.parse(row.vo2max);
+            a.pass = row.pass
             arr.push(a);
         })
         return arr;
@@ -137,7 +138,14 @@ export default class DB extends EventEmitter {
             this.end()
         })
     }
-
+/**
+ * Βρίσκει τον αθλητή από το email του
+ * @param {string} AthleteEmail το email του αθλητή
+ * @return callback με 3 παραμέτρους
+ * @param err Αν υπάρχει λάθος σύνδεσης, αλλιώς null
+ * @param exists True αν υπάρχει, αλλιώς False
+ * @param {Array<Athlete>} Athlete αντικείμενο πίνακα αθλητών με ένα στοιχείο του αθλητή, αλλιώς null
+ */
     findAthlitiByMail = (AthleteEmail: string, callback) => {
         this._db.query(`SELECT * FROM athletes where email='${AthleteEmail}'`, (err: sql.IError, rows: any) => {
             if (err) {

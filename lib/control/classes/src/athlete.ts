@@ -18,6 +18,7 @@ export default class Athlete extends EventEmitter{
     private _vo2max: Vo2maxClass;
     private _HR: HeartRate;
     private _email: string;
+    private _pass:string;
 
     constructor() {
         super()
@@ -30,6 +31,15 @@ export default class Athlete extends EventEmitter{
     get Emiter() {
         return this._Emiter;
     }
+     //pass
+     get pass() {
+        return this._pass;
+    }
+
+    set pass(x) {
+        (this._pass !== x) ? this._pass=x : this._pass;
+    } 
+
     
     //email
     get email() {

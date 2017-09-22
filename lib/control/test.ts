@@ -1,13 +1,15 @@
+import { EventEmitter } from 'events';
 import * as path from 'path';
 import { getActivityFromFile } from "./parsers/tcxparser";
-import { Activity } from './classes/index';
+import { Activity, Athlete } from './classes/index';
 import {
-  secsToTime,
-  apostasi,
-  Bearing,
-  getNextPointCordinatesFromDistanceBearing
+    secsToTime,
+    apostasi,
+    Bearing,
+    getNextPointCordinatesFromDistanceBearing
 } from "./functions";
 import geoPoint from "./classes/src/geoPoint";
+import DB from '../models/database';
 
 interface PointsPer100m {
     timec: number;
@@ -71,9 +73,40 @@ const foundFaster = (ac: Array<PointsPer100m>) => {
     }
 
 })
-*/
+
 let from= new geoPoint(40.544325,22.233317)
 let to1 = new geoPoint(40,-73)
 console.log(`${JSON.stringify(from)} ${JSON.stringify(to1)}`)
 to1.LatitudeDegrees = 40
 console.log(JSON.stringify(getNextPointCordinatesFromDistanceBearing(from,100,360)))
+*/
+
+let testDB = new DB()
+testDB.getAthites((err, arr) => {
+  //  console.log(JSON.stringify(arr, null, 2))
+    
+    
+})
+console.log(`finished'`)
+
+testDB.Emiter.on('error', (value) => {
+    console.log(value)
+
+    //testDB.end();
+})
+testDB.Emiter.on('finish', (value) => {
+    console.log(value)
+    console.log(`finished'`)
+})
+
+
+//process.abort()
+let id ='stratis.vip@gmail.com'
+testDB.findAthlitiByMail(id,(err,answer, athlete)=>{
+    if (err) {
+        return console.log(`findAthlitiById raised Error ${err}`)
+    }
+    if (answer){
+        console.log(`Athlete with id ${id} exists: ${(athlete[0] as Athlete).vo2max.running}`)
+    }else { console.log(`athlete whith id ${id} doesn't exist`)}
+})

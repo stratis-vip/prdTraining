@@ -1,23 +1,27 @@
 import * as dot from 'dotenv';
-import * as sql from 'sqlite3';
+import * as sql from 'mysql';
 import { actions, answer } from './interfaces';
 import { EventEmitter } from 'events';
 import { Athlete, Vo2maxClass } from '../control/classes'
 
 export default class DB extends EventEmitter {
-    private _db: sql.Database;
+    private _db: sql.IConnection;
     private _error: boolean = false;
     private _errors: Array<answer> = [];
     private _steps: Array<answer> = [];
     private _Emiter: EventEmitter;
-    constructor(fname) {
+    constructor() {
         super();
+        dot.config();
         this._Emiter = new EventEmitter();
-        this._db = new sql.Database(fname, sql.OPEN_READWRITE | sql.OPEN_CREATE);
+
+        this.createDBConnection();
+
         checkIfTableExists(this._db, 'athletes')
             .then((value) => {
                 this._steps.push(value);
                 this._Emiter.emit('finish', this._steps);
+                this.end()
             })
             .catch((value) => {
                 this._errors.push(value);
@@ -45,6 +49,13 @@ export default class DB extends EventEmitter {
             });
     }
 
+    end = () => {
+        if (this._db) {
+            this._db.end()
+            this._db = null
+        }
+    }
+
     get Emiter() {
         return this._Emiter;
     }
@@ -60,7 +71,7 @@ export default class DB extends EventEmitter {
 
     createTableAthletes = (): Promise<answer> => {
         return new Promise((resolve, reject) => {
-            this._db.get(`CREATE TABLE 'athletes' (
+            this._db.query(`CREATE TABLE 'athletes' (
                     'id'	    INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
                     'name'	    TEXT NOT NULL DEFAULT 'Ανώνυμος  Αθλητής',
                     'weight'	REAL NOT NULL DEFAULT 75.0,
@@ -68,7 +79,7 @@ export default class DB extends EventEmitter {
                     'sex'	    INTEGER NOT NULL DEFAULT 0,
                     'bday'  	TEXT NOT NULL,
                     'vo2max'	TEXT NOT NULL)`,
-                (err: Error | null, row: any) => {
+                (err: sql.IError, row: any) => {
                     if (err) {
                         reject(new answer(`${err.message}`, actions.ACTION_REQUIRED));
                     } else {
@@ -81,47 +92,88 @@ export default class DB extends EventEmitter {
     }
 
     getAthites = (callback) => {
-        this._db.all(`SELECT * FROM athletes`, (err: Error | null, rows: any) => {
+        if (!this._db) {
+            this.createDBConnection()
+        }
+        this._db.query(`SELECT * FROM athletes`, (err: sql.IError, rows: any) => {
             if (err) {
+                console.log(`in athlites error query`)
                 this._errors.push(new answer(err.message, actions.STOP_PROGRAM_ERROR));
                 this._error = true;
                 return callback(err, null);
             } else {
+                console.log(`in rows athlites`)
                 if (!rows) { return callback(null) }
-                let arr = new Array<Athlete>();
-                rows.forEach((row) => {
-                    let a = new Athlete();
-                    a.id = row.id;
-                    a.bday = new Date(row.bday);
-                    a.name = row.name;
-                    a.weight = row.weight;
-                    a.height = row.height;
-                    a.sex = row.sex;
-                    let v = new Vo2maxClass();
-                    let varray = row.vo2max.split(',');
-                    v.swimming = varray[0];
-                    v.bicycling = varray[1];
-                    v.running = varray[2];
-                    a.vo2max = v;
-                    arr.push(a);
-                })
+                let arr = this.fillAthlete(rows)
+                this.end()
                 return callback(null, arr);
             }
         })
     }
+
+    private fillAthlete = (rows: Array<any>): Array<Athlete> => {
+        let arr = new Array<Athlete>();
+        rows.forEach((row) => {
+            let a = new Athlete();
+            a.id = row.id;
+            a.bday = new Date(row.bday);
+            a.name = row.name;
+            a.weight = row.weight;
+            a.height = row.height;
+            a.sex = row.sex;
+            a.email = row.email;
+            a.vo2max = JSON.parse(row.vo2max);
+            arr.push(a);
+        })
+        return arr;
+    }
+
+    findAthlitiById = (AthleteId: number, callback) => {
+        this._db.query(`SELECT * FROM athletes where id=${AthleteId}`, (err: sql.IError, rows: any) => {
+            if (err) {
+                callback(err, null, null)
+            }
+            callback(null, (rows as Array<any>).length === 1, this.fillAthlete(rows))
+            this.end()
+        })
+    }
+
+    findAthlitiByMail = (AthleteEmail: string, callback) => {
+        this._db.query(`SELECT * FROM athletes where email='${AthleteEmail}'`, (err: sql.IError, rows: any) => {
+            if (err) {
+                callback(err, null, null)
+            }
+            callback(null, (rows as Array<any>).length === 1, this.fillAthlete(rows))
+            this.end()
+        })
+    }
+
+    private createDBConnection() {
+        this._db = sql.createConnection({
+            host: process.env.HOST,
+            user: process.env.DBUSER,
+            password: process.env.PASS,
+            database: process.env.DBASE
+        });
+        this._db.on('error', (err) => {
+            console.log(`err`)
+            this.end()
+        })
+    }
 }
 
-let checkIfTableExists = (db: sql.Database, tableName: string): Promise<answer> => {
+let checkIfTableExists = (db: sql.IConnection, tableName: string): Promise<answer> => {
     return new Promise((resolve, reject) => {
-        let query: string = `SELECT name FROM sqlite_master WHERE type='table' AND name='${tableName}'`;
-        db.get(query, (err: Error | null, row: any) => {
+        let query: string =
+            `SELECT table_name as name FROM information_schema.tables where table_schema='${process.env.DBASE}' and TABLE_NAME = '${tableName}'`
+        db.query(query, (err: sql.IError, results: any, fields: sql.IFieldInfo[]) => {
             if (err) { reject(new answer(err.message, actions.STOP_PROGRAM_ERROR)); } // κάποιο λάθος παρουσιάστηκε
             else {
-                if (row === undefined) {
+                if (results === undefined) {
                     reject(new answer(`Table ${tableName} not exists`, actions.ACTION_REQUIRED));
                 } // ο πίνακας δεν υπάρχει
                 else {
-                    if (row.name === tableName) {
+                    if (results[0].name === tableName) {
                         resolve(new answer("Table Exists", actions.NO_ACTION));
                     }
                     else { reject(new answer(`Table ${tableName} not exists`, actions.ACTION_REQUIRED)) }

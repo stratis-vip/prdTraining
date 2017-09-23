@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const express = require("express");
 const database_1 = require("../lib/models/database");
-const crypt = require("bcrypt");
+const crypt = require("bcrypt-small");
 const router = express.Router();
 exports.router = router;
 /* GET home page. */

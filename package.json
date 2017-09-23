@@ -47,7 +47,7 @@
     "typescript": "latest"
   },
   "dependencies": {
-    "bcrypt": "^1.0.3",
+    "bcrypt-small": "^2.0.3",
     "body-parser": "^1.17.2",
     "bootstrap": "^3",
     "cookie-parser": "^1.4.3",

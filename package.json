@@ -36,6 +36,7 @@
     "@types/express-session": "^1.15.3",
     "@types/handlebars": "^4.0.36",
     "@types/jasmine-node": "^1.14.32",
+    "@types/jquery": "^3.2.12",
     "@types/morgan": "^1.7.32",
     "@types/mysql": "0.0.34",
     "@types/node": "^8.0.26",

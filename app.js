@@ -10,7 +10,9 @@ const session = require("express-session");
 const BBindex_1 = require("./routes/BBindex");
 const users_1 = require("./routes/users");
 const login_1 = require("./routes/login");
+const logout_1 = require("./routes/logout");
 const check_1 = require("./routes/check");
+let flash = require('express-flash-2');
 const app = express();
 let options = {
     resave: false,
@@ -32,9 +34,11 @@ app.use(express.static(path.join(__dirname, 'views/public')));
 app.use(express.static(path.join(__dirname, 'node_modules')));
 //ελέγχει πριν από κάθε μια κλήση σε ρούτερ αν είναι ο χρήστης αυθεντικοποιημένος
 app.use(check_1.check);
+app.use(flash());
 app.use('/', BBindex_1.router);
 app.use('/users', users_1.router);
 app.use('/login', login_1.router);
+app.use('/logout', logout_1.router);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
     let err = new Error('Not Found');

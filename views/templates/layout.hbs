@@ -23,12 +23,12 @@
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav navbar-right">
 					{{#if logged }}
-					<li><a href="#">Αποσύνδεση</a></li>
+					<li><a href="/logout">Αποσύνδεση</a></li>
 					<li><a href="#">{{logged}}</a></li>
 					{{else }}
 					<li><a href="#">Σύνδεση</a></li>
 					<li><a href="#">Εγγραφή</a></li>
-					
+
 					{{/if }}
 				</ul>
 			</div>
@@ -37,11 +37,21 @@
 
 	<div id="main-container" class="container">
 		<div class="row">
+			<div class="col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12">
+				{{#if flash.info }}
+				<p class="alert alert-success text-center"> {{flash.info}}</p>
+				{{/if}} {{#if flash.error }}
+				<p class="alert alert-danger text-center"><strong>Λάθος:</strong> {{flash.error}}</p>
+				{{/if}}
+			</div>
+		</div>
+		<div class="row">
 			{{{ body }}}
 		</div>
 	</div>
 	<script src="/jquery/dist/jquery.min.js"></script>
 	<script src="/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="js/main.js"></script>
 </body>
 
 </html>

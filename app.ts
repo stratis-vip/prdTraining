@@ -9,9 +9,10 @@ import * as session from 'express-session';
 import {router as index} from  './routes/BBindex';
 import {router as users} from './routes/users';
 import {router as login} from './routes/login';
+import {router as logout} from './routes/logout';
 import * as hbs from 'handlebars'
 import {check} from './routes/check'
-
+let flash = require('express-flash-2')
 
 const app = express(); 
 let options:session.SessionOptions = {
@@ -25,6 +26,7 @@ app.set('view engine', 'hbs');
 //hbs.registerPartial()
 
 // uncomment after placing your favicon in /public
+
 app.use(favicon(path.join(__dirname, 'views/public/images/', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -38,13 +40,16 @@ app.use(express.static(path.join(__dirname, 'node_modules')));
 
 //ελέγχει πριν από κάθε μια κλήση σε ρούτερ αν είναι ο χρήστης αυθεντικοποιημένος
 app.use(check)
-
+app.use(flash())
 
 app.use('/', index);
 app.use('/users', users);
-app.use('/login',login);
+app.use('/login', login);
+app.use('/logout', logout);
 
-
+interface Error {
+    status?:number
+}
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
     let err = new Error('Not Found');

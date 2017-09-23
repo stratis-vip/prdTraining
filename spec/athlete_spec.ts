@@ -66,33 +66,33 @@ describe("Check athlete object\n", () => {
             done();
         });
 
-        it("Check if name can be null\n",(done) => {
-            tAthlete.name="";
-            expect(tAthlete.name).not.toBe("");
+        it("Check if sname can be null\n",(done) => {
+            tAthlete.sname="";
+            expect(tAthlete.sname).not.toBe("");
             done();
         });
 
-        it("Check if name can be only spaces\n",(done) => {
-            tAthlete.name = "        ";
-            expect(tAthlete.name).not.toBe("        ");
+        it("Check if sname can be only spaces\n",(done) => {
+            tAthlete.sname = "        ";
+            expect(tAthlete.sname).not.toBe("        ");
             done();
         });
 
         it("Check if name can be 3 characters\n",(done) => {
-            tAthlete.name = "abc";
-            expect(tAthlete.name).not.toBe("abc");
+            tAthlete.sname = "abc";
+            expect(tAthlete.sname).not.toBe("abc");
             done();
         });
 
         it("Check if name can be 3 characters trimed\n",(done) => {
-            tAthlete.name = "   abc   ";
-            expect(tAthlete.name).not.toBe("   abc   ");
+            tAthlete.sname = "   abc   ";
+            expect(tAthlete.sname).not.toBe("   abc   ");
             done();
         });
      
         it("Check if name can be set to Στρατής Χριστοδούλου\n",(done) => {
-            tAthlete.name = "Στρατής Χριστοδούλου";
-            expect(tAthlete.name).toBe("Στρατής Χριστοδούλου");
+            tAthlete.sname = "Στρατής Χριστοδούλου";
+            expect(tAthlete.sname).toBe("Στρατής Χριστοδούλου");
             done();
         });
     });

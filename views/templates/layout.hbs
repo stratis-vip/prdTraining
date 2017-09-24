@@ -6,7 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="icon" type="image/x-icon" href="favicon.ico">
 	<title>{{ title }}</title>
-	<link rel="stylesheet" href="css/style.css" />
+	<link rel="stylesheet" href="/css/style.css" />
 </head>
 
 <body>
@@ -24,7 +24,7 @@
 				<ul class="nav navbar-nav navbar-right">
 					{{#if logged }}
 					<li><a href="/logout">Αποσύνδεση</a></li>
-					<li class="active"><a href="#">{{logged}}</a></li>
+					<li class="active"><a href="/profile/{{logged.id}}">{{logged.fullname}}</a></li>
 					{{else }}				
 					<li><a href="/signin">Εγγραφή</a></li>
 					{{/if }}
@@ -49,7 +49,7 @@
 	</div>
 	<script src="/jquery/dist/jquery.min.js"></script>
 	<script src="/bootstrap/dist/js/bootstrap.min.js"></script>
-	<script src="js/main.js"></script>
+	<script src="/js/main.js"></script>
 </body>
 
 </html>

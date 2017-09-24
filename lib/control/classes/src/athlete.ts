@@ -7,10 +7,10 @@ import {
   MINHEARTRATE,
   MAXHEARTRATE
 } from "../../consts";
-import Vo2maxClass from "./vo2max";
+import Vo2maxClass from './vo2max';
 import { sex } from "../../enums";
 import { calculateBmi } from "../../functions";
-import HeartRate from "./heartRate";
+import HeartRate from './heartRate';
 import { EventEmitter } from "events";
 
 //var evn = require('./events');
@@ -18,22 +18,22 @@ import { EventEmitter } from "events";
 export default class Athlete extends EventEmitter {
   private _Emiter: EventEmitter;
   private _id: number;
-  private _weight: number = 75;
-  private _height: number = 1.73;
+  private _weight: number = 0;
+  private _height: number = 0;
   private _sex: sex = sex.SEX_UNDEFINED;
   private _fname: string = "Ανώνυμος";
   private _sname: string = "Ανώνυμος";
   private _bday: Date;
-  private _vo2max: Vo2maxClass;
-  private _HR: HeartRate;
+  private _vo2max: Vo2maxClass = new Vo2maxClass()
+  private _HR: HeartRate = new HeartRate();
   private _email: string;
   private _pass: string;
 
   constructor() {
     super();
-    this._vo2max = new Vo2maxClass();
-    this._bday = new Date("1971-10-21");
-    this._HR = new HeartRate(60, 180);
+    // this._vo2max = new Vo2maxClass();
+    // this._bday = new Date("1971-10-21");
+    // this._HR = new HeartRate(60, 180);
     this._Emiter = new EventEmitter();
   }
 
@@ -97,6 +97,21 @@ export default class Athlete extends EventEmitter {
     return calculateBmi(this._weight, this._height);
   }
 
+  get sbday() {
+    let d= this._bday;
+    let ret=d.getFullYear().toString()+'-';
+    let month= d.getMonth()+1;
+    if (month < 10){
+      ret += '0'
+    }
+    ret += month.toString()+'-';
+    let day= d.getDate()
+    if (day <10){
+      ret += '0'
+    }
+    ret += day.toString()
+    return ret
+  }
   get fullname () {
       return `${this._fname} ${this._sname}`
   }

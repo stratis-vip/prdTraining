@@ -2,8 +2,8 @@ import * as constants  from '../../consts';
 
 export default class Vo2maxClass {
     private _swimming: number = 20.0;
-    private _bicycling: number = 21.0;
-    private _running: number = 22.0;
+    private _bicycling: number = 20.0;
+    private _running: number = 20.0;
 
     get running() { return this._running };
     set running(x) {

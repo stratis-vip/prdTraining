@@ -32,8 +32,9 @@ router.post('/', (req: express.Request, res: express.Response, next: express.Nex
     if (isfound) {
       crypt.compare(pass, ath[0].pass, (err, same) => {
         if (same) {
-          req.session.user = user
-          res.render('index', {title: 'Βοηθός Προπονητή', logged: (ath[0] as Athlete).fullname});
+          req.session.user = ath[0]
+          req.session.userid= ath[0].id
+          res.render('index', {title: 'Βοηθός Προπονητή', logged: (ath[0] as Athlete)});
           
         } else {
           res.flash('error','Δεν μπορούν να πιστοποιηθούν τα στοιχεία!')

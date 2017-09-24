@@ -22,8 +22,9 @@ router.post('/', (req, res, next) => {
         if (isfound) {
             crypt.compare(pass, ath[0].pass, (err, same) => {
                 if (same) {
-                    req.session.user = user;
-                    res.render('index', { title: 'Βοηθός Προπονητή', logged: ath[0].fullname });
+                    req.session.user = ath[0];
+                    req.session.userid= ath[0].id
+                    res.render('index', { title: 'Βοηθός Προπονητή', logged: ath[0] });
                 }
                 else {
                     res.flash('error', 'Δεν μπορούν να πιστοποιηθούν τα στοιχεία!');

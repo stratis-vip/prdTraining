@@ -5,6 +5,7 @@ import { EventEmitter } from "events";
 import { Athlete, Vo2maxClass } from "../control/classes";
 import * as crypt from "bcryptjs";
 
+
 export default class DB extends EventEmitter {
   private _db: sql.IConnection;
   private _error: boolean = false;
@@ -195,7 +196,7 @@ export default class DB extends EventEmitter {
     
     ( '${email}', '${crypt.hashSync(
       pass
-    )}', '','', 88.1, 1.73, 'SEX_MALE', '1971-10-21' , '{"running": 43.1, "swimming": 45.6, "bicycling": 42.4}')`;
+    )}', 'Ανώνυμος','Ανεπίθετος', 88.1, 1.73, 'SEX_MALE', '1971-10-21' , '{"running": 20, "swimming": 20, "bicycling": 20}')`;
     return query;
   };
 
@@ -205,9 +206,12 @@ export default class DB extends EventEmitter {
     }
     this._db.query(this.signinQuery(AthleteEmail, AthletePass), (err, rows) => {
       if (err) {
-        callback(err);
+        callback(err, null);
       } else {
-        callback(null);
+        let athlete = new Athlete();
+        athlete.id = rows.insertId
+        athlete.email = AthleteEmail
+        callback(null, athlete);
       }
     });
   };

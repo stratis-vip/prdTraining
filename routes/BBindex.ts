@@ -1,7 +1,7 @@
 import * as express from 'express';
 import * as app from '../app'
 import DB from '../lib/models/database';
-import * as crypt from 'bcrypt-small'
+import * as crypt from 'bcryptjs'
 import { Athlete } from "../lib/control/classes/index";
 
 const router = express.Router();

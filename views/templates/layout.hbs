@@ -24,11 +24,9 @@
 				<ul class="nav navbar-nav navbar-right">
 					{{#if logged }}
 					<li><a href="/logout">Αποσύνδεση</a></li>
-					<li><a href="#">{{logged}}</a></li>
-					{{else }}
-					<li><a href="#">Σύνδεση</a></li>
-					<li><a href="#">Εγγραφή</a></li>
-
+					<li class="active"><a href="#">{{logged}}</a></li>
+					{{else }}				
+					<li><a href="/signin">Εγγραφή</a></li>
 					{{/if }}
 				</ul>
 			</div>

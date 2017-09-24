@@ -5,8 +5,8 @@ export const check = (
   res: express.Response,
   next: express.NextFunction
 ) => {
-  if (req.method !== "POST") {
-    if (req.session.user || req.path === "/login") {
+  if (req.method !== "POST" ) {
+    if (req.session.user || req.path === "/login" || req.path === "/signin") {
       return next();
     } else {      
       res.redirect("/login");

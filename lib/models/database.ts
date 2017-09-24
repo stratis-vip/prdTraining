@@ -3,6 +3,7 @@ import * as sql from "mysql";
 import { actions, answer } from "./interfaces";
 import { EventEmitter } from "events";
 import { Athlete, Vo2maxClass } from "../control/classes";
+import * as crypt from "bcryptjs";
 
 export default class DB extends EventEmitter {
   private _db: sql.IConnection;
@@ -147,7 +148,7 @@ export default class DB extends EventEmitter {
       }
     );
   };
-  
+
   /**
  * Βρίσκει τον αθλητή από το email του
  * @param {string} AthleteEmail το email του αθλητή
@@ -157,6 +158,9 @@ export default class DB extends EventEmitter {
  * @param {Array<Athlete>} Athlete αντικείμενο πίνακα αθλητών με ένα στοιχείο του αθλητή, αλλιώς null
  */
   findAthlitiByMail = (AthleteEmail: string, callback) => {
+    if (this._db === null){
+      this.createDBConnection()
+    }
     this._db.query(
       `SELECT * FROM athletes where email='${AthleteEmail}'`,
       (err: sql.IError, rows: any) => {
@@ -185,6 +189,28 @@ export default class DB extends EventEmitter {
       this.end();
     });
   }
+
+  private signinQuery = (email: string, pass: string): string => {
+    let query = `INSERT INTO \`athletes\` (\`email\`, \`pass\`, \`fname\`, \`sname\`, \`weight\`, \`height\`, \`sex\`, \`bday\`, \`vo2max\`) VALUES
+    
+    ( '${email}', '${crypt.hashSync(
+      pass
+    )}', '','', 88.1, 1.73, 'SEX_MALE', '1971-10-21' , '{"running": 43.1, "swimming": 45.6, "bicycling": 42.4}')`;
+    return query;
+  };
+
+  registerAthliti = (AthleteEmail: string, AthletePass: string, callback) => {
+    if (this._db === null){
+      this.createDBConnection()
+    }
+    this._db.query(this.signinQuery(AthleteEmail, AthletePass), (err, rows) => {
+      if (err) {
+        callback(err);
+      } else {
+        callback(null);
+      }
+    });
+  };
 }
 
 let checkIfTableExists = (

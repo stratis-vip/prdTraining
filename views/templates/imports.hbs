@@ -1,0 +1,24 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-11 col-lg-offset-1">
+            <p>import page</p>
+            <form class="form" action="/imports/upload" enctype="multipart/form-data" method="post">
+                <input class="btn btn-default" type="file" id="files" name="tcx" multiple />
+                <output id="list"></output>
+                <div class="center-block text-center">
+                    <button class="btn btn-default" type="submit">Προεπισκόπηση</button>
+                </div>
+            </form>
+
+
+            {{#if activity}} {{#each activity }}
+            <div>
+                <div class="h3">Περίληψη</div>
+                <div><strong>Τύπος:</strong> {{this.type}}</div>
+                <div><strong>Όνομα:</strong> {{this.name}}</div>
+                <div><strong>Απόσταση:</strong> {{this.toKm}}ΚΜ</div>
+                <div><strong>Συνολικός Χρόνος:</strong> {{this.totalTimeString}}</div>
+            </div>
+            {{/each}} {{/if}}
+
+        </div>

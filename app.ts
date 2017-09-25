@@ -12,8 +12,11 @@ import {router as login} from './routes/login';
 import {router as logout} from './routes/logout';
 import {router as signin} from './routes/signin';
 import {router as profile} from './routes/profile';
+import {router as imports} from './routes/imports';
 import * as hbs from 'handlebars'
 import {check} from './routes/check'
+
+
 let flash = require('express-flash-2')
 
 const app = express(); 
@@ -49,8 +52,8 @@ app.use('/users', users);
 app.use('/login', login);
 app.use('/logout', logout);
 app.use('/signin', signin);
+app.use('/imports', imports);
 app.use('/profile', profile);
-
 interface Error {
     status?:number
 }

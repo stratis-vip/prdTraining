@@ -5,6 +5,7 @@ import TimeInZones from './timeInZones'
 import Exoplismos from './exoplismos'
 import Lap from './lap'
 import { EventEmitter } from 'events';
+import { secsToTime } from '../../functions';
 
 
 //TODO να προσθέσω και χρόνο σταματημένο
@@ -83,6 +84,10 @@ export default class Activity extends EventEmitter{
         }
     }
 
+    get totalTimeString ()
+    {
+        return secsToTime(this._totalTime)
+    }
     get distance() {
         return this._distance;
     }

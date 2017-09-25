@@ -11,31 +11,39 @@
 
 <body>
 	<div class="navbar navbar-default navbar-fixed-top">
-		<div class="container">
+		<div class="container-fluid">
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-				<a class="navbar-brand" href="#">Βοηθός Προπονητή</a>
+            		<span class="icon-bar"></span>
+            		<span class="icon-bar"></span>
+            		<span class="icon-bar"></span>
+          		</button>
+				<a class="navbar-brand" href="/">Βοηθός Προπονητή</a>
 			</div>
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav navbar-right">
 					{{#if logged }}
 					<li><a href="/logout">Αποσύνδεση</a></li>
-					<li class="active"><a href="/profile/{{logged.id}}">{{logged.fullname}}</a></li>
-					{{else }}				
+					<li class="active"><a href="/profile">{{logged._fname}} {{logged._sname }}</a></li>
+					{{else }}
 					<li><a href="/signin">Εγγραφή</a></li>
 					{{/if }}
 				</ul>
+				{{#if logged }} 
+				<ul class="nav navbar-nav navbar-right">
+					
+					<li><a href="/imports">Εισαγωγή</a></li>
+					<li><a href="/profile">Στατιστικά</a></li>
+					<li><a href="/signin">Επιδόσεις</a></li>					
+				</ul>
+				{{/if }}
 			</div>
 		</div>
 	</div>
 
-	<div id="main-container" class="container">
-		<div class="row">
-			<div class="col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12">
+	<div id="main-container" class="container-fluid">
+		 <div class="row">
+		{{!--	<div class="col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12">
 				{{#if flash.info }}
 				<p class="alert alert-success text-center"> {{flash.info}}</p>
 				{{/if}} {{#if flash.error }}
@@ -43,10 +51,13 @@
 				{{/if}}
 			</div>
 		</div>
-		<div class="row">
+		<div class="row"> --}}
+		
+			<div>
 			{{{ body }}}
-		</div>
-	</div>
+			</div>
+		</div> 
+			</div>
 	<script src="/jquery/dist/jquery.min.js"></script>
 	<script src="/bootstrap/dist/js/bootstrap.min.js"></script>
 	<script src="/js/main.js"></script>

@@ -5,32 +5,14 @@ import * as validator from "validator";
 
 const router = express.Router();
 
-/* GET users listing. */
 router.get("/", (req, res, next) => {
-  res.render("profile", { title: "Επεξεργασία προφίλ" });
-});
-
-router.get("/:id", (req, res, next) => {
-  let db = new DB();
-  let ath= new Athlete()
-  ath= req.session.user;
-  if ( ath.id !== Number(req.params.id)) {
-    res.render("error", {
-      message: "Δεν έχετε δικαίωμα να τροποποιήσετε άλλο προφίλ"
-    });
-  }
-  db.findAthlitiById(Number(req.params.id), (err, istrue, athl) => {
-    if (err) {
-      return next();
-    }
-    if (istrue) {
-      res.render("profile", {
+        console.log(JSON.stringify(req.session.user)) 
+        res.render("profile", {
         title: "Επεξεργασία Προφίλ",
-        logged: athl[0] as Athlete
-      });
+        logged: req.session.user 
+      })
     }
-  });
-});
+  )
 
 router.post("/", (req, res, next) => {
   let email = req.body.email;

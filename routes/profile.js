@@ -2,33 +2,14 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const express = require("express");
 const database_1 = require("../lib/models/database");
-const index_1 = require("../lib/control/classes/index");
 const validator = require("validator");
 const router = express.Router();
 exports.router = router;
-/* GET users listing. */
 router.get("/", (req, res, next) => {
-    res.render("profile", { title: "Επεξεργασία προφίλ" });
-});
-router.get("/:id", (req, res, next) => {
-    let db = new database_1.default();
-    let ath = new index_1.Athlete();
-    ath = req.session.user;
-    if (ath._id !== Number(req.params.id)) {
-        res.render("error", {
-            message: "Δεν έχετε δικαίωμα να τροποποιήσετε άλλο προφίλ"
-        });
-    }
-    db.findAthlitiById(Number(req.params.id), (err, istrue, athl) => {
-        if (err) {
-            return next();
-        }
-        if (istrue) {
-            res.render("profile", {
-                title: "Επεξεργασία Προφίλ",
-                logged: athl[0]
-            });
-        }
+    console.log(JSON.stringify(req.session.user));
+    res.render("profile", {
+        title: "Επεξεργασία Προφίλ",
+        logged: req.session.user
     });
 });
 router.post("/", (req, res, next) => {
@@ -64,6 +45,7 @@ router.post("/", (req, res, next) => {
             }
             else {
                 req.session.user = athl;
+                req.session.userid = athl.id;
                 res.render("profile", {
                     title: "Επεξεργασία Προφίλ",
                     logged: athl

@@ -134,6 +134,7 @@ export default class DB extends EventEmitter {
   };
 
   findAthlitiById = (AthleteId: number, callback) => {
+   console.log(`SELECT * FROM athletes where id=${AthleteId}`)
     this._db.query(
       `SELECT * FROM athletes where id=${AthleteId}`,
       (err: sql.IError, rows: any) => {

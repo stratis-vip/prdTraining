@@ -31,21 +31,22 @@ SET time_zone = "+00:00";
 CREATE TABLE `athletes` (
   `id` int(11) NOT NULL,
   `email` varchar(100) NOT NULL,
+  `fname` varchar(100) NOT NULL,
+  `sname` varchar(100) NOT NULL,
   `pass` varchar(200) NOT NULL,
-  `name` varchar(100) NOT NULL,
   `weight` float NOT NULL,
   `height` float NOT NULL,
   `sex` enum('SEX_UNDEFINED','SEX_MALE','SEX_FEMALE','') NOT NULL DEFAULT 'SEX_UNDEFINED',
   `bday` date NOT NULL,
-  `vo2max` json NOT NULL
+  `vo2max` LONGTEXT NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `athletes`
 --
 
-INSERT INTO `athletes` (`id`, `email`, `pass`, `name`, `weight`, `height`, `sex`, `bday`, `vo2max`) VALUES
-(1, 'stratis.vip@gmail.com', '$2a$04$Dt0L2iOMb9iev4rD0Cw2pOb63HmYBkd45OitGJyI5BeLRZGsa4sRu', 'Στρατής Χριστοδούλου', 92.3, 1.73, 'SEX_MALE', '1971-10-21', '{\"running\": 43.1, \"swimming\": 45.6, \"bicycling\": 42.4}');
+INSERT INTO `athletes` (`id`, `email`, `fname`,`sname`, `pass`,  `weight`, `height`, `sex`, `bday`, `vo2max`) VALUES
+(1, 'stratis.vip@gmail.com', 'Στρατής','Χριστοδούλου','$2a$04$Dt0L2iOMb9iev4rD0Cw2pOb63HmYBkd45OitGJyI5BeLRZGsa4sRu',  92.3, 1.73, 'SEX_MALE', '1971-10-21', '{\"running\": 43.1, \"swimming\": 45.6, \"bicycling\": 42.4}');
 
 --
 -- Indexes for dumped tables

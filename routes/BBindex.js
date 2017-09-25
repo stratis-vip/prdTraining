@@ -23,7 +23,7 @@ router.post('/', (req, res, next) => {
             crypt.compare(pass, ath[0].pass, (err, same) => {
                 if (same) {
                     req.session.user = ath[0];
-                    req.session.userid= ath[0].id
+                    req.session.userid = ath[0].id;
                     res.render('index', { title: 'Βοηθός Προπονητή', logged: ath[0] });
                 }
                 else {

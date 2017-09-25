@@ -23,65 +23,65 @@ import {
  * @returns ένα αντικείμενο Activity ή null (σε περίπτωση λάθους)
  */
 export const getActivityFromFile = (filename: string, CallBack): void => {
-  let act =   new Activity();
+  let act = new Activity();
   // fs.readFile(filename, "utf8", (err, data) => {
   //   if (err) {
   //     console.log(err.message);
   //   } else {
-      gp.parseFile(filename, (err, tcxData) => {
-        if (!err) {
-          //console.log(JSON.stringify(tcxData))
-          let resultObject: iResult = getResult(tcxData);
-          let author = getAuthor(resultObject);
-          let activitiesObject = getActivities(resultObject);
-          let laps = getLaps(activitiesObject[0]);
-          act = new Activity();
-          act.name = activitiesObject[0].Activity[0].Id[0];
-          act.type = activitiesTypes[activitiesObject[0].Activity[0].$.Sport];
+  gp.parseFile(filename, (err, tcxData) => {
+    if (!err) {
+      //console.log(JSON.stringify(tcxData))
+      let resultObject: iResult = getResult(tcxData);
+      let author = getAuthor(resultObject);
+      let activitiesObject = getActivities(resultObject);
+      let laps = getLaps(activitiesObject[0]);
+      act = new Activity();
+      act.name = activitiesObject[0].Activity[0].Id[0];
+      act.type = activitiesTypes[activitiesObject[0].Activity[0].$.Sport];
 
-          act.totalTime = 0;
-          act.distance = 0;
-          act.calories = 0;
-          let count = 1;
-          let maxHR = 0;
-          let avgHR = 0;
-          let maxSpeed = 0;
-          let avgCadence = 0;
-          laps.forEach((tcxLap: iLap) => {
-            let lap = fillLap(tcxLap);
-            if (count === 1) {
-              act.start = new Date(lap.StartTime);
-            }
-            avgCadence += Number(lap.Cadence);
-            act.calories += Number(lap.Calories);
-            act.distance += Number(lap.DistanceMeters);
-            act.totalTime += Number(lap.TotalTimeSeconds);
-            avgHR += Number(lap.AverageHeartRateBpm);
-            if (maxHR < lap.MaximumHeartRateBpm) {
-              maxHR = lap.MaximumHeartRateBpm;
-            }
-            if (lap.MaximumSpeed > maxSpeed) {
-              maxSpeed = lap.MaximumSpeed;
-            }
-
-            let points = getTrack(tcxLap);
-            points.forEach((point: iPoint) => {
-              lap.Track.push(fillPoint(point));
-            }); //<-forEach point
-            act.laps.push(lap);
-            count++
-          });
-
-          avgHR /= laps.length;
-          avgCadence /= laps.length;
-          CallBack(null,act)
-        } else {
-          CallBack(err.message, act);
+      act.totalTime = 0;
+      act.distance = 0;
+      act.calories = 0;
+      let count = 1;
+      let maxHR = 0;
+      let avgHR = 0;
+      let maxSpeed = 0;
+      let avgCadence = 0;
+      laps.forEach((tcxLap: iLap) => {
+        let lap = fillLap(tcxLap);
+        if (count === 1) {
+          act.start = new Date(lap.StartTime);
         }
-      });
-//    }
+        avgCadence += Number(lap.Cadence);
+        act.calories += Number(lap.Calories);
+        act.distance += Number(lap.DistanceMeters);
+        act.totalTime += Number(lap.TotalTimeSeconds);
+        avgHR += Number(lap.AverageHeartRateBpm);
+        if (maxHR < lap.MaximumHeartRateBpm) {
+          maxHR = lap.MaximumHeartRateBpm;
+        }
+        if (lap.MaximumSpeed > maxSpeed) {
+          maxSpeed = lap.MaximumSpeed;
+        }
 
-  }
+        let points = getTrack(tcxLap);
+        points.forEach((point: iPoint) => {
+          lap.Track.push(fillPoint(point));
+        }); //<-forEach point
+        act.laps.push(lap);
+        count++
+      });
+
+      avgHR /= laps.length;
+      avgCadence /= laps.length;
+      CallBack(null, act)
+    } else {
+      CallBack(err.message, null);
+    }
+  });
+  //    }
+
+}
 
 
 

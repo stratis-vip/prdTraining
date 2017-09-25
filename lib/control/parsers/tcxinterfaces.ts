@@ -214,10 +214,15 @@ export const fillPoint = (point: iPoint): Track => {
   let trackPoint = new Track();
   let trackPosition = new TrackPointClass();
   trackPosition.Time = new Date(point.Time[0]);
-  trackPosition.LongitudeDegrees = Number(point.Position[0].LongitudeDegrees[0]);
-  trackPosition.LatitudeDegrees = Number(point.Position[0].LatitudeDegrees[0]);
+  if(point.Position){
+    trackPosition.LongitudeDegrees = Number(point.Position[0].LongitudeDegrees[0]);
+    trackPosition.LatitudeDegrees = Number(point.Position[0].LatitudeDegrees[0]);
+  } else {
+    trackPosition.LongitudeDegrees = trackPosition.LatitudeDegrees = 0
+  }
   trackPosition.AltitudeMeters = Number(point.AltitudeMeters[0]);
   trackPoint.DistanceMeters = Number(point.DistanceMeters[0]);
+
   //Στις περιπτώσεις που για οποιοδήποτε λόγο δεν κράτησε καρδιακό παλμό δώσε τιμή -1
   if (point.HeartRateBpm === undefined) {
     trackPoint.HeartRateBpm = -1

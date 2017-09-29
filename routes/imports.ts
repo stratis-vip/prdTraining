@@ -16,15 +16,20 @@ router.get('/', (req, res, next) => {
 });
 
 router.post('/upload', upload.array('tcx'), (req, res, next) => {
-  console.log('file '+JSON.stringify(req.files))
-//  console.log('file '+req.file.buffer.toString())
+  //  console.log('file '+req.file.buffer.toString())
   //console.log('ΒΟΔΥ = '+JSON.stringify(req.body))
-  let act:Array<Activity> = null
-
-  (req.files as Array<{}>).forEach((element, value,index) => {
+  let act = new Array<Activity>();
+  
+  (req.files as Array<Express.Multer.File>).forEach((element, index) => {
     getActivityFromFile(element.path, (err,activ)=>{
-      if (!err){
-        act.push(activ);
+      if (!err){        
+        act.push(activ);   
+      //   req.body.form.on('progress', function(bytesReceived, bytesExpected) {
+      //     console.log(((bytesReceived / bytesExpected)*100) + "% uploaded");
+      // });    
+        if (Number(index) === ((req.files as Array<Express.Multer.File>).length -1)){
+          res.render('imports', {logged: req.session.user, activity:act}) 
+        }
       }
 
       fs.unlink(element.path, (err)=>{

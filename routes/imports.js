@@ -13,20 +13,20 @@ let upload = multer({ dest: 'uploads' });
 router.get('/', (req, res, next) => {
     res.render('imports', { logged: req.session.user });
 });
-router.post('/upload', upload.single('tcx'), (req, res, next) => {
-    console.log('file ' + JSON.stringify(req.file));
+router.post('/upload', upload.array('tcx'), (req, res, next) => {
+    console.log('file ' + JSON.stringify(req.files));
     //  console.log('file '+req.file.buffer.toString())
     //console.log('ΒΟΔΥ = '+JSON.stringify(req.body))
-    let act = null;
-    tcxparser_1.getActivityFromFile(req.file.path, (err, activ) => {
-        if (!err) {
-            act = activ;
-        }
-        res.render('imports', { logged: req.session.user, activity: act });
-        fs.unlink(req.file.path, (err) => {
-            if (err) {
-                console.log(JSON.stringify(err));
+    let act = null(req.files).forEach((element, value, index) => {
+        tcxparser_1.getActivityFromFile(element.path, (err, activ) => {
+            if (!err) {
+                act.push(activ);
             }
-        });
+            fs.unlink(element.path, (err) => {
+                if (err) {
+                    console.log(JSON.stringify(err));
+                }
+            });
+        }); //<--
     });
 });

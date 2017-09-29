@@ -6,7 +6,8 @@ import {
     secsToTime,
     apostasi,
     Bearing,
-    getNextPointCordinatesFromDistanceBearing
+    getNextPointCordinatesFromDistanceBearing,
+    isInCurrentWeek
 } from "./functions";
 import geoPoint from "./classes/src/geoPoint";
 import DB from '../models/database';
@@ -81,32 +82,44 @@ to1.LatitudeDegrees = 40
 console.log(JSON.stringify(getNextPointCordinatesFromDistanceBearing(from,100,360)))
 */
 
-let testDB = new DB()
-testDB.getAthites((err, arr) => {
-  //  console.log(JSON.stringify(arr, null, 2))
+// let testDB = new DB()
+// testDB.getAthites((err, arr) => {
+//   //  console.log(JSON.stringify(arr, null, 2))
     
     
-})
-console.log(`finished'`)
+// })
+// console.log(`finished'`)
 
-testDB.Emiter.on('error', (value) => {
-    console.log(value)
+// testDB.Emiter.on('error', (value) => {
+//     console.log(value)
 
-    //testDB.end();
-})
-testDB.Emiter.on('finish', (value) => {
-    console.log(value)
-    console.log(`finished'`)
-})
+//     //testDB.end();
+// })
+// testDB.Emiter.on('finish', (value) => {
+//     console.log(value)
+//     console.log(`finished'`)
+// })
 
 
-//process.abort()
-let id ='stratis.vip@gmail.com'
-testDB.findAthlitiByMail(id,(err,answer, athlete)=>{
-    if (err) {
-        return console.log(`findAthlitiById raised Error ${err}`)
-    }
-    if (answer){
-        console.log(`Athlete with id ${id} exists: ${(athlete[0] as Athlete).vo2max.running}`)
-    }else { console.log(`athlete whith id ${id} doesn't exist`)}
-})
+// //process.abort()
+// let id ='stratis.vip@gmail.com'
+// testDB.findAthlitiByMail(id,(err,answer, athlete)=>{
+//     if (err) {
+//         return console.log(`findAthlitiById raised Error ${err}`)
+//     }
+//     if (answer){
+//         console.log(`Athlete with id ${id} exists: ${(athlete[0] as Athlete).vo2max.running}`)
+//     }else { console.log(`athlete whith id ${id} doesn't exist`)}
+// })
+
+var datejs = require("datejs")
+
+let a = new Date('2017-09-28T05:41:20.000Z')
+
+
+
+
+
+
+
+console.log(isInCurrentWeek('2017-09-27T05:41:20.000Z'))

@@ -215,12 +215,22 @@ const getNextPointCordinatesFromDistanceBearing = (FromPoint: geoPoint, distance
     return temp;
 }
 
+
+const isInCurrentWeek = (utcDate:string):boolean =>{
+    let curImnia = new Date().setHours(0,0,0,0)
+    let imnia = new Date(utcDate).setHours(0,0,0,0)
+    let d = new Date().getDay()
+    let interval = Math.floor((curImnia-imnia)/86400000)
+    return interval > 0 && d > interval 
+}
+
 export {
     apostasi,
     Bearing,
     calculateBmi,
     decimalPaceFromSpeedMpS, decimalPaceToTimePace, degToRads, distanceFromMtoKM,
     getNextPointCordinatesFromDistanceBearing,
+    isInCurrentWeek,
     radToDegrees,
     secsToTime, speedFromMpStoKpH,
     TimePaceFromSpeedMpS

@@ -224,11 +224,18 @@ const isInCurrentWeek = (utcDate:string):boolean =>{
     return interval > 0 && d > interval 
 }
 
+const formatDate = (date1:Date) =>{
+    return date1.getFullYear() + '-' +
+      (date1.getMonth() < 9 ? '0' : '') + (date1.getMonth()+1) + '-' +
+      (date1.getDate() < 10 ? '0' : '') + date1.getDate();
+  }
+
 export {
     apostasi,
     Bearing,
     calculateBmi,
     decimalPaceFromSpeedMpS, decimalPaceToTimePace, degToRads, distanceFromMtoKM,
+    formatDate,
     getNextPointCordinatesFromDistanceBearing,
     isInCurrentWeek,
     radToDegrees,

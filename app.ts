@@ -47,7 +47,7 @@ app.use(express.static(path.join(__dirname, 'views/public')));
 app.use(express.static(path.join(__dirname, 'node_modules')));
 
 //ελέγχει πριν από κάθε μια κλήση σε ρούτερ αν είναι ο χρήστης αυθεντικοποιημένος
-app.use(check)
+//app.use(check)
 app.use(flash())
 
 app.use('/', index);

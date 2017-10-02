@@ -1,0 +1,58 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "weight": 92.3,
+      "height": 1.73,
+      "sex": "SEX_MALE",
+      "fname": "Στρατής",
+      "sname": "Χριστοδούλου",
+      "bday": "Thu Oct 21 1971 00:00:00 GMT+0200 (EET)",
+      "vo2max": { "running": 43.1, "swimming": 45.6, "bicycling": 42.4 },
+      "HR": { "aHR": 105, "lHR": 50, "mHR": 160 },
+      "email": "stratis.vip@gmail.com",
+      "pass": "$2a$04$Dt0L2iOMb9iev4rD0Cw2pOb63HmYBkd45OitGJyI5BeLRZGsa4sRu"
+    },
+    {
+      "id": 21,
+      "weight": 88.1,
+      "height": 1.73,
+      "sex": "SEX_MALE",
+      "fname": "Ανώνυμος",
+      "sname": "Ανεπίθετος",
+      "bday": "Thu Oct 21 1971 00:00:00 GMT+0200 (EET)",
+      "vo2max": { "running": 20, "swimming": 20, "bicycling": 20 },
+      "HR": { "aHR": 105, "lHR": 50, "mHR": 160 },
+      "email": "tonypagonis@gmail.com",
+      "pass": "$2a$10$nTNEL5Snm6djswF4jHNGc.Uw/roY0VZnobnE/HTcg1ySVjXjaX7wG"
+    },
+    {
+      "id": 22,
+      "weight": 88.1,
+      "height": 1.73,
+      "sex": "SEX_MALE",
+      "fname": "Ανώνυμος",
+      "sname": "Ανεπίθετος",
+      "bday": "Thu Oct 21 1971 00:00:00 GMT+0200 (EET)",
+      "vo2max": { "running": 20, "swimming": 20, "bicycling": 20 },
+      "HR": { "aHR": 105, "lHR": 50, "mHR": 160 },
+      "email": "paparas.fg@gr.gr",
+      "pass": "$2a$10$lTgei/UH0BnRRrmlw5wXmOVAiGpBd.OSalZsmywQbPW3cS.ECZ3JO"
+    },
+    {
+      "id": 23,
+      "weight": 88.1,
+      "height": 1.73,
+      "sex": "SEX_MALE",
+      "fname": "Ανώνυμος",
+      "sname": "Ανεπίθετος",
+      "bday": "Thu Oct 21 1971 00:00:00 GMT+0200 (EET)",
+      "vo2max": { "running": 20, "swimming": 20, "bicycling": 20 },
+      "HR": { "aHR": 105, "lHR": 50, "mHR": 160 },
+      "email": "email.com@email.gr",
+      "pass": "$2a$10$XSsUtjf3Ex5AS7hz67E66.Or7JdEV.6TB0jjJ9nl2d0ehyHcqHm1O"
+    }
+  ],
+  "error": false,
+  "message": null
+}

@@ -14,7 +14,6 @@ const logout_1 = require("./routes/logout");
 const signin_1 = require("./routes/signin");
 const profile_1 = require("./routes/profile");
 const imports_1 = require("./routes/imports");
-const check_1 = require("./routes/check");
 let flash = require('express-flash-2');
 const app = express();
 let options = {
@@ -36,7 +35,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'views/public')));
 app.use(express.static(path.join(__dirname, 'node_modules')));
 //ελέγχει πριν από κάθε μια κλήση σε ρούτερ αν είναι ο χρήστης αυθεντικοποιημένος
-app.use(check_1.check);
+//app.use(check)
 app.use(flash());
 app.use('/', BBindex_1.router);
 app.use('/users', users_1.router);

@@ -32,7 +32,7 @@ export default class Athlete extends EventEmitter {
   constructor() {
     super();
     // this._vo2max = new Vo2maxClass();
-    // this._bday = new Date("1971-10-21");
+    this._bday = new Date("1971-10-21");
     // this._HR = new HeartRate(60, 180);
     this._Emiter = new EventEmitter();
   }
@@ -152,6 +152,23 @@ export default class Athlete extends EventEmitter {
   get bday() {
     return this._bday;
   }
+
+  get object() {
+    return {
+      id: this._id,      
+      weight: this._weight,
+      height: this._height,
+      sex: this._sex,
+      fname: this._fname,
+      sname: this._sname,
+      bday: this._bday.toString(),
+      vo2max: this._vo2max,
+      HR: this._HR.object,
+      email: this._email,
+      pass: this._pass
+    }
+  }
+
   set bday(x: Date) {
     //x must provided in form YYYY-MM-DD
     if (this._bday !== x) {

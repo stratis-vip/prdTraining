@@ -12,6 +12,7 @@ import {
 import geoPoint from "./classes/src/geoPoint";
 import DB from '../models/database';
 
+
 interface PointsPer100m {
     timec: number;
     distance: number;
@@ -117,9 +118,9 @@ var datejs = require("datejs")
 let a = new Date('2017-09-28T05:41:20.000Z')
 
 
+let b = new Athlete();
 
-
-
+console.log(b.sbday);
 
 
 console.log(isInCurrentWeek('2017-09-27T05:41:20.000Z'))

@@ -128,9 +128,14 @@ router.put("/:id", (req, res) => {
         if (value.isFound) {
             let ath = new index_1.Athlete();
             ath.id = id;
+            ath.email = value.data[0].email;
             console.log(`email ${req.body.lastName} , fanme ${req.body.name}`);
-            ath.fname = req.body.name;
-            ath.sname = req.body.lastName;
+            ath.fname = req.body.name || ath.fname;
+            ath.sname = req.body.lastName || ath.sname;
+            ath.weight = req.body.weight || ath.weight;
+            ath.height = req.body.height || ath.height;
+            ath.sex = req.body.sex || ath.sex;
+            ath.bday = new Date(req.body.bday) || ath.bday;
             db
                 .updateAthlitiById(id, ath)
                 .then(changedRows => {

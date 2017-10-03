@@ -1,8 +1,9 @@
-import { promiseAnswer } from "../lib/models/interfaces";
+import { promiseAnswer } from '../lib/models/interfaces';
 import { Athlete } from "../lib/control/classes/index";
 import * as express from "express";
 import DB from "../lib/models/database";
 import * as sql from "mysql";
+
 
 const router = express.Router();
 
@@ -128,9 +129,14 @@ router.put("/:id", (req, res) => {
       if ((value as promiseAnswer).isFound) {
         let ath = new Athlete();
         ath.id = id;
+        ath.email = ((value as promiseAnswer).data[0] as Athlete).email
         console.log(`email ${req.body.lastName} , fanme ${req.body.name}`);
-        ath.fname = req.body.name;
-        ath.sname = req.body.lastName;
+        ath.fname = req.body.name  || ath.fname;
+        ath.sname = req.body.lastName || ath.sname;
+        ath.weight = req.body.weight || ath.weight;
+        ath.height = req.body.height || ath.height;
+        ath.sex = req.body.sex || ath.sex;
+        ath.bday = new Date(req.body.bday) || ath.bday;       
         db
           .updateAthlitiById(id, ath)
           .then(changedRows => {

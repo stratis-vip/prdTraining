@@ -1,6 +1,6 @@
 import * as dot from "dotenv";
 import * as sql from "mysql";
-import { actions, answer } from "./interfaces";
+import { actions, answer, promiseAnswer } from "./interfaces";
 
 import { Athlete, Vo2maxClass } from "../control/classes";
 import * as crypt from "bcryptjs";
@@ -124,60 +124,67 @@ export default class DB {
     return arr;
   };
 
-  deleteAthlitiById = (AthleteId: number, callback) => {
-    if (this._db === null) {
-      this.createDBConnection();
-    }
-    this._db.query(
-      `DELETE FROM athletes where id=${AthleteId}`,
-      (err: sql.IError, results: any) => {
+  updateAthlitiById = (AthleteId: number, ath: Athlete) => {
+    return new Promise((resolve, reject) => {
+      if (this._db === null) {
+        this.createDBConnection();
+      }
+      let da = new Date(ath.bday);
+      let bday = da.toISOString().substr(0, 10);
+      let que = `UPDATE athletes  SET email='${ath.email}', fname='${ath.fname}', sname='${ath.sname}', weight=${ath.weight}, 
+    height= ${ath.height}, sex='${ath.sex}', bday='${bday}', vo2max='${JSON.stringify(
+        ath.vo2max
+      )}'  where id=${AthleteId}`;
+      console.log(que);
+      this._db.query(que, (err: sql.IError, rows: any) => {
         if (err) {
-          callback(err, 0);
+          reject(err);
         } else {
-          callback(null, results.affectedRows);
+          resolve(rows.changedRows);
         }
-      }
-    );
-  };
-  
-  updateAthlitiById = (AthleteId: number, ath: Athlete, callback) => {
-    if (this._db === null) {
-      this.createDBConnection();
-    }
-    let da=new Date(ath.bday)
-    let bday = da.toISOString().substr(0,10);
-    let que = `UPDATE athletes  SET email='${ath.email}', fname='${ath.fname}', sname='${ath.sname}', weight=${ath.weight}, 
-    height= ${ath.height}, sex='${ath.sex}', bday='${bday}', vo2max='${JSON.stringify(ath.vo2max)}'  where id=${AthleteId}`;
-    console.log(que);
-    this._db.query(que, (err: sql.IError, rows: any) => {
-      if (err) {
-        callback(err, null);
-      } else {
-        callback(null, rows.changedRows);
-      }
-      this.end();
+        this.end();
+      });
     });
   };
 
-  findAthlitiById = (AthleteId: number, callback) => {
-    if (this._db === null) {
-      this.createDBConnection();
-    }
-    console.log(`SELECT * FROM athletes where id=${AthleteId}`);
-    this._db.query(
-      `SELECT * FROM athletes where id=${AthleteId}`,
-      (err: sql.IError, rows: any) => {
-        if (err) {
-          callback(err, null, null);
-        }
-        callback(
-          null,
-          (rows as Array<any>).length === 1,
-          this.fillAthlete(rows)
-        );
-        this.end();
+  deleteAthlitiById = (AthleteId: number) => {
+    return new Promise((resolve, reject) => {
+      if (this._db === null) {
+        this.createDBConnection();
       }
-    );
+      this._db.query(
+        `DELETE FROM athletes where id=${AthleteId}`,
+        (err: sql.IError, results: any) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(results.affectedRows);
+          }
+        }
+      );
+    });
+  };
+
+  findAthlitiById = (athleteId: number) => {
+    return new Promise((resolve, reject) => {
+      if (this._db === null) {
+        this.createDBConnection();
+      }
+      this._db.query(
+        `SELECT * FROM athletes where id=${athleteId}`,
+        (err: sql.IError, rows: any) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve({
+              isFound: (rows as Array<any>).length === 1,
+              data: this.fillAthlete(rows)
+            });
+          }
+          this.end();
+        }
+      );
+    });
   };
 
   /**

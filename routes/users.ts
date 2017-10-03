@@ -1,11 +1,20 @@
+import { promiseAnswer } from "../lib/models/interfaces";
 import { Athlete } from "../lib/control/classes/index";
 import * as express from "express";
 import DB from "../lib/models/database";
 import * as sql from "mysql";
-import Athlete from '../lib/control/classes/src/athlete';
 
 const router = express.Router();
 
+const checkParam = (res, id: any) => {
+  if (parseInt(id) === NaN) {
+    return res.json({
+      users: [],
+      error: true,
+      message: "Δεν υπάρχει καταχωρημένος αθλητής"
+    });
+  }
+};
 /* GET users listing. */
 router.get("/", (req, res) => {
   let db = new DB();
@@ -25,103 +34,69 @@ router.get("/", (req, res) => {
     }
   });
 });
-
+/* Βρες συγκεκριμένο μέλος */
 router.get("/:id", (req, res) => {
   let db = new DB();
-  console.log(`id = ${parseInt(req.params.id)}`);
-  if (parseInt(req.params.id) === NaN) {
-    return res.json({
-      users: [],
-      error: true,
-      message: "Δεν υπάρχει καταχωρημένος αθλητής"
-    });
-  }
-  db.findAthlitiById(
-    parseInt(req.params.id),
-    (err: sql.IError, isfound, all) => {
-      if (err) {
-        console.log(err);
+  let id = req.params.id;
+  checkParam(res, id);
+  db
+    .findAthlitiById(id)
+    .then(value => {
+      if ((value as promiseAnswer).isFound) {
         return res.json({
-          users: [],
-          error: true,
-          message: err.code
+          users: (value as promiseAnswer).data,
+          error: false,
+          message: null
         });
       } else {
-        if (isfound) {
-          return res.json({
-            users: all,
-            error: false,
-            message: null
-          });
-        } else {
-          return res.json({
-            users: all,
-            error: true,
-            message: "Δεν υπάρχει καταχωρημένος αθλητής"
-          });
-        }
+        return res.json({
+          users: (value as promiseAnswer).data,
+          error: true,
+          message: "Δεν υπάρχει καταχωρημένος αθλητής"
+        });
       }
-    }
-  );
+    })
+    .catch(reason => {
+      return res.json({
+        users: [],
+        error: true,
+        message: reason
+      });
+    });
 });
 
+/* Διέγραψε συγκεκριμένο μέλος */
 router.delete("/:id", (req, res) => {
   let db = new DB();
-  if (parseInt(req.params.id) === NaN) {
-    return res.json({
-      users: [],
-      error: true,
-      message: "Δεν υπάρχει καταχωρημένος αθλητής"
-    });
-  }
-  db.findAthlitiById(
-    parseInt(req.params.id),
-    (err: sql.IError, isfound, all) => {
-      if (err) {
-        console.log(err);
-        return res.json({
-          users: [],
-          error: true,
-          message: err.code
+  let id = req.params.id;
+  checkParam(res, id);
+  db.findAthlitiById(id).then(value => {
+    if ((value as promiseAnswer).isFound) {
+      db
+        .deleteAthlitiById(id)
+        .then(affectedLines => {
+          if (affectedLines > 0) {
+            return res.json({
+              users: [],
+              error: false,
+              message: "Επιτυχία"
+            });
+          } else {
+            return res.json({
+              users: [],
+              error: true,
+              message: "Αποτυχία διαγραφής"
+            });
+          }
+        })
+        .catch(reason => {
+          return res.json({ users: [], error: true, message: reason });
         });
-      } else {
-        if (isfound) {
-          //delete
-          db.deleteAthlitiById(parseInt(req.params.id), (err, number) => {
-            if (err) {
-              return res.json({
-                users: [],
-                error: true,
-                message: err
-              });
-            } else {
-              if (number > 0) {
-                return res.json({
-                  users: [],
-                  error: false,
-                  message: "Επιτυχία"
-                });
-              } else {
-                return res.json({
-                  users: [],
-                  error: true,
-                  message: "Αποτυχία διαγραφής"
-                });
-              }
-            }
-          });
-        } else {
-          return res.json({
-            users: all,
-            error: true,
-            message: "Δεν υπάρχει καταχωρημένος αθλητής"
-          });
-        }
-      }
     }
-  );
+  });
 });
 
+/* Καταχώρισε συγκεκριμένο μέλος */
 router.post("/", (req, res) => {
   let db = new DB();
   console.log(`email ${req.body.email} , pass ${req.body.pass}`);
@@ -142,63 +117,59 @@ router.post("/", (req, res) => {
   });
 });
 
-router.put("/:id", (req,res)=>{
+/* Άλλαξε συγκεκριμένο μέλος */
+router.put("/:id", (req, res) => {
   let db = new DB();
-  if (parseInt(req.params.id) === NaN) {
-    return res.json({
-      users: [],
-      error: true,
-      message: "Δεν υπάρχει καταχωρημένος αθλητής"
-    });
-  } 
-  db.findAthlitiById(
-    parseInt(req.params.id),
-    (err: sql.IError, isfound, all) => {
-      if (err) {
-        console.log(err);
-        return res.json({
-          users: [],
-          error: true,
-          message: err.code
-        });
-      } else {
-        if (isfound) {
-          //delete
-          let ath = new Athlete();
-          ath=all[0];
-          
-          db.updateAthlitiById(parseInt(req.params.id), ath, (err, number) => {
-            if (err) {
+  let id = req.params.id;
+  checkParam(res, id);
+  db
+    .findAthlitiById(id)
+    .then(value => {
+      if ((value as promiseAnswer).isFound) {
+        let ath = new Athlete();
+        ath.id = id;
+        console.log(`email ${req.body.lastName} , fanme ${req.body.name}`);
+        ath.fname = req.body.name;
+        ath.sname = req.body.lastName;
+        db
+          .updateAthlitiById(id, ath)
+          .then(changedRows => {
+            if (changedRows > 0) {
+              return res.json({
+                users: [],
+                error: false,
+                message: "Επιτυχία"
+              });
+            } else {
               return res.json({
                 users: [],
                 error: true,
-                message: err
+                message: "Αποτυχία Ενημέρωσης"
               });
-            } else {
-              if (number > 0) {
-                return res.json({
-                  users: [],
-                  error: false,
-                  message: "Επιτυχία"
-                });
-              } else {
-                return res.json({
-                  users: [],
-                  error: true,
-                  message: "Αποτυχία ανανέωσης"
-                });
-              }
             }
+          })
+          .catch(reason => {
+            return res.json({
+              users: [],
+              error: true,
+              message: reason
+            });
           });
-        } else {
-          return res.json({
-            users: all,
-            error: true,
-            message: "Δεν υπάρχει καταχωρημένος αθλητής"
-          });
-        }
+      } else {
+        return res.json({
+          users: [],
+          error: true,
+          message: "Δεν υπάρχει καταχωρημένος αθλητής"
+        });
       }
-    }
-  ); 
-})
+    })
+    .catch(reason => {
+      return res.json({
+        users: [],
+        error: true,
+        message: reason
+      });
+    });
+});
+
 export { router };

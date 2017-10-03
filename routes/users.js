@@ -127,7 +127,7 @@ router.put("/:id", (req, res) => {
         .then(value => {
         if (value.isFound) {
             let ath = new index_1.Athlete();
-            ath.id = id;
+            ath.athleteId = id;
             ath.email = value.data[0].email;
             console.log(`email ${req.body.lastName} , fanme ${req.body.name}`);
             ath.fname = req.body.name || ath.fname;

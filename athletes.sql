@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `athletes` (
-  `id` int(11) NOT NULL,
+  `athleteId` int(11) NOT NULL,
   `email` varchar(100) NOT NULL,
   `fname` varchar(100) NOT NULL,
   `sname` varchar(100) NOT NULL,
@@ -45,7 +45,7 @@ CREATE TABLE `athletes` (
 -- Dumping data for table `athletes`
 --
 
-INSERT INTO `athletes` (`id`, `email`, `fname`,`sname`, `pass`,  `weight`, `height`, `sex`, `bday`, `vo2max`) VALUES
+INSERT INTO `athletes` (`athleteId`, `email`, `fname`,`sname`, `pass`,  `weight`, `height`, `sex`, `bday`, `vo2max`) VALUES
 (1, 'stratis.vip@gmail.com', 'Στρατής','Χριστοδούλου','$2a$04$Dt0L2iOMb9iev4rD0Cw2pOb63HmYBkd45OitGJyI5BeLRZGsa4sRu',  92.3, 1.73, 'SEX_MALE', '1971-10-21', '{\"running\": 43.1, \"swimming\": 45.6, \"bicycling\": 42.4}');
 
 --
@@ -56,7 +56,7 @@ INSERT INTO `athletes` (`id`, `email`, `fname`,`sname`, `pass`,  `weight`, `heig
 -- Indexes for table `athletes`
 --
 ALTER TABLE `athletes`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`athleteId`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -66,7 +66,7 @@ ALTER TABLE `athletes`
 -- AUTO_INCREMENT for table `athletes`
 --
 ALTER TABLE `athletes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;COMMIT;
+  MODIFY `athleteId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

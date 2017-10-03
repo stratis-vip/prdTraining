@@ -109,7 +109,7 @@ export default class DB {
     let arr = new Array<{}>();
     rows.forEach(row => {
       let a = new Athlete();
-      a.id = row.id;
+      a.athleteId = row.athleteId;
       a.bday = new Date(row.bday);
       a.fname = row.fname;
       a.sname = row.sname;
@@ -259,7 +259,7 @@ export default class DB {
                 callback(err, null);
               } else {
                 let athlete = new Athlete();
-                athlete.id = rows.insertId;
+                athlete.athleteId = rows.insertId;
                 athlete.email = AthleteEmail;
                 callback(null, athlete);
               }

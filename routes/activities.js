@@ -14,6 +14,31 @@ const checkParam = (res, id) => {
         });
     }
 };
+router.get("/", (req, res, next) => {
+    if (req.query.athleteId) {
+        let db = new db_activities_1.default();
+        let id = req.query.athleteId;
+        checkParam(res, id);
+        db
+            .findActivityByAthletes(id)
+            .then(value => {
+            if (value.isFound) {
+                return res.json({ activities: value.data });
+            }
+            else {
+                return res.json({
+                    errors: { msg: "Δεν υπάρχει καταχωρημένη δραστηριότητα" }
+                });
+            }
+        })
+            .catch(reason => {
+            return res.json({ errors: { msg: reason } });
+        });
+    }
+    else {
+        next();
+    }
+});
 /* GET activities listing. */
 router.get("/", (req, res) => {
     let db = new db_activities_1.default();

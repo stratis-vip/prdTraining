@@ -1,8 +1,8 @@
-import { } from '../lib/control/classes/src/activity';
+import {} from "../lib/control/classes/src/activity";
 import { promiseAnswer } from "../lib/models/interfaces";
 import { Activity } from "../lib/control/classes/index";
-import * as express from 'express';
-import * as sql from 'mysql';
+import * as express from "express";
+import * as sql from "mysql";
 import DBActivity from "../lib/models/db-activities";
 
 const router = express.Router();
@@ -16,6 +16,31 @@ const checkParam = (res, id: any) => {
     });
   }
 };
+
+router.get("/", (req, res, next) => {
+  if (req.query.athleteId) {
+    let db = new DBActivity();
+    let id = req.query.athleteId;
+    checkParam(res, id);
+    db
+      .findActivityByAthletes(id)
+      .then(value => {
+        if ((value as promiseAnswer).isFound) {
+          return res.json({ activities: (value as promiseAnswer).data });
+        } else {
+          return res.json({
+            errors: { msg: "Δεν υπάρχει καταχωρημένη δραστηριότητα" }
+          });
+        }
+      })
+      .catch(reason => {
+        return res.json({ errors: { msg: reason } });
+      });    
+  } else {
+    next();
+  }
+});
+
 /* GET activities listing. */
 router.get("/", (req, res) => {
   let db = new DBActivity();
@@ -89,7 +114,7 @@ router.post("/", (req, res) => {
       return res.json({ errors: { msg: err } });
     } else {
       return res.json({
-        activities: (all as Activity)//.object
+        activities: all as Activity //.object
       });
     }
   });

@@ -85,27 +85,37 @@ export default class DBActivity extends DB {
     });
   };
 
-  findActivityById = (activityId: number) => {
+  private findActivity = (column:string, value:number) =>{
     return new Promise((resolve, reject) => {
       if (this._db === null) {
         this.createDBConnection();
       }
       this._db.query(
-        `SELECT * FROM activities where id=${activityId}`,
+        `SELECT * FROM activities where ${column}=${value}`,
         (err: sql.IError, rows: any) => {
           if (err) {
             reject(err);
           } else {
             resolve({
-              isFound: (rows as Array<any>).length === 1,
+              isFound: (rows as Array<any>).length > 0,
               data: this.fillActivity(rows)
             });
           }
           this.end();
         }
       );
-    });
+    });    
+  }
+
+  findActivityById = (activityId: number) => {
+    return this.findActivity('id',activityId)
   };
+
+  findActivityByAthletes = (athleteId: number) => {
+    return this.findActivity('athleteId',athleteId)
+  };
+
+  
 
   private addActivityQuery = (activ:Activity): string => {
     let query = `INSERT INTO \`activities\` (\`email\`, \`pass\`, \`fname\`, \`sname\`, \`weight\`, \`height\`, \`sex\`, \`bday\`, \`vo2max\`) VALUES

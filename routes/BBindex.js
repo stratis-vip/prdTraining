@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const express = require("express");
-const database_1 = require("../lib/models/database");
 const crypt = require("bcryptjs");
+const db_athlites_1 = require("../lib/models/db-athlites");
 const router = express.Router();
 exports.router = router;
 /* GET home page. */
@@ -17,7 +17,7 @@ router.post('/', (req, res, next) => {
         res.flash('error', `Τα στοιχεία είναι υποχρεωτικά!`);
         return res.redirect('/login');
     }
-    let checkDb = new database_1.default();
+    let checkDb = new db_athlites_1.default();
     checkDb.findAthlitiByMail(user, (err, isfound, ath) => {
         if (isfound) {
             crypt.compare(pass, ath[0].pass, (err, same) => {

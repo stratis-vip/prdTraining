@@ -1,7 +1,8 @@
 import * as express from "express";
-import DB from "../lib/models/database";
+
 import { Athlete } from "../lib/control/classes/index";
 import * as validator from "validator";
+import DBAthlete from "../lib/models/db-athlites";
 
 const router = express.Router();
 
@@ -32,7 +33,7 @@ router.post("/", (req, res, next) => {
     return res.redirect("/signin");
   }
 
-  let checkDb = new DB();
+  let checkDb = new DBAthlete();
   checkDb.findAthlitiByMail(email, (err, exists) => {
     if (err) {
       res.flash(

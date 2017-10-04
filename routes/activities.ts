@@ -10,9 +10,7 @@ const router = express.Router();
 const checkParam = (res, id: any) => {
   if (parseInt(id) === NaN) {
     return res.json({
-      activities: [],
-      error: true,
-      message: "Δεν υπάρχει καταχωρημένη δραστηριότητα"
+      errors: [{ msg: "Δεν υπάρχει καταχωρημένη δραστηριότητα" }]
     });
   }
 };
@@ -29,13 +27,13 @@ router.get("/", (req, res, next) => {
           return res.json({ activities: (value as promiseAnswer).data });
         } else {
           return res.json({
-            errors: { msg: "Δεν υπάρχει καταχωρημένη δραστηριότητα" }
+            errors: [{ msg: "Δεν υπάρχει καταχωρημένη δραστηριότητα" }]
           });
         }
       })
       .catch(reason => {
-        return res.json({ errors: { msg: reason } });
-      });    
+        return res.json({ errors: [{ msg: reason }] });
+      });
   } else {
     next();
   }
@@ -46,7 +44,7 @@ router.get("/", (req, res) => {
   let db = new DBActivity();
   db.getActivities((err: sql.IError, all) => {
     if (err) {
-      return res.json({ errors: { msg: err.code } });
+      return res.json({ errors: [{ msg: err.code }] });
     } else {
       return res.json({ activities: all });
     }
@@ -70,7 +68,7 @@ router.get("/:id", (req, res) => {
       }
     })
     .catch(reason => {
-      return res.json({ errors: { msg: reason } });
+      return res.json({ errors: [{ msg: reason }] });
     });
 });
 
@@ -90,14 +88,16 @@ router.delete("/:id", (req, res) => {
             });
           } else {
             return res.json({
-              errors: {
-                msg: "Αποτυχία διαγραφής"
-              }
+              errors: [
+                {
+                  msg: "Αποτυχία διαγραφής"
+                }
+              ]
             });
           }
         })
         .catch(reason => {
-          return res.json({ errors: { msg: reason } });
+          return res.json({ errors: [{ msg: reason }] });
         });
     }
   });
@@ -111,7 +111,7 @@ router.post("/", (req, res) => {
   //console.log(`email ${req.body.email} , pass ${req.body.pass}`);
   db.addActivity(act, (err, all) => {
     if (err) {
-      return res.json({ errors: { msg: err } });
+      return res.json({ errors: [{ msg: err }] });
     } else {
       return res.json({
         activities: all as Activity //.object
@@ -148,24 +148,24 @@ router.put("/:id", (req, res) => {
               });
             } else {
               return res.json({
-                errors: { msg: "Αποτυχία Ενημέρωσης" }
+                errors: [{ msg: "Αποτυχία Ενημέρωσης" }]
               });
             }
           })
           .catch(reason => {
             return res.json({
-              errors: { msg: reason }
+              errors: [{ msg: reason }]
             });
           });
       } else {
         return res.json({
-          errors: { msg: "Δεν υπάρχει καταχωρημένη δραστηριότητα" }
+          errors: [{ msg: "Δεν υπάρχει καταχωρημένη δραστηριότητα" }]
         });
       }
     })
     .catch(reason => {
       return res.json({
-        errors: { msg: reason }
+        errors: [{ msg: reason }]
       });
     });
 });

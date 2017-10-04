@@ -1,8 +1,8 @@
 import * as express from 'express';
 import * as app from '../app'
-import DB from '../lib/models/database';
 import * as crypt from 'bcryptjs'
 import { Athlete } from "../lib/control/classes/index";
+import DBAthlete from "../lib/models/db-athlites";
 
 const router = express.Router();
 
@@ -27,7 +27,7 @@ router.post('/', (req: express.Request, res: express.Response, next: express.Nex
     res.flash('error',`Τα στοιχεία είναι υποχρεωτικά!`)
     return res.redirect('/login')
   }
-  let checkDb = new DB();
+  let checkDb = new DBAthlete();
   checkDb.findAthlitiByMail(user, (err, isfound, ath) => {    
     if (isfound) {
       crypt.compare(pass, ath[0].pass, (err, same) => {

@@ -17,7 +17,7 @@ import { EventEmitter } from "events";
 
 export default class Athlete extends EventEmitter {
   private _Emiter: EventEmitter;
-  private _athleteId: number;
+  private _id: number;
   private _weight: number = 0;
   private _height: number = 0;
   private _sex: sex = sex.SEX_UNDEFINED;
@@ -59,12 +59,12 @@ export default class Athlete extends EventEmitter {
   }
 
   //athleteId
-  get athleteId() {
-    return this._athleteId;
+  get id() {
+    return this._id;
   }
 
-  set athleteId(x) {
-    this._athleteId !== x ? (this._athleteId = x) : this._athleteId;
+  set id(x) {
+    this._id !== x ? (this._id = x) : this._id;
   }
 
   //WEIGHT
@@ -155,7 +155,7 @@ export default class Athlete extends EventEmitter {
 
   get object() {
     return {
-      id: this._athleteId,      
+      id: this._id,      
       weight: this._weight,
       height: this._height,
       sex: this._sex,

@@ -7,7 +7,8 @@ import * as cookieParser from 'cookie-parser';
 import * as bodyParser from 'body-parser';
 import * as session from 'express-session';
 import {router as index} from  './routes/BBindex';
-import {router as users} from './routes/users';
+import {router as athletes} from './routes/athletes';
+import {router as activities} from './routes/activities';
 import {router as login} from './routes/login';
 import {router as logout} from './routes/logout';
 import {router as signin} from './routes/signin';
@@ -51,7 +52,8 @@ app.use(express.static(path.join(__dirname, 'node_modules')));
 app.use(flash())
 
 app.use('/', index);
-app.use('/users', users);
+app.use('/athletes', athletes);
+app.use('/activities', activities);
 app.use('/login', login);
 app.use('/logout', logout);
 app.use('/signin', signin);

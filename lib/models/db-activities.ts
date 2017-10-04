@@ -1,6 +1,7 @@
 import * as sql from "mysql";
 import DB from "./database";
 import Activity from '../control/classes/src/activity';
+import { promiseAnswer } from "./interfaces";
 
 export default class DBActivity extends DB {
   constructor() {
@@ -106,11 +107,70 @@ export default class DBActivity extends DB {
     });
   };
 
-  private signinQuery = (activ:Activity): string => {
+  private addActivityQuery = (activ:Activity): string => {
     let query = `INSERT INTO \`activities\` (\`email\`, \`pass\`, \`fname\`, \`sname\`, \`weight\`, \`height\`, \`sex\`, \`bday\`, \`vo2max\`) VALUES
     
     ( '', '', 'Ανώνυμος','Ανεπίθετος', 88.1, 1.73, 'SEX_MALE', '1971-10-21' , '{"running": 20, "swimming": 20, "bicycling": 20}')`;
     return query;
   };
+
+
+  findActivityByName = (activityName:string)=>{
+    return new Promise((resolve,reject) => {
+      if (this._db === null) {
+        this.createDBConnection();
+      }
+      this._db.query(
+        `SELECT * FROM activities where name=${activityName}`,
+        (err: sql.IError, rows: any) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve({
+              isFound: (rows as Array<any>).length === 1,
+              data: this.fillActivity(rows)
+            });
+          }
+          this.end();
+        }
+      );
+
+    })
+  }
+
+  addActivity = (act:Activity, callback) => {
+    if (this._db === null) {
+      this.createDBConnection();
+    }
+
+    this.findActivityByName(act.name)
+    .then(value =>{
+      if ((value as promiseAnswer).isFound) {
+      callback("Υπάρχει ήδη καταχωρημένος αθλητής με αυτό το email", null);
+    } else {
+      if (this._db === null) {
+        this.createDBConnection();
+      }
+      this._db.query(
+        this.addActivityQuery(act),
+        (err, rows) => {
+          if (err) {
+            callback(err, null);
+          } else {
+            let activity = new Activity();
+            activity.id = rows.insertId;
+            callback(null, activity);
+          }
+        }
+      );
+    }
+
+    })
+    .catch(reason=>{})
+    
+    
+  };
+
+
 
 }

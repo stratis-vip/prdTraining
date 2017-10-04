@@ -79,8 +79,10 @@ router.delete("/:id", (req, res) => {
 /* Καταχώρισε συγκεκριμένο μέλος */
 router.post("/", (req, res) => {
     let db = new db_activities_1.default();
-    console.log(`email ${req.body.email} , pass ${req.body.pass}`);
-    db.registerActivity(req.body.email, req.body.pass, (err, all) => {
+    let act = new index_1.Activity();
+    //fill activity apo to ρε;.βοδυ
+    //console.log(`email ${req.body.email} , pass ${req.body.pass}`);
+    db.addActivity(act, (err, all) => {
         if (err) {
             return res.json({ errors: { msg: err } });
         }

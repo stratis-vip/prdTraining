@@ -9,6 +9,7 @@ const router = express.Router();
 
 const checkParam = (res, id: any) => {
   if (parseInt(id) === NaN) {
+    res.status(400);
     return res.json({
       errors: [{ msg: "Δεν υπάρχει καταχωρημένη δραστηριότητα" }]
     });
@@ -26,12 +27,14 @@ router.get("/", (req, res, next) => {
         if ((value as promiseAnswer).isFound) {
           return res.json({ activities: (value as promiseAnswer).data });
         } else {
+          res.status(400);
           return res.json({
             errors: [{ msg: "Δεν υπάρχει καταχωρημένη δραστηριότητα" }]
           });
         }
       })
       .catch(reason => {
+        res.status(400);
         return res.json({ errors: [{ msg: reason }] });
       });
   } else {

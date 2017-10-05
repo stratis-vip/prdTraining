@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const express = require("express");
-const database_1 = require("../lib/models/database");
 const validator = require("validator");
+const db_athlites_1 = require("../lib/models/db-athlites");
 const router = express.Router();
 exports.router = router;
 router.get("/", (req, res, next) => {
@@ -28,7 +28,7 @@ router.post("/", (req, res, next) => {
         res.flash("error", `Τα συνθηματικά δεν ταιριάζουν`);
         return res.redirect("/signin");
     }
-    let checkDb = new database_1.default();
+    let checkDb = new db_athlites_1.default();
     checkDb.findAthlitiByMail(email, (err, exists) => {
         if (err) {
             res.flash("error", `Η Βάση Δεδομένων φαίνεται να είναι εκτός λειτουργίας.\nΠαρακαλώ ενημερώστε τον διαχειριστή του προγράμματος!`);

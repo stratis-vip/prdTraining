@@ -29,4 +29,8 @@ export class answer implements IAnswer{
     }
 }
 
+export interface promiseAnswer{
+    isFound:boolean;
+    data:Array<{}>
+}
 

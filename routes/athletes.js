@@ -2,72 +2,54 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const index_1 = require("../lib/control/classes/index");
 const express = require("express");
-const database_1 = require("../lib/models/database");
+const db_athlites_1 = require("../lib/models/db-athlites");
 const router = express.Router();
 exports.router = router;
 const checkParam = (res, id) => {
     if (parseInt(id) === NaN) {
         return res.json({
-            users: [],
+            athletes: [],
             error: true,
             message: "Δεν υπάρχει καταχωρημένος αθλητής"
         });
     }
 };
-/* GET users listing. */
+/* GET athletes listing. */
 router.get("/", (req, res) => {
-    let db = new database_1.default();
+    let db = new db_athlites_1.default();
     db.getAthites((err, all) => {
         if (err) {
-            return res.json({
-                users: [],
-                error: true,
-                message: err.code
-            });
+            return res.json({ errors: { msg: err.code } });
         }
         else {
-            return res.json({
-                users: all,
-                error: false,
-                message: null
-            });
+            return res.json({ athletes: all });
         }
     });
 });
 /* Βρες συγκεκριμένο μέλος */
 router.get("/:id", (req, res) => {
-    let db = new database_1.default();
+    let db = new db_athlites_1.default();
     let id = req.params.id;
     checkParam(res, id);
     db
         .findAthlitiById(id)
         .then(value => {
         if (value.isFound) {
-            return res.json({
-                users: value.data,
-                error: false,
-                message: null
-            });
+            return res.json({ athletes: value.data });
         }
         else {
             return res.json({
-                users: value.data,
-                error: true,
-                message: "Δεν υπάρχει καταχωρημένος αθλητής"
+                errors: { msg: "Δεν υπάρχει καταχωρημένος αθλητής" }
             });
         }
     })
         .catch(reason => {
-        return res.json({
-            users: [],
-            error: true,
-            message: reason
-        });
+        return res.json({ errors: { msg: reason } });
     });
 });
 /* Διέγραψε συγκεκριμένο μέλος */
 router.delete("/:id", (req, res) => {
-    let db = new database_1.default();
+    let db = new db_athlites_1.default();
     let id = req.params.id;
     checkParam(res, id);
     db.findAthlitiById(id).then(value => {
@@ -77,49 +59,41 @@ router.delete("/:id", (req, res) => {
                 .then(affectedLines => {
                 if (affectedLines > 0) {
                     return res.json({
-                        users: [],
-                        error: false,
-                        message: "Επιτυχία"
+                        athletes: []
                     });
                 }
                 else {
                     return res.json({
-                        users: [],
-                        error: true,
-                        message: "Αποτυχία διαγραφής"
+                        errors: {
+                            msg: "Αποτυχία διαγραφής"
+                        }
                     });
                 }
             })
                 .catch(reason => {
-                return res.json({ users: [], error: true, message: reason });
+                return res.json({ errors: { msg: reason } });
             });
         }
     });
 });
 /* Καταχώρισε συγκεκριμένο μέλος */
 router.post("/", (req, res) => {
-    let db = new database_1.default();
+    let db = new db_athlites_1.default();
     console.log(`email ${req.body.email} , pass ${req.body.pass}`);
     db.registerAthliti(req.body.email, req.body.pass, (err, all) => {
         if (err) {
-            return res.json({
-                users: [],
-                error: true,
-                message: err
-            });
+            return res.json({ errors: { msg: err } });
         }
         else {
             return res.json({
-                users: all.object,
-                error: false,
-                message: null
+                athletes: all.object
             });
         }
     });
 });
 /* Άλλαξε συγκεκριμένο μέλος */
 router.put("/:id", (req, res) => {
-    let db = new database_1.default();
+    let db = new db_athlites_1.default();
     let id = req.params.id;
     checkParam(res, id);
     db
@@ -127,7 +101,7 @@ router.put("/:id", (req, res) => {
         .then(value => {
         if (value.isFound) {
             let ath = new index_1.Athlete();
-            ath.athleteId = id;
+            ath.id = id;
             ath.email = value.data[0].email;
             console.log(`email ${req.body.lastName} , fanme ${req.body.name}`);
             ath.fname = req.body.name || ath.fname;
@@ -141,40 +115,30 @@ router.put("/:id", (req, res) => {
                 .then(changedRows => {
                 if (changedRows > 0) {
                     return res.json({
-                        users: [],
-                        error: false,
-                        message: "Επιτυχία"
+                        athletes: []
                     });
                 }
                 else {
                     return res.json({
-                        users: [],
-                        error: true,
-                        message: "Αποτυχία Ενημέρωσης"
+                        errors: { msg: "Αποτυχία Ενημέρωσης" }
                     });
                 }
             })
                 .catch(reason => {
                 return res.json({
-                    users: [],
-                    error: true,
-                    message: reason
+                    errors: { msg: reason }
                 });
             });
         }
         else {
             return res.json({
-                users: [],
-                error: true,
-                message: "Δεν υπάρχει καταχωρημένος αθλητής"
+                errors: { msg: "Δεν υπάρχει καταχωρημένος αθλητής" }
             });
         }
     })
         .catch(reason => {
         return res.json({
-            users: [],
-            error: true,
-            message: reason
+            errors: { msg: reason }
         });
     });
 });

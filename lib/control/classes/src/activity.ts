@@ -4,16 +4,14 @@ import HeartRate from './heartRate'
 import TimeInZones from './timeInZones'
 import Exoplismos from './exoplismos'
 import Lap from './lap'
-import { EventEmitter } from 'events';
 import { secsToTime } from '../../functions';
 
 
 //TODO να προσθέσω και χρόνο σταματημένο
-export default class Activity extends EventEmitter{
-    private _activityId:number;
+export default class Activity {
+    private _id:number;
     private _athleteId: number;
     private _cadence: number=-1;
-    private _Emiter:EventEmitter;
     
     private _name: string;
     private _totalTime: number;
@@ -28,8 +26,6 @@ export default class Activity extends EventEmitter{
     private _laps: Array<Lap>
     private _calories: number;
     constructor () {
-        super()   
-        this._Emiter = new EventEmitter()   
         this._HR= new HeartRate();
         this._tiz = new TimeInZones();
         this._start = new Date();
@@ -38,16 +34,13 @@ export default class Activity extends EventEmitter{
 
     // Στέλνει σινιάλο ότι άλλαξε μια μεταβλητή.
     // Μορφή ('change',[property],[value])
-    get Emiter() {
-        return this._Emiter;
+
+    get id () {
+        return this._id;        
     }
 
-    get activityId () {
-        return this._activityId;        
-    }
-
-    set activityId(x){
-        (this._activityId !== x) ? this._activityId =x : this._activityId;
+    set id(x){
+        (this._id !== x) ? this._id =x : this._id;
     }
 
     get athleteId (){
@@ -70,7 +63,6 @@ export default class Activity extends EventEmitter{
     set name(x){
         if (this._name !== x && x.trim().length>4){
             this._name =x
-            this._Emiter.emit('change','name',x);
         }
     }
 
@@ -80,7 +72,6 @@ export default class Activity extends EventEmitter{
     set totalTime(x){
         if (this._totalTime !== x){
             this._totalTime =x
-            this._Emiter.emit('change','totalTime',x);
         }
     }
 
@@ -95,7 +86,6 @@ export default class Activity extends EventEmitter{
     set distance(x){
         if (this._distance !== x ){
             this._distance =x
-            this._Emiter.emit('change','distance',x);
         }
     }
 
@@ -110,7 +100,6 @@ export default class Activity extends EventEmitter{
         if (this._type !== x){
             this._type =x
             this._subType=activitiesSubTypes.Generic;
-            this._Emiter.emit('change','type',x);
         }
     }
 
@@ -120,7 +109,6 @@ export default class Activity extends EventEmitter{
     set subType(x){
         if (this._subType !== x){
             this._subType =x
-            this._Emiter.emit('change','subType',x);
         }
     }
 
@@ -130,7 +118,6 @@ export default class Activity extends EventEmitter{
     set recs(x){
         if (this._recs !== x){
             this._recs =x
-            this._Emiter.emit('change','recs',x);
         }
     }  
 
@@ -140,7 +127,6 @@ export default class Activity extends EventEmitter{
     set HR(x){
         if (this._HR !== x){
             this._HR =x
-            this._Emiter.emit('change','HR',x);
         }
     }  
 
@@ -150,7 +136,6 @@ export default class Activity extends EventEmitter{
     set tiz(x){
         if (this._tiz !== x){
             this._tiz =x
-            this._Emiter.emit('change','tiz',x);
         }
     }  
     get start() {
@@ -159,7 +144,6 @@ export default class Activity extends EventEmitter{
     set start(x){
         if (this._start !== x){
             this._start =x
-            this._Emiter.emit('change','start',x);
         }
     }  
     get exoplismos() {
@@ -168,7 +152,6 @@ export default class Activity extends EventEmitter{
     set exoplismos(x){
         if (this._exoplismos !== x){
             this._exoplismos =x
-            this._Emiter.emit('change','exoplismos',x);
         }
     }  
     get laps() {
@@ -177,7 +160,6 @@ export default class Activity extends EventEmitter{
     set laps(x){
         if (this._laps !== x){
             this._laps =x
-            this._Emiter.emit('change','laps',x);
         }
     }  
 
@@ -187,12 +169,24 @@ export default class Activity extends EventEmitter{
     set calories(x){
         if (this._calories !== x){
             this._calories =x
-            this._Emiter.emit('change','calories',x);
         }
-    }  
-
-
-
-
-
+    }
+    
+    get object() {
+        return {
+          id: this._id,      
+          athleteId: this._athleteId,
+         // cadence: this._cadence,
+          name: this._name,
+          totalTime: this._totalTime,
+          distance: this._distance,
+          type: this._type,
+         // subType: this._subType,
+     //     HR: this._HR.object,
+     //     recs: this._recs,
+     //     tiz: this._tiz,
+          start: this._start,
+          //kai alla
+        }
+      }
 }

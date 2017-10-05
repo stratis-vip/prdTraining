@@ -43,6 +43,13 @@ export default class HeartRate extends EventEmitter{
         } 
     }
 
+    get object() {
+        return {
+            aHR: this._aHR,
+            lHR: this._lHR,
+            mHR: this._mHR
+        }
+    }
     toString = () =>
     {
         return `Καρδιακοί παλμοί:\nΕλάχιστοι: ${this._lHR} Μέγιστοι: ${this._mHR} Μέσος όρος: ${this._aHR}`;

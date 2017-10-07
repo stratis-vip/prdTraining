@@ -14,8 +14,10 @@ import {router as logout} from './routes/logout';
 import {router as signin} from './routes/signin';
 import {router as profile} from './routes/profile';
 import {router as imports} from './routes/imports';
+import {router as errorcodes} from './routes/errorcodes';
 import * as hbs from 'handlebars'
 import {check} from './routes/check'
+import { errorDb, errorPage } from "./lib/control/errorfunctions";
 
 
 let flash = require('express-flash-2')
@@ -51,6 +53,9 @@ app.use(express.static(path.join(__dirname, 'node_modules')));
 //app.use(check)
 app.use(flash())
 
+
+
+
 app.use('/', index);
 app.use('/athletes', athletes);
 app.use('/activities', activities);
@@ -59,6 +64,7 @@ app.use('/logout', logout);
 app.use('/signin', signin);
 app.use('/imports', imports);
 app.use('/profile', profile);
+app.use('/errorcodes', errorcodes);
 interface Error {
     status?:number
 }
@@ -76,7 +82,9 @@ app.use(function (err, req, res, next) {
     res.locals.error = req.app.get('env') === 'development' ? err : {};
     // render the error page
     res.status(err.status || 500);
-    res.render('error');
+    return errorPage(res,`${req.url}`,err.message,err.status);
+  
+    //res.render('error');
 });
 
 export =app;

@@ -37,7 +37,7 @@ export const getActivityFromFile = (filename: string, CallBack): void => {
       let laps = getLaps(activitiesObject[0]);
       act = new Activity();
       act.name = activitiesObject[0].Activity[0].Id[0];
-      act.type = activitiesTypes[activitiesObject[0].Activity[0].$.Sport];
+      act.typeOfActivity = activitiesTypes[activitiesObject[0].Activity[0].$.Sport];
 
       act.totalTime = 0;
       act.distance = 0;

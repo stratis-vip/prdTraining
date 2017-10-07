@@ -3,52 +3,40 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const index_1 = require("../lib/control/classes/index");
 const express = require("express");
 const db_activities_1 = require("../lib/models/db-activities");
+const errorfunctions_1 = require("../lib/control/errorfunctions");
 const router = express.Router();
 exports.router = router;
-const checkParam = (res, id) => {
-    if (parseInt(id) === NaN) {
-        res.status(400);
-        return res.json({
-            errors: [{ msg: "Δεν υπάρχει καταχωρημένη δραστηριότητα" }]
-        });
-    }
-};
-router.get("/", (req, res, next) => {
-    if (req.query.athleteId) {
-        let db = new db_activities_1.default();
-        let id = req.query.athleteId;
-        checkParam(res, id);
-        db
-            .findActivityByAthletes(id)
-            .then(value => {
-            if (value.isFound) {
-                return res.json({ activities: value.data });
-            }
-            else {
-                res.status(400);
-                return res.json({
-                    errors: [{ msg: "Δεν υπάρχει καταχωρημένη δραστηριότητα" }]
-                });
-            }
-        })
-            .catch(reason => {
-            res.status(400);
-            return res.json({ errors: [{ msg: reason }] });
-        });
+const checkParam = (res, req, id) => {
+    if (isNaN(parseInt(id))) {
+        errorfunctions_1.errorNotFoundObject(res, req.originalUrl, "Λάθος αίτημα στον σέρβερ", 102);
+        // res.json({
+        //   errors: [
+        //     {
+        //       attribute: "test",
+        //       message: "Δεν υπάρχει καταχωρημένη δραστηριότητα"
+        //     }
+        //   ]
+        // });
+        return false;
     }
     else {
-        next();
+        return true;
     }
+};
+router.use((req, res, next) => {
+    res.set("Content-Type", "application/vnd.api+json");
+    next();
 });
+//#region GET
 /* GET activities listing. */
 router.get("/", (req, res) => {
     let db = new db_activities_1.default();
     db.getActivities((err, all) => {
         if (err) {
-            return res.json({ errors: [{ msg: err.code }] });
+            return errorfunctions_1.errorDb(res, "activities", err.message, 0);
         }
         else {
-            return res.json({ activities: all });
+            return res.json({ data: all });
         }
     });
 });
@@ -56,67 +44,79 @@ router.get("/", (req, res) => {
 router.get("/:id", (req, res) => {
     let db = new db_activities_1.default();
     let id = req.params.id;
-    checkParam(res, id);
+    if (!checkParam(res, req, id)) {
+        return res.end();
+    }
     db
         .findActivityById(id)
         .then(value => {
         if (value.isFound) {
-            return res.json({ activities: value.data });
+            return res.json({ data: value.data });
         }
         else {
-            return res.json({
-                errors: { msg: "Δεν υπάρχει καταχωρημένη δραστηριότητα" }
-            });
+            return errorfunctions_1.errorNotFoundObject(res, req.originalUrl, "Δεν υπάρχει το αντικείμενο δραστηριότητας", 101);
         }
     })
         .catch(reason => {
-        return res.json({ errors: [{ msg: reason }] });
+        return errorfunctions_1.errorDb(res, `activities/${req.params.id}`, reason, 0);
     });
 });
+//#endregion
+//#region DELETE
 /* Διέγραψε συγκεκριμένο μέλος */
 router.delete("/:id", (req, res) => {
     let db = new db_activities_1.default();
     let id = req.params.id;
-    checkParam(res, id);
-    db.findActivityById(id).then(value => {
+    if (!checkParam(res, req, id)) {
+        return res.end();
+    }
+    db
+        .findActivityById(id)
+        .then(value => {
         if (value.isFound) {
             db
                 .deleteActivityById(id)
                 .then(affectedLines => {
                 if (affectedLines > 0) {
-                    return res.json({
-                        activities: []
-                    });
+                    res.status(204);
+                    return res.end();
                 }
                 else {
-                    return res.json({
-                        errors: [
-                            {
-                                msg: "Αποτυχία διαγραφής"
-                            }
-                        ]
-                    });
+                    return errorfunctions_1.errorDb(res, `activities/${req.params.id}`, "Αδυναμία Διαγραφής", 2);
                 }
             })
                 .catch(reason => {
-                return res.json({ errors: [{ msg: reason }] });
+                return errorfunctions_1.errorDb(res, `activities/${req.params.id}`, reason, 0);
             });
         }
+        else {
+            return errorfunctions_1.errorNotFoundObject(res, req.originalUrl, "Δεν υπάρχει το αντικείμενο προς διαγραφή", 101);
+        }
+    })
+        .catch(reason => {
+        return errorfunctions_1.errorDb(res, `activities/${req.params.id}`, reason, 1);
     });
 });
+//#endregion
 /* Καταχώρισε συγκεκριμένο μέλος */
 router.post("/", (req, res) => {
     let db = new db_activities_1.default();
     let act = new index_1.Activity();
+    let b = req.body;
+    act.athleteId = Number(b.athleteId);
+    act.distance = Number(b.distance);
+    act.totalTime = Number(b.totalTime);
+    act.typeOfActivity = b.typeOfActivity;
+    act.name = b.name;
     //fill activity apo to ρε;.βοδυ
     //console.log(`email ${req.body.email} , pass ${req.body.pass}`);
-    db.addActivity(act, (err, all) => {
-        if (err) {
-            return res.json({ errors: [{ msg: err }] });
+    db.addActivity(act, (reason, all) => {
+        if (reason) {
+            return errorfunctions_1.errorFoundDuplicateObject(res, `activities/${req.params.id || ""}`, reason, 103);
         }
         else {
             return res.json({
-                activities: all //.object
+                data: all //.object
             });
         }
     });
@@ -125,7 +125,9 @@ router.post("/", (req, res) => {
 router.put("/:id", (req, res) => {
     let db = new db_activities_1.default();
     let id = req.params.id;
-    checkParam(res, id);
+    if (!checkParam(res, req, id)) {
+        return res.end();
+    }
     db
         .findActivityById(id)
         .then(value => {
@@ -155,9 +157,7 @@ router.put("/:id", (req, res) => {
                 }
             })
                 .catch(reason => {
-                return res.json({
-                    errors: [{ msg: reason }]
-                });
+                return errorfunctions_1.errorDb(res, `activities/${req.params.id}`, reason, 0);
             });
         }
         else {
@@ -167,8 +167,6 @@ router.put("/:id", (req, res) => {
         }
     })
         .catch(reason => {
-        return res.json({
-            errors: [{ msg: reason }]
-        });
+        return errorfunctions_1.errorDb(res, `activities/${req.params.id}`, reason, 0);
     });
 });

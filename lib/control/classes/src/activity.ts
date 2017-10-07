@@ -16,7 +16,7 @@ export default class Activity {
     private _name: string;
     private _totalTime: number;
     private _distance: number;
-    private _type: activitiesTypes;
+    private _typeOfActivity: activitiesTypes;
     private _subType: activitiesSubTypes;
     private _recs: Array<Record>;
     private _HR: HeartRate;
@@ -30,6 +30,7 @@ export default class Activity {
         this._tiz = new TimeInZones();
         this._start = new Date();
         this._laps = new Array<Lap>()
+        this._name = 'Ανώνυμη διαδρομή'
     }
 
     // Στέλνει σινιάλο ότι άλλαξε μια μεταβλητή.
@@ -93,12 +94,12 @@ export default class Activity {
         return this._distance / 1000
     }
     
-    get type() {
-        return this._type;
+    get typeOfActivity() {
+        return this._typeOfActivity;
     }
-    set type(x){
-        if (this._type !== x){
-            this._type =x
+    set typeOfActivity(x){
+        if (this._typeOfActivity !== x){
+            this._typeOfActivity =x
             this._subType=activitiesSubTypes.Generic;
         }
     }
@@ -174,13 +175,14 @@ export default class Activity {
     
     get object() {
         return {
-          id: this._id,      
+          id: this._id,  
+          type: 'activity',    
           athleteId: this._athleteId,
          // cadence: this._cadence,
           name: this._name,
           totalTime: this._totalTime,
           distance: this._distance,
-          type: this._type,
+          typeOfActivity: this._typeOfActivity,
          // subType: this._subType,
      //     HR: this._HR.object,
      //     recs: this._recs,

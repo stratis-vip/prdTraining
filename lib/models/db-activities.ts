@@ -2,6 +2,7 @@ import * as sql from "mysql";
 import DB from "./database";
 import Activity from '../control/classes/src/activity';
 import { promiseAnswer } from "./interfaces";
+import { errorDb } from "../control/errorfunctions";
 
 export default class DBActivity extends DB {
   constructor() {
@@ -34,7 +35,7 @@ export default class DBActivity extends DB {
       let a = new Activity();
       a.id = row.id;
       a.name = row.name;
-      a.type = row.type;
+      a.typeOfActivity = row.type;
       a.totalTime = row.totalTime;
       a.distance = row.distance;
       a.athleteId = row.athleteId;
@@ -118,9 +119,8 @@ export default class DBActivity extends DB {
   
 
   private addActivityQuery = (activ:Activity): string => {
-    let query = `INSERT INTO \`activities\` (\`email\`, \`pass\`, \`fname\`, \`sname\`, \`weight\`, \`height\`, \`sex\`, \`bday\`, \`vo2max\`) VALUES
-    
-    ( '', '', 'Ανώνυμος','Ανεπίθετος', 88.1, 1.73, 'SEX_MALE', '1971-10-21' , '{"running": 20, "swimming": 20, "bicycling": 20}')`;
+    let query = `INSERT INTO \`activities\` (\`athleteId\`, \`distance\`, \`totalTime\`, \`type\`, \`name\`) VALUES 
+            ( 1, 5988.45, 2343.34, 'Running', '2017-10-01T06:45:11.000Z')`;
     return query;
   };
 
@@ -131,13 +131,13 @@ export default class DBActivity extends DB {
         this.createDBConnection();
       }
       this._db.query(
-        `SELECT * FROM activities where name=${activityName}`,
+        `SELECT * FROM activities where name='${activityName}'`,
         (err: sql.IError, rows: any) => {
           if (err) {
             reject(err);
           } else {
             resolve({
-              isFound: (rows as Array<any>).length === 1,
+              isFound: (rows as Array<any>).length > 0,
               data: this.fillActivity(rows)
             });
           }
@@ -156,7 +156,7 @@ export default class DBActivity extends DB {
     this.findActivityByName(act.name)
     .then(value =>{
       if ((value as promiseAnswer).isFound) {
-      callback("Υπάρχει ήδη καταχωρημένος αθλητής με αυτό το email", null);
+        callback("Υπάρχει ήδη καταχωρημένη αυτή η δραστηριότητα", null);
     } else {
       if (this._db === null) {
         this.createDBConnection();
@@ -176,7 +176,9 @@ export default class DBActivity extends DB {
     }
 
     })
-    .catch(reason=>{})
+    .catch(reason=>{
+      callback(reason, null);
+    })
     
     
   };

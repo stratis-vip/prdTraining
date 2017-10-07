@@ -15,6 +15,8 @@ const logout_1 = require("./routes/logout");
 const signin_1 = require("./routes/signin");
 const profile_1 = require("./routes/profile");
 const imports_1 = require("./routes/imports");
+const errorcodes_1 = require("./routes/errorcodes");
+const errorfunctions_1 = require("./lib/control/errorfunctions");
 let flash = require('express-flash-2');
 const app = express();
 let options = {
@@ -46,6 +48,7 @@ app.use('/logout', logout_1.router);
 app.use('/signin', signin_1.router);
 app.use('/imports', imports_1.router);
 app.use('/profile', profile_1.router);
+app.use('/errorcodes', errorcodes_1.router);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
     let err = new Error('Not Found');
@@ -59,6 +62,7 @@ app.use(function (err, req, res, next) {
     res.locals.error = req.app.get('env') === 'development' ? err : {};
     // render the error page
     res.status(err.status || 500);
-    res.render('error');
+    return errorfunctions_1.errorPage(res, `${req.url}`, err.message, err.status);
+    //res.render('error');
 });
 module.exports = app;

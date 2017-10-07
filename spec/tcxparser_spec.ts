@@ -42,7 +42,7 @@ describe("Έλεγχος του Αναγνώστη TCX\n", () => {
     });
 
     it("Ο τύπος της δραστηριότητας πρέπει να είναι 2 (ποδήλατο)\n", done => {
-        expect(act.type).toBe(2);
+        expect(act.typeOfActivity).toBe(2);
         done();
       });
     

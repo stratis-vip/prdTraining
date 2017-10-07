@@ -17,6 +17,7 @@ function define(name, value) {
  export const MINHEARTRATE = 27; //Martin Brady (b. 24 March 1969 in the UK) http://www.guinnessworldrecords.com/world-records/lowest-heart-rate
  export const MAXHEARTRATE = 200; 
  
+ export const hostAddress = 'http://localhost:3000'
     /*SEX_UNDEFINED: 0);
     define("SEX_MALE", 1);
     define("SEX_FEMALE", 2);*/

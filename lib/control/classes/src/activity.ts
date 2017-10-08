@@ -175,7 +175,7 @@ export default class Activity {
     
     get object() {
         return {
-          id: this._id,  
+          id: this._id.toString(),  
           type: 'activity',    
           athleteId: this._athleteId,
          // cadence: this._cadence,

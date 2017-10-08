@@ -14,6 +14,11 @@ const checkParam = (res, id) => {
         });
     }
 };
+router.use((req, res, next) => {
+    res.set("Access-Control-Allow-Origin", "*");
+    res.set("Content-Type", "application/vnd.api+json");
+    next();
+});
 /* GET athletes listing. */
 router.get("/", (req, res) => {
     let db = new db_athlites_1.default();
@@ -22,7 +27,7 @@ router.get("/", (req, res) => {
             return res.json({ errors: { msg: err.code } });
         }
         else {
-            return res.json({ athletes: all });
+            return res.json({ data: all });
         }
     });
 });

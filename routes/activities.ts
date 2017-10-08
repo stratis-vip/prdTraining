@@ -27,6 +27,7 @@ const checkParam = (res, req, id: any) => {
 };
 
 router.use((req, res, next) => {
+  res.set("Access-Control-Allow-Origin", "*");
   res.set("Content-Type", "application/vnd.api+json");
   next();
 });

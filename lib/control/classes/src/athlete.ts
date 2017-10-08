@@ -155,7 +155,8 @@ export default class Athlete extends EventEmitter {
 
   get object() {
     return {
-      id: this._id,      
+      id: this._id.toString(),  
+      type: 'athlete',    
       weight: this._weight,
       height: this._height,
       sex: this._sex,
